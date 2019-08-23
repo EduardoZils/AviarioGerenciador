@@ -24,4 +24,8 @@
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_selecao_aviario">SelecaoAviario</string>
     <string name="title_activity_add_aviario">AddAviario</string>
+    <string name="title_activity_hidrometro">HidrometroActivity</string>
+    <string name="title_activity_pesos">PesosActivity</string>
+    <string name="title_activity_pesagem">PesagemActivity</string>
+    <string name="title_activity_mortalidade">MortalidadeActivity</string>
 </resources>

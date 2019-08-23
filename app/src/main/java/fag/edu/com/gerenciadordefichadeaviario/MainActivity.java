@@ -83,11 +83,14 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this, SelecaoAviario.class);
             startActivity(intent);
         } else if (id == R.id.nav_gallery) {
-
+            Intent intent = new Intent(MainActivity.this, MortalidadeActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_slideshow) {
-
+            Intent intent = new Intent(MainActivity.this, HidrometroActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_tools) {
-
+            Intent intent = new Intent(MainActivity.this, PesagemActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

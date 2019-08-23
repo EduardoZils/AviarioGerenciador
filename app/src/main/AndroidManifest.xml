@@ -10,9 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".MortalidadeActivity"
+            android:label="@string/title_activity_mortalidade"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".PesagemActivity"
+            android:label="@string/title_activity_pesagem"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PesosActivity"
+            android:label="@string/title_activity_pesos"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HidrometroActivity"
+            android:label="@string/title_activity_hidrometro"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".AddAviario"
             android:label="@string/title_activity_add_aviario"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SelecaoAviario"
             android:label="@string/title_activity_selecao_aviario"
