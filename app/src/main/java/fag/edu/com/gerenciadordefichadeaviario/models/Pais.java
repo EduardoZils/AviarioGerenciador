@@ -1,8 +1,12 @@
 package fag.edu.com.gerenciadordefichadeaviario.models;
 
+import com.orm.SugarRecord;
+import com.orm.dsl.Unique;
+
 import java.util.Date;
 
-public class Pais {
+public class Pais extends SugarRecord {
+    @Unique
     int cd_pais;
     String ds_nome;
     String ds_sigla;

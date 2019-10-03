@@ -33,16 +33,21 @@
     </LinearLayout>
 
     <ListView
+        android:id="@+id/lvAviario"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
         android:layout_margin="@dimen/fab_margin"
-        android:outlineSpotShadowColor="@color/colorLaranjaDark"
-        android:cacheColorHint="@color/colorLaranja"
+        android:outlineSpotShadowColor="@color/colorPrimary"
+        android:cacheColorHint="@color/colorPrimary"
         ></ListView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:gravity="bottom"
+        android:layout_weight="2.5"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
         <Button
             android:id="@+id/btEditarAviario"
             android:layout_width="match_parent"

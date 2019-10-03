@@ -1,8 +1,12 @@
 package fag.edu.com.gerenciadordefichadeaviario.models;
 
+import com.orm.SugarRecord;
+import com.orm.dsl.Unique;
+
 import java.util.Date;
 
-public class Aviario {
+public class Aviario extends SugarRecord {
+    @Unique
     int cd_aviario;
     Usuario usuario;
     Endereco endereco;

@@ -1,8 +1,12 @@
 package fag.edu.com.gerenciadordefichadeaviario.models;
 
+import com.orm.SugarRecord;
+import com.orm.dsl.Unique;
+
 import java.util.Date;
 
-public class Hidrometro {
+public class Hidrometro extends SugarRecord {
+    @Unique
     int cd_hidrometro;
     Lote lote;
     Double qt_gasto;

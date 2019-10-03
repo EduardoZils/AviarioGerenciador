@@ -1,8 +1,12 @@
 package fag.edu.com.gerenciadordefichadeaviario.models;
 
+import com.orm.SugarRecord;
+import com.orm.dsl.Unique;
+
 import java.util.Date;
 
-public class Mortalidade {
+public class Mortalidade extends SugarRecord {
+    @Unique
     int cd_mortalidade;
     Lote lote;
     int qt_aves_abatidas;

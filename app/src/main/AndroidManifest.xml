@@ -10,9 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".VacinaActivity"
+            android:label="@string/title_activity_vacina"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".MortalidadeActivity"
             android:label="@string/title_activity_mortalidade"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PesagemActivity"
             android:label="@string/title_activity_pesagem"
@@ -33,9 +37,6 @@
             android:name=".SelecaoAviario"
             android:label="@string/title_activity_selecao_aviario"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login" />
 
         <meta-data
             android:name="DATABASE"

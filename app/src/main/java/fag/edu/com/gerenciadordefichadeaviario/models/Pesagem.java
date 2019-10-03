@@ -1,8 +1,12 @@
 package fag.edu.com.gerenciadordefichadeaviario.models;
 
+import com.orm.SugarRecord;
+import com.orm.dsl.Unique;
+
 import java.util.Date;
 
-public class Pesagem {
+public class Pesagem extends SugarRecord {
+    @Unique
     int cd_pesagem;
     Lote lote;
     Double vl_peso_semana;

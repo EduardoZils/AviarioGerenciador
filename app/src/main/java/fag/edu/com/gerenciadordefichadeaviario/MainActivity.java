@@ -15,12 +15,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
+import com.orm.SugarContext;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SugarContext.init(this); //responsavel por iniciar o sugar
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -92,7 +95,8 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this, PesagemActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_share) {
-
+            Intent intent = new Intent(MainActivity.this, VacinaActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_send) {
 
         }

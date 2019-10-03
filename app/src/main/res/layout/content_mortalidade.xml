@@ -9,6 +9,8 @@
     tools:context=".MortalidadeActivity"
     tools:showIn="@layout/activity_mortalidade">
 
+    
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,7 +33,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
+            android:layout_margin="8dp"
             android:layout_weight="1"
             android:text="Data Leitura:"
             android:textSize="16dp" />
@@ -39,7 +41,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
+            android:layout_margin="8dp"
             android:layout_weight="0.7"
             android:inputType="date"
             android:textSize="16dp" />
@@ -49,24 +51,58 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_margin="8dp"
         android:hint="Leitura atual"
         android:inputType="number" />
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        android:text="Contagem aves mortas:"
-        android:textSize="@dimen/fab_margin" />
+        android:layout_height="wrap_content">
 
-    <TextView
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_weight="1"
+            android:text="Aves mortas"
+            android:textAlignment="center"
+            android:textSize="@dimen/fab_margin" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_weight="1"
+            android:text="Aves eliminadas"
+            android:textAlignment="center"
+            android:textSize="@dimen/fab_margin" />
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="143"
-        android:textSize="40dp"
-        android:textStyle="bold" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="143"
+            android:textSize="40dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="125"
+            android:textSize="40dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,38 +110,88 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_margin="@dimen/fab_margin"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="@dimen/fab_margin"
                 android:layout_weight="1"
-                android:scaleX="3"
-                android:scaleY="3"
-                android:src="@drawable/ic_add_circle" />
+                android:orientation="horizontal">
 
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:scaleX="3"
+                    android:scaleY="3"
+                    android:src="@drawable/ic_add_circle" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:scaleX="3"
+                    android:scaleY="3"
+                    android:src="@drawable/ic_remove_circle" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_margin="@dimen/fab_margin"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="@dimen/fab_margin"
                 android:layout_weight="1"
-                android:scaleX="3"
-                android:scaleY="3"
-                android:src="@drawable/ic_remove_circle" />
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:scaleX="3"
+                    android:scaleY="3"
+                    android:src="@drawable/ic_add_circle" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:scaleX="3"
+                    android:scaleY="3"
+                    android:src="@drawable/ic_remove_circle" />
+            </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
 
     <Button

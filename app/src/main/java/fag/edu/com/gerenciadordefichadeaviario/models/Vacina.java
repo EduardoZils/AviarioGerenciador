@@ -1,8 +1,12 @@
 package fag.edu.com.gerenciadordefichadeaviario.models;
 
+import com.orm.SugarRecord;
+import com.orm.dsl.Unique;
+
 import java.util.Date;
 
-public class Vacina {
+public class Vacina extends SugarRecord {
+    @Unique
     int cd_vacina;
     Lote lote;
     String ds_nome;

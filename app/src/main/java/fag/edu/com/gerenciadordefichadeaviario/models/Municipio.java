@@ -1,8 +1,12 @@
 package fag.edu.com.gerenciadordefichadeaviario.models;
 
+import com.orm.SugarRecord;
+import com.orm.dsl.Unique;
+
 import java.util.Date;
 
-public class Municipio {
+public class Municipio extends SugarRecord {
+    @Unique
     int cd_municipio;
     Estado estado;
     String ds_nome;
