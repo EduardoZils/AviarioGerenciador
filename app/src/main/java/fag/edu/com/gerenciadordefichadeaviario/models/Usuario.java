@@ -7,104 +7,95 @@ import java.util.Date;
 
 public class Usuario extends SugarRecord {
     @Unique
-    int cd_usuario;
-    String ds_nome;
-    String ds_email;
-    String ds_senha;
-    String ds_cpdf;
-    String ds_rg;
-    Date dt_nascimento;
-    Date dt_cadastro;
-    Date dt_atualizacao;
+    int cdUsuario;
+    String dsNome;
+    String dsEmail;
+    String dsSenha;
+    String dsCpf;
+    String dsRg;
+    Date dtNascimento;
+    Date dtCadastro;
+    Date dtAtualizacao;
 
-    public Usuario(int cd_usuario, String ds_nome, String ds_email, String ds_senha, String ds_cpdf, String ds_rg, Date dt_nascimento, Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_usuario = cd_usuario;
-        this.ds_nome = ds_nome;
-        this.ds_email = ds_email;
-        this.ds_senha = ds_senha;
-        this.ds_cpdf = ds_cpdf;
-        this.ds_rg = ds_rg;
-        this.dt_nascimento = dt_nascimento;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+    public Usuario() {
     }
 
-    public int getCd_usuario() {
-        return cd_usuario;
+    public int getCdUsuario() {
+        return cdUsuario;
     }
 
-    public void setCd_usuario(int cd_usuario) {
-        this.cd_usuario = cd_usuario;
+    public void setCdUsuario(int cdUsuario) {
+        this.cdUsuario = cdUsuario;
     }
 
-    public String getDs_nome() {
-        return ds_nome;
+    public String getDsNome() {
+        return dsNome;
     }
 
-    public void setDs_nome(String ds_nome) {
-        this.ds_nome = ds_nome;
+    public void setDsNome(String dsNome) {
+        this.dsNome = dsNome;
     }
 
-    public String getDs_email() {
-        return ds_email;
+    public String getDsEmail() {
+        return dsEmail;
     }
 
-    public void setDs_email(String ds_email) {
-        this.ds_email = ds_email;
+    public void setDsEmail(String dsEmail) {
+        this.dsEmail = dsEmail;
     }
 
-    public String getDs_senha() {
-        return ds_senha;
+    public String getDsSenha() {
+        return dsSenha;
     }
 
-    public void setDs_senha(String ds_senha) {
-        this.ds_senha = ds_senha;
+    public void setDsSenha(String dsSenha) {
+        this.dsSenha = dsSenha;
     }
 
-    public String getDs_cpdf() {
-        return ds_cpdf;
+    public String getDsCpf() {
+        return dsCpf;
     }
 
-    public void setDs_cpdf(String ds_cpdf) {
-        this.ds_cpdf = ds_cpdf;
+    public void setDsCpf(String dsCpf) {
+        this.dsCpf = dsCpf;
     }
 
-    public String getDs_rg() {
-        return ds_rg;
+    public String getDsRg() {
+        return dsRg;
     }
 
-    public void setDs_rg(String ds_rg) {
-        this.ds_rg = ds_rg;
+    public void setDsRg(String dsRg) {
+        this.dsRg = dsRg;
     }
 
-    public Date getDt_nascimento() {
-        return dt_nascimento;
+    public Date getDtNascimento() {
+        return dtNascimento;
     }
 
-    public void setDt_nascimento(Date dt_nascimento) {
-        this.dt_nascimento = dt_nascimento;
+    public void setDtNascimento(Date dtNascimento) {
+        this.dtNascimento = dtNascimento;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
     }
 
     @Override
     public String toString() {
         return "Usuario{" +
-                "ds_nome='" + ds_nome + '\'' +
+                "dsNome='" + dsNome + '\'' +
                 '}';
     }
 }
