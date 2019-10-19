@@ -25,7 +25,7 @@ import fag.edu.com.gerenciadordefichadeaviario.models.Usuario;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText et_email, et_senha;
-    private Button bt_login;
+    private Button bt_login, bt_teste;
     private TextView tv_registre;
 
     @Override
@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         et_senha = findViewById(R.id.et_senha);
         bt_login = findViewById(R.id.bt_login);
         tv_registre = findViewById(R.id.tv_registre);
+        bt_teste = findViewById(R.id.bt_teste);
     }
 
     private void loadEvents() {
@@ -83,6 +84,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegistrarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        bt_teste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });

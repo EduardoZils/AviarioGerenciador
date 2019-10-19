@@ -18,9 +18,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="REGISTRE-SE"
-            android:textAlignment="center"
-            android:textSize="25dp"
-            android:textStyle="bold" />
+            android:drawableLeft="@drawable/ic_user_add"
+            android:textColor="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:textSize="22dp" />
 
         <EditText
             android:id="@+id/et_nome"

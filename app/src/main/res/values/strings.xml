@@ -120,4 +120,5 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="title_activity_registrar">RegistrarActivity</string>
+    <string name="title_activity_alimentacao">AlimentacaoActivity</string>
 </resources>

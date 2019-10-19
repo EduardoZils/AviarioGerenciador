@@ -9,58 +9,53 @@
     tools:context=".SelecaoAviario"
     tools:showIn="@layout/activity_selecao_aviario">
 
-
-
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Seleção de Aviário"
-            android:textSize="22dp"
-            android:gravity="center"
-            android:layout_weight="1"
-            />
-        <Button
-            android:id="@+id/btAdicionarAviario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Adicionar Aviário"
-            android:drawableLeft="@drawable/ic_menu_send"
-            android:layout_weight="1"/>
-    </LinearLayout>
+        android:drawableLeft="@drawable/ic_fazenda"
+        android:gravity="center"
+        android:text="Seleção de aviário"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="22dp" />
+
+    <Button
+        android:id="@+id/btAdicionarAviario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_add"
+        android:text="Adicionar Aviário" />
+
 
     <ListView
         android:id="@+id/lvAviario"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.5"
         android:layout_margin="@dimen/fab_margin"
-        android:outlineSpotShadowColor="@color/colorPrimary"
+        android:layout_weight="0.5"
         android:cacheColorHint="@color/colorPrimary"
-        ></ListView>
+        android:outlineSpotShadowColor="@color/colorPrimary"></ListView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:gravity="bottom"
-        android:layout_weight="2.5"
         android:layout_height="match_parent"
+        android:layout_weight="1.5"
+        android:gravity="bottom"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/btEditarAviario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Editar Aviário"
+            android:layout_weight="1"
             android:drawableLeft="@drawable/ic_menu_send"
-            android:layout_weight="1"/>
+            android:text="Editar Aviário" />
+
         <Button
             android:id="@+id/btLoteAviario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Iniciar Lote"
+            android:layout_weight="1"
             android:drawableLeft="@drawable/ic_menu_send"
-            android:layout_weight="1"/>
+            android:text="Iniciar Lote" />
     </LinearLayout>
 </LinearLayout>

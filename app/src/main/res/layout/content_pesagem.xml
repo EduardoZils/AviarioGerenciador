@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,12 +9,19 @@
     tools:context=".PesagemActivity"
     tools:showIn="@layout/activity_pesagem">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_balanca"
+            android:gravity="center"
             android:text="Pesagem"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="22dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -51,21 +58,37 @@
             android:text="Pesagens de hoje: "
             android:textSize="16dp" />
 
+
         <ListView
+            android:id="@+id/lvAviario"
             android:layout_width="match_parent"
-            android:layout_height="170dp"></ListView>
-
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:layout_margin="@dimen/fab_margin"
-            android:drawableLeft="@drawable/ic_add_circle"
-            android:text="Adicionar pesos" />
+            android:layout_weight="0.5"
+            android:cacheColorHint="@color/colorPrimary"
+            android:outlineSpotShadowColor="@color/colorPrimary"></ListView>
 
-        <Button
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            android:text="Salvar Pesagens" />
-</LinearLayout>
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_add_circle"
+                android:text="Adicionar pesos" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Salvar Pesagens" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>
