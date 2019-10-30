@@ -14,11 +14,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.orm.SugarContext;
 
+import fag.edu.com.gerenciadordefichadeaviario.models.Usuario;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static Usuario usuarioLogado;
+    TextView tv_bem_vindo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,9 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        tv_bem_vindo = findViewById(R.id.tv_bem_vindo);
+        tv_bem_vindo.setText("Bem vindo " + usuarioLogado.getDsNome() + ", estavamos lhe esperando");
     }
 
     @Override
@@ -96,8 +105,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
             Intent intent = new Intent(MainActivity.this, VacinaActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_logoff) {
+            usuarioLogado = null;
+            Usuario.deleteAll(Usuario.class);
+            finish();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

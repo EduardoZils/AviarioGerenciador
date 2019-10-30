@@ -16,6 +16,20 @@ public class Usuario extends SugarRecord {
     Date dtNascimento;
     Date dtCadastro;
     Date dtAtualizacao;
+    boolean blAtivo;
+
+    public Usuario(int cdUsuario, String dsNome, String dsEmail, String dsSenha, String dsCpf, String dsRg, Date dtNascimento, Date dtCadastro, Date dtAtualizacao, boolean blAtivo) {
+        this.cdUsuario = cdUsuario;
+        this.dsNome = dsNome;
+        this.dsEmail = dsEmail;
+        this.dsSenha = dsSenha;
+        this.dsCpf = dsCpf;
+        this.dsRg = dsRg;
+        this.dtNascimento = dtNascimento;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
+        this.blAtivo = blAtivo;
+    }
 
     public Usuario() {
     }
@@ -90,6 +104,14 @@ public class Usuario extends SugarRecord {
 
     public void setDtAtualizacao(Date dtAtualizacao) {
         this.dtAtualizacao = dtAtualizacao;
+    }
+
+    public boolean isBlAtivo() {
+        return blAtivo;
+    }
+
+    public void setBlAtivo(boolean blAtivo) {
+        this.blAtivo = blAtivo;
     }
 
     @Override

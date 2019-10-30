@@ -4,13 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -54,7 +51,7 @@ public class TaskGet extends AsyncTask<String, Integer, Result> {
             try {
 
                 StringBuffer response = new StringBuffer();
-                URL url = new URL("http://192.168.0.95:80/api/" + jsonData[0]);
+                URL url = new URL("http://192.168.43.8:80/api/" + jsonData[0]);
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
@@ -62,15 +59,9 @@ public class TaskGet extends AsyncTask<String, Integer, Result> {
                 connection.setRequestProperty("Content-Type", "application/json");
                 connection.setRequestProperty("Accept", "application/json");
                 connection.setConnectTimeout(20000);
-                connection.setDoInput(true);
                 connection.setReadTimeout(30000);
                 connection.connect();
 
-                //Escrevo na Conexão que montamos
-                OutputStream os = new BufferedOutputStream(connection.getOutputStream());
-                //Escrevo na requisição do nosso JSON
-                //os.write(jsonData[0].getBytes());
-                //os.flush();
 
                 System.out.println("=================Retorno da Req ==>   " + connection.getResponseCode());
 
@@ -82,7 +73,7 @@ public class TaskGet extends AsyncTask<String, Integer, Result> {
                 } else {
                     System.out.println("========================== Erro ao realizar Conexão ==========================");
                     System.out.println(connection.getResponseMessage());
-                    return new Result("ERROR", true);
+                    return new Result("VALOR NULO", true);
                 }
 
                 System.out.println("========================== RESULTADO ==========================");
@@ -99,7 +90,7 @@ public class TaskGet extends AsyncTask<String, Integer, Result> {
 
             }
         }
-        return new Result("VALOR NULL", true);
+        return new Result("ERRO", true);
     }
 
     @Override

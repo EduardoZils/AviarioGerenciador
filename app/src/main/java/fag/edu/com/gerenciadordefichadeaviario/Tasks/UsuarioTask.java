@@ -32,7 +32,7 @@ public class UsuarioTask extends AsyncTask<String, Integer, Usuario> {
         progress = new ProgressDialog(context);
         progress.setTitle("Aguarde");
         progress.setMessage("Estamos cadastrando você em nosso sistema...");
-        progress.setIcon(R.drawable.ic_menu_share);
+        progress.setIcon(R.drawable.ic_user_add);
         progress.setCancelable(false);
         progress.show();
     }
@@ -47,12 +47,12 @@ public class UsuarioTask extends AsyncTask<String, Integer, Usuario> {
 
             StringBuffer response = new StringBuffer();
 
-            URL urlUsuario = new URL("http://192.168.0.95:80/api/usuarios");
+            URL urlUsuario = new URL("http://192.168.43.8:80/api/usuarios");
             HttpURLConnection connection = (HttpURLConnection) urlUsuario.openConnection();
 
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestProperty("Accept", "application/json");
+            //connection.setRequestProperty("Accept", "application/json");
             connection.setConnectTimeout(20000);
             connection.setDoInput(true);
             connection.setReadTimeout(30000);

@@ -12,11 +12,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import fag.edu.com.gerenciadordefichadeaviario.Tasks.TaskGet;
@@ -66,12 +69,17 @@ public class RegistrarActivity extends AppCompatActivity implements DatePickerDi
                 Usuario u = new Usuario();
 
                 u.setCdUsuario(verificaCodigoUsuario());
+                if (u.getCdUsuario() == -1) {
+                    Mensagem.ExibirMensagem(RegistrarActivity.this, "Este e-mail já está cadastrado no sistema!", TipoMensagem.ERRO);
+                    et_email.setBackgroundColor(Color.rgb(247, 118, 118));
+                }
 
                 u.setDsNome(et_nome.getText().toString());
                 u.setDsEmail(et_email.getText().toString());
                 u.setDsCpf(et_cpf.getText().toString());
                 u.setDsRg(et_rg.getText().toString());
                 u.setDtAtualizacao(new Date());
+                u.setBlAtivo(true);
                 u.setDtCadastro(new Date());
 
                 if (et_senha.getText().toString().equals(et_senhaC.getText().toString())) {
@@ -81,16 +89,18 @@ public class RegistrarActivity extends AppCompatActivity implements DatePickerDi
                     et_senha.setBackgroundColor(Color.rgb(247, 118, 118));
                     et_senhaC.setBackgroundColor(Color.rgb(247, 118, 118));
                 }
-                UsuarioTask usuarioTask = new UsuarioTask(RegistrarActivity.this);
 
+                try {
 
-                //    String userarios = usuarioTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
-                //            new String[]{new Gson().toJson(u)}).get();
-
-                // } catch (ExecutionException e) {
-                //     e.printStackTrace();
-                // } catch (InterruptedException ie) {
-                //     ie.printStackTrace();
+                    UsuarioTask task = new UsuarioTask(RegistrarActivity.this);
+                    Usuario usuario = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{new Gson().toJson(u)}).get();
+                    System.out.println("VERIFICA Result ------------------->" + usuario);
+                    Mensagem.ExibirMensagem(RegistrarActivity.this, "Usuário cadastrado com sucesso!", TipoMensagem.SUCESSO);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                u.save();
+                finish();
 
             }
         });
@@ -115,17 +125,34 @@ public class RegistrarActivity extends AppCompatActivity implements DatePickerDi
 
     private int verificaCodigoUsuario() {
         //Se for a API montada por vocês
-        Type type = new TypeToken<Usuario>() {
-        }.getType();
-
         try {
+
             TaskGet task = new TaskGet(this, "Usuarios");
-            Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios"}).get();
+            Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios/byEmail/" + et_email.getText().toString()}).get();
             System.out.println("VERIFICA Result ------------------->" + result);
 
-            Usuario u = null;
-            //u =  new Gson().fromJson(result, type);
-            //System.out.println("VERIFICA CODIGO USUARIO 2------------------>" + u.getDsNome());
+            if (result != null && !result.isError()) {
+                Type typeUser = new TypeToken<Usuario>() {
+                }.getType();
+                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+                Usuario usuario = gson.fromJson(result.getContent(), typeUser);
+
+                return -1;
+            } else {  // Caso não encontre um e-mail pertencente irá efetuar a busca de todos os registros e devolver o código necessário
+                TaskGet task1 = new TaskGet(this, "Usuarios");
+                Result result1 = task1.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios/"}).get();
+                System.out.println("VERIFICA Result1 ------------------->" + result1);
+
+                Type typeUser1 = new TypeToken<List<Usuario>>() {
+                }.getType();
+                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+                List<Usuario> usuarioList = gson.fromJson(result1.getContent(), typeUser1);
+                System.out.println("usuarioList--------------> " + usuarioList);
+                return usuarioList.size() + 1;
+            }
+
+
+            //System.out.println("VERIFICA VIROU USUARIO ------------------> " + u.getDsNome());
 
         } catch (Exception e) {
             e.printStackTrace();

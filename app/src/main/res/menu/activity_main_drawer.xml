@@ -30,13 +30,13 @@
             android:title="Relatório" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Usuário">
         <menu>
 
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_logoff"
                 android:icon="@drawable/ic_menu_send"
-                android:title="@string/menu_send" />
+                android:title="Logoff" />
         </menu>
     </item>
 
