@@ -14,6 +14,10 @@ public class Endereco extends SugarRecord {
     Date dt_cadastro;
     Date dt_atualizacao;
 
+    public Endereco() {
+    }
+
+
     public Endereco(int cd_endereco, Municipio municipio, String ds_cep, String ds_adjetivo, Date dt_cadastro, Date dt_atualizacao) {
         this.cd_endereco = cd_endereco;
         this.municipio = municipio;

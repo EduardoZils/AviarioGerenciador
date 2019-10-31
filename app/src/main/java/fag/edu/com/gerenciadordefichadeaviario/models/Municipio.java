@@ -7,26 +7,29 @@ import java.util.Date;
 
 public class Municipio extends SugarRecord {
     @Unique
-    int cd_municipio;
+    int cdMunicipio;
     Estado estado;
-    String ds_nome;
-    Date dt_cadastro;
-    Date dt_atualizacao;
+    String dsNome;
+    Date dtCadastro;
+    Date dtAtualizacao;
 
-    public Municipio(int cd_municipio, Estado estado, String ds_nome, Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_municipio = cd_municipio;
+    public Municipio() {
+    }
+
+    public Municipio(int cdMunicipio, Estado estado, String dsNome, Date dtCadastro, Date dtAtualizacao) {
+        this.cdMunicipio = cdMunicipio;
         this.estado = estado;
-        this.ds_nome = ds_nome;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+        this.dsNome = dsNome;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
     }
 
-    public int getCd_municipio() {
-        return cd_municipio;
+    public int getCdMunicipio() {
+        return cdMunicipio;
     }
 
-    public void setCd_municipio(int cd_municipio) {
-        this.cd_municipio = cd_municipio;
+    public void setCdMunicipio(int cdMunicipio) {
+        this.cdMunicipio = cdMunicipio;
     }
 
     public Estado getEstado() {
@@ -37,34 +40,32 @@ public class Municipio extends SugarRecord {
         this.estado = estado;
     }
 
-    public String getDs_nome() {
-        return ds_nome;
+    public String getDsNome() {
+        return dsNome;
     }
 
-    public void setDs_nome(String ds_nome) {
-        this.ds_nome = ds_nome;
+    public void setDsNome(String dsNome) {
+        this.dsNome = dsNome;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
     }
 
     @Override
     public String toString() {
-        return "Municipio{" +
-                "ds_nome='" + ds_nome + '\'' +
-                '}';
+        return dsNome;
     }
 }

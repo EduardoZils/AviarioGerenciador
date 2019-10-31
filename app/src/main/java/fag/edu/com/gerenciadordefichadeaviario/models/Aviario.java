@@ -7,30 +7,33 @@ import java.util.Date;
 
 public class Aviario extends SugarRecord {
     @Unique
-    int cd_aviario;
+    int cdAviario;
     Usuario usuario;
     Endereco endereco;
-    int nm_identificador;
-    int nm_cap_aves;
-    Date dt_cadastro;
-    Date dt_atualizacao;
+    int nrIdentificador;
+    int nrCapAves;
+    Date dtCadastro;
+    Date dtAtualizacao;
 
-    public Aviario(int cd_aviario, Usuario usuario, Endereco endereco, int nm_identificador, int nm_cap_aves, Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_aviario = cd_aviario;
+    public Aviario() {
+    }
+
+    public Aviario(int cdAviario, Usuario usuario, Endereco endereco, int nrIdentificador, int nrCapAves, Date dtCadastro, Date dtAtualizacao) {
+        this.cdAviario = cdAviario;
         this.usuario = usuario;
         this.endereco = endereco;
-        this.nm_identificador = nm_identificador;
-        this.nm_cap_aves = nm_cap_aves;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+        this.nrIdentificador = nrIdentificador;
+        this.nrCapAves = nrCapAves;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
     }
 
-    public int getCd_aviario() {
-        return cd_aviario;
+    public int getCdAviario() {
+        return cdAviario;
     }
 
-    public void setCd_aviario(int cd_aviario) {
-        this.cd_aviario = cd_aviario;
+    public void setCdAviario(int cdAviario) {
+        this.cdAviario = cdAviario;
     }
 
     public Usuario getUsuario() {
@@ -49,42 +52,42 @@ public class Aviario extends SugarRecord {
         this.endereco = endereco;
     }
 
-    public int getNm_identificador() {
-        return nm_identificador;
+    public int getNrIdentificador() {
+        return nrIdentificador;
     }
 
-    public void setNm_identificador(int nm_identificador) {
-        this.nm_identificador = nm_identificador;
+    public void setNrIdentificador(int nrIdentificador) {
+        this.nrIdentificador = nrIdentificador;
     }
 
-    public int getNm_cap_aves() {
-        return nm_cap_aves;
+    public int getNrCapAves() {
+        return nrCapAves;
     }
 
-    public void setNm_cap_aves(int nm_cap_aves) {
-        this.nm_cap_aves = nm_cap_aves;
+    public void setNrCapAves(int nrCapAves) {
+        this.nrCapAves = nrCapAves;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
     }
 
     @Override
     public String toString() {
         return "Aviario{" +
-                "nm_identificador=" + nm_identificador +
+                "cdAviario=" + cdAviario +
                 '}';
     }
 }

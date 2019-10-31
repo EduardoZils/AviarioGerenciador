@@ -140,15 +140,15 @@ public class RegistrarActivity extends AppCompatActivity implements DatePickerDi
                 return -1;
             } else {  // Caso não encontre um e-mail pertencente irá efetuar a busca de todos os registros e devolver o código necessário
                 TaskGet task1 = new TaskGet(this, "Usuarios");
-                Result result1 = task1.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios/"}).get();
+                Result result1 = task1.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios/Count"}).get();
                 System.out.println("VERIFICA Result1 ------------------->" + result1);
 
-                Type typeUser1 = new TypeToken<List<Usuario>>() {
+                Type typeUser1 = new TypeToken<Integer>() {
                 }.getType();
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-                List<Usuario> usuarioList = gson.fromJson(result1.getContent(), typeUser1);
-                System.out.println("usuarioList--------------> " + usuarioList);
-                return usuarioList.size() + 1;
+                int tamanho = gson.fromJson(result1.getContent(), typeUser1);
+                System.out.println("tamanho da Lista--------------> " + tamanho);
+                return tamanho + 1;
             }
 
 

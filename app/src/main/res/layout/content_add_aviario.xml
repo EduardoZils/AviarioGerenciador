@@ -15,9 +15,10 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_codigo_aviario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=" Criação de Aviário #(ERROR)"
+            android:text="Criação de Aviário #(ERROR)"
             android:drawableLeft="@drawable/ic_fazenda"
             android:textColor="@color/colorPrimaryDark"
             android:gravity="center"
