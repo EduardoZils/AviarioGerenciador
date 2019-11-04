@@ -18,6 +18,7 @@
         android:layout_marginRight="@dimen/fab_margin"
         android:text="ENTRAR"
         android:textColor="@color/colorPrimaryDark"
+        android:drawableLeft="@mipmap/ic_chicken"
         android:textSize="30dp" />
 
 

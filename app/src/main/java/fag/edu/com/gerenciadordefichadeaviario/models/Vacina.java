@@ -7,34 +7,39 @@ import java.util.Date;
 
 public class Vacina extends SugarRecord {
     @Unique
-    int cd_vacina;
+    int cdVacina;
     Lote lote;
-    String ds_nome;
-    String ds_forma_uso;
-    Date dt_uso;
-    String ds_prescricao;
-    Double qt_usada;
-    Date dt_registro;
-    Date dt_atualizacao;
+    String dsNome;
+    String dsFormaUso;
+    Date dtUso;
+    String dsPrescricao;
+    Double qtUsada;
+    Date dtCadastro;
+    Date dtAtualizacao;
+    boolean blAtivo;
 
-    public Vacina(int cd_vacina, Lote lote, String ds_nome, String ds_forma_uso, Date dt_uso, String ds_prescricao, Double qt_usada, Date dt_registro, Date dt_atualizacao) {
-        this.cd_vacina = cd_vacina;
+    public Vacina() {
+    }
+
+    public Vacina(int cdVacina, Lote lote, String dsNome, String dsFormaUso, Date dtUso, String dsPrescricao, Double qtUsada, Date dtCadastro, Date dtAtualizacao, boolean blAtivo) {
+        this.cdVacina = cdVacina;
         this.lote = lote;
-        this.ds_nome = ds_nome;
-        this.ds_forma_uso = ds_forma_uso;
-        this.dt_uso = dt_uso;
-        this.ds_prescricao = ds_prescricao;
-        this.qt_usada = qt_usada;
-        this.dt_registro = dt_registro;
-        this.dt_atualizacao = dt_atualizacao;
+        this.dsNome = dsNome;
+        this.dsFormaUso = dsFormaUso;
+        this.dtUso = dtUso;
+        this.dsPrescricao = dsPrescricao;
+        this.qtUsada = qtUsada;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
+        this.blAtivo = blAtivo;
     }
 
-    public int getCd_vacina() {
-        return cd_vacina;
+    public int getCdVacina() {
+        return cdVacina;
     }
 
-    public void setCd_vacina(int cd_vacina) {
-        this.cd_vacina = cd_vacina;
+    public void setCdVacina(int cdVacina) {
+        this.cdVacina = cdVacina;
     }
 
     public Lote getLote() {
@@ -45,67 +50,75 @@ public class Vacina extends SugarRecord {
         this.lote = lote;
     }
 
-    public String getDs_nome() {
-        return ds_nome;
+    public String getDsNome() {
+        return dsNome;
     }
 
-    public void setDs_nome(String ds_nome) {
-        this.ds_nome = ds_nome;
+    public void setDsNome(String dsNome) {
+        this.dsNome = dsNome;
     }
 
-    public String getDs_forma_uso() {
-        return ds_forma_uso;
+    public String getDsFormaUso() {
+        return dsFormaUso;
     }
 
-    public void setDs_forma_uso(String ds_forma_uso) {
-        this.ds_forma_uso = ds_forma_uso;
+    public void setDsFormaUso(String dsFormaUso) {
+        this.dsFormaUso = dsFormaUso;
     }
 
-    public Date getDt_uso() {
-        return dt_uso;
+    public Date getDtUso() {
+        return dtUso;
     }
 
-    public void setDt_uso(Date dt_uso) {
-        this.dt_uso = dt_uso;
+    public void setDtUso(Date dtUso) {
+        this.dtUso = dtUso;
     }
 
-    public String getDs_prescricao() {
-        return ds_prescricao;
+    public String getDsPrescricao() {
+        return dsPrescricao;
     }
 
-    public void setDs_prescricao(String ds_prescricao) {
-        this.ds_prescricao = ds_prescricao;
+    public void setDsPrescricao(String dsPrescricao) {
+        this.dsPrescricao = dsPrescricao;
     }
 
-    public Double getQt_usada() {
-        return qt_usada;
+    public Double getQtUsada() {
+        return qtUsada;
     }
 
-    public void setQt_usada(Double qt_usada) {
-        this.qt_usada = qt_usada;
+    public void setQtUsada(Double qtUsada) {
+        this.qtUsada = qtUsada;
     }
 
-    public Date getDt_registro() {
-        return dt_registro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_registro(Date dt_registro) {
-        this.dt_registro = dt_registro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
+    }
+
+    public boolean isBlAtivo() {
+        return blAtivo;
+    }
+
+    public void setBlAtivo(boolean blAtivo) {
+        this.blAtivo = blAtivo;
     }
 
     @Override
     public String toString() {
         return "Vacina{" +
-                "ds_nome='" + ds_nome + '\'' +
-                ", ds_forma_uso='" + ds_forma_uso + '\'' +
+                "ds_nome='" + dsNome + '\'' +
+                ", ds_forma_uso='" + dsFormaUso + '\'' +
                 '}';
     }
 }

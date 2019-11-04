@@ -7,32 +7,32 @@ import java.util.Date;
 
 public class Endereco extends SugarRecord {
     @Unique
-    int cd_endereco;
+    int cdEndereco;
     Municipio municipio;
-    String ds_cep;
-    String ds_adjetivo;
-    Date dt_cadastro;
-    Date dt_atualizacao;
+    String dsCep;
+    String dsAdjetivo;
+    Date dtCadastro;
+    Date dtAtualizacao;
 
     public Endereco() {
     }
 
 
-    public Endereco(int cd_endereco, Municipio municipio, String ds_cep, String ds_adjetivo, Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_endereco = cd_endereco;
+    public Endereco(int cdEndereco, Municipio municipio, String dsCep, String dsAdjetivo, Date dtCadastro, Date dtAtualizacao) {
+        this.cdEndereco = cdEndereco;
         this.municipio = municipio;
-        this.ds_cep = ds_cep;
-        this.ds_adjetivo = ds_adjetivo;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+        this.dsCep = dsCep;
+        this.dsAdjetivo = dsAdjetivo;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
     }
 
-    public int getCd_endereco() {
-        return cd_endereco;
+    public int getCdEndereco() {
+        return cdEndereco;
     }
 
-    public void setCd_endereco(int cd_endereco) {
-        this.cd_endereco = cd_endereco;
+    public void setCdEndereco(int cdEndereco) {
+        this.cdEndereco = cdEndereco;
     }
 
     public Municipio getMunicipio() {
@@ -43,37 +43,38 @@ public class Endereco extends SugarRecord {
         this.municipio = municipio;
     }
 
-    public String getDs_cep() {
-        return ds_cep;
+    public String getDsCep() {
+        return dsCep;
     }
 
-    public void setDs_cep(String ds_cep) {
-        this.ds_cep = ds_cep;
+    public void setDsCep(String dsCep) {
+        this.dsCep = dsCep;
     }
 
-    public String getDs_adjetivo() {
-        return ds_adjetivo;
+    public String getDsAdjetivo() {
+        return dsAdjetivo;
     }
 
-    public void setDs_adjetivo(String ds_adjetivo) {
-        this.ds_adjetivo = ds_adjetivo;
+    public void setDsAdjetivo(String dsAdjetivo) {
+        this.dsAdjetivo = dsAdjetivo;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
     }
+
 
     @Override
     public String toString() {

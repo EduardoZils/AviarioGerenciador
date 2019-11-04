@@ -24,6 +24,14 @@
             android:gravity="center"
             android:textSize="22dp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_margin="@dimen/fab_margin"
+            android:text="Registre um novo aviário preenchendo os campos abaixo"
+            android:textSize="@dimen/fab_margin" />
+
 
         <EditText
             android:id="@+id/et_numero_aviario"

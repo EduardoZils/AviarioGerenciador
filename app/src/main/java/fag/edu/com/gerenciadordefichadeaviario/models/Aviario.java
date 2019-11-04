@@ -14,11 +14,12 @@ public class Aviario extends SugarRecord {
     int nrCapAves;
     Date dtCadastro;
     Date dtAtualizacao;
+    Boolean blAtivo;
 
     public Aviario() {
     }
 
-    public Aviario(int cdAviario, Usuario usuario, Endereco endereco, int nrIdentificador, int nrCapAves, Date dtCadastro, Date dtAtualizacao) {
+    public Aviario(int cdAviario, Usuario usuario, Endereco endereco, int nrIdentificador, int nrCapAves, Date dtCadastro, Date dtAtualizacao, Boolean blAtivo) {
         this.cdAviario = cdAviario;
         this.usuario = usuario;
         this.endereco = endereco;
@@ -26,6 +27,7 @@ public class Aviario extends SugarRecord {
         this.nrCapAves = nrCapAves;
         this.dtCadastro = dtCadastro;
         this.dtAtualizacao = dtAtualizacao;
+        this.blAtivo = blAtivo;
     }
 
     public int getCdAviario() {
@@ -84,10 +86,16 @@ public class Aviario extends SugarRecord {
         this.dtAtualizacao = dtAtualizacao;
     }
 
+    public Boolean getBlAtivo() {
+        return blAtivo;
+    }
+
+    public void setBlAtivo(Boolean blAtivo) {
+        this.blAtivo = blAtivo;
+    }
+
     @Override
     public String toString() {
-        return "Aviario{" +
-                "cdAviario=" + cdAviario +
-                '}';
+        return cdAviario + " - #" + nrIdentificador;
     }
 }

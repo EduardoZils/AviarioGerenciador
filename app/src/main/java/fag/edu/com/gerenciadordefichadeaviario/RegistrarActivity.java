@@ -10,17 +10,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import fag.edu.com.gerenciadordefichadeaviario.Tasks.TaskGet;
 import fag.edu.com.gerenciadordefichadeaviario.Tasks.UsuarioTask;
@@ -31,9 +29,11 @@ import fag.edu.com.gerenciadordefichadeaviario.models.Usuario;
 
 public class RegistrarActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    EditText et_nome, et_cpf, et_rg, et_senha, et_senhaC, et_dtnasc, et_email;
+    EditText et_nome, et_cpf, et_rg, et_senha, et_senhaC, et_email;
+    TextView tv_dtnascimento;
     Button bt_registrar;
     private int day, mounth, year;
+    private String dt_selecionada;
     private Calendar calendar = Calendar.getInstance();
     private DatePickerDialog datePickerDialog;//Dialog pra Date
 
@@ -55,7 +55,7 @@ public class RegistrarActivity extends AppCompatActivity implements DatePickerDi
         day = calendar.get(Calendar.DAY_OF_MONTH);
         datePickerDialog = new DatePickerDialog(RegistrarActivity.this, this, year, mounth, day);
 
-        et_dtnasc.setOnClickListener(new View.OnClickListener() {
+        tv_dtnascimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 datePickerDialog.show();
@@ -112,14 +112,15 @@ public class RegistrarActivity extends AppCompatActivity implements DatePickerDi
         et_rg = findViewById(R.id.et_rg);
         et_senha = findViewById(R.id.et_senha);
         et_senhaC = findViewById(R.id.et_senhaC);
-        et_dtnasc = findViewById(R.id.et_dtnasc);
+        tv_dtnascimento = findViewById(R.id.tv_dtnascimento);
         et_email = findViewById(R.id.et_email);
         bt_registrar = findViewById(R.id.bt_registrar);
     }
 
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        Mensagem.ExibirMensagem(RegistrarActivity.this, "Data selecionada (" + dayOfMonth + "/" + (month + 1) + "/" + year + ")", TipoMensagem.ALERTA);
-        et_dtnasc.setText(year + "/" + (month + 1) + "/" + dayOfMonth);
+        //Mensagem.ExibirMensagem(RegistrarActivity.this, "Data selecionada (" + dayOfMonth + "/" + (month + 1) + "/" + year + ")", TipoMensagem.ALERTA);
+        dt_selecionada = year + "/" + (month + 1) + "/" + dayOfMonth;
+        tv_dtnascimento.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
     }
 
 

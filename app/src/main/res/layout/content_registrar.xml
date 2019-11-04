@@ -17,11 +17,19 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="REGISTRE-SE"
             android:drawableLeft="@drawable/ic_user_add"
-            android:textColor="@color/colorPrimaryDark"
             android:gravity="center"
+            android:text="REGISTRE-SE"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="22dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:gravity="center"
+            android:text="Registre-se para começar a utilizar o aplicativo"
+            android:textSize="@dimen/fab_margin" />
 
         <EditText
             android:id="@+id/et_nome"
@@ -70,13 +78,30 @@
             android:hint="Confirma Senha"
             android:inputType="textPassword" />
 
-        <EditText
-            android:id="@+id/et_dtnasc"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            android:keyboardNavigationCluster="false"
-            android:hint="Data de Nascimento" />
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:text="Data de Nascimento"
+                android:textSize="@dimen/fab_margin" />
+
+            <TextView
+                android:id="@+id/tv_dtnascimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:text="Selecione uma data"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/fab_margin" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/bt_registrar"

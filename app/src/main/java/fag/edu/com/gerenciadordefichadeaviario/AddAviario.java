@@ -22,6 +22,8 @@ import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
 
+import fag.edu.com.gerenciadordefichadeaviario.Tasks.AviarioTask;
+import fag.edu.com.gerenciadordefichadeaviario.Tasks.EnderecoTask;
 import fag.edu.com.gerenciadordefichadeaviario.Tasks.TaskGet;
 import fag.edu.com.gerenciadordefichadeaviario.Tasks.UsuarioTask;
 import fag.edu.com.gerenciadordefichadeaviario.Util.Mensagem;
@@ -67,8 +69,6 @@ public class AddAviario extends AppCompatActivity {
     }
 
 
-
-
     private void carregaEventos() {
 
         bt_salvar_aviario.setOnClickListener(new View.OnClickListener() {
@@ -76,14 +76,22 @@ public class AddAviario extends AppCompatActivity {
             public void onClick(View v) {
 
                 Endereco endereco = new Endereco();
-                endereco.setCd_endereco(verificaCodigoEndereco());
-                endereco.setDs_adjetivo(et_referencia.getText().toString());
-                endereco.setDs_cep(et_cep.getText().toString());
+                endereco.setCdEndereco(verificaCodigoEndereco());
+                endereco.setDsAdjetivo(et_referencia.getText().toString());
+                endereco.setDsCep(et_cep.getText().toString());
                 endereco.setMunicipio((Municipio) spMunicipio.getSelectedItem());
-                endereco.setDt_cadastro(new Date());
-                endereco.setDt_atualizacao(new Date());
-                endereco.save();
-
+                endereco.setDtCadastro(new Date());
+                endereco.setDtAtualizacao(new Date());
+                try {
+                    EnderecoTask task = new EnderecoTask(AddAviario.this);
+                    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+                    Endereco endereco1 = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(endereco)}).get();
+                    System.out.println("VERIFICA Result POST ENDERECO------------------->" + endereco1);
+                    Mensagem.ExibirMensagem(AddAviario.this, "Endereco cadastrado com sucesso!", TipoMensagem.SUCESSO);
+                    endereco.save();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
                 Aviario aviario = new Aviario();
                 aviario.setCdAviario(codigoAviario);
                 aviario.setUsuario(MainActivity.usuarioLogado);
@@ -92,17 +100,18 @@ public class AddAviario extends AppCompatActivity {
                 aviario.setDtCadastro(new Date());
                 aviario.setDtAtualizacao(new Date());
                 aviario.setEndereco(endereco);
-
-
                 try {
-
-                    UsuarioTask task = new UsuarioTask(AddAviario.this);
-                    Usuario usuario = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{new Gson().toJson(aviario)}).get();
-                    System.out.println("VERIFICA Result ------------------->" + usuario);
+                    AviarioTask task = new AviarioTask(AddAviario.this);
+                    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+                    Aviario aviario1 = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(aviario)}).get();
+                    System.out.println("VERIFICA Result POST AVIARIO------------------->" + aviario1);
                     Mensagem.ExibirMensagem(AddAviario.this, "Aviário cadastrado com sucesso!", TipoMensagem.SUCESSO);
+                    aviario.save();
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
+                finish();
+
             }
         });
 
