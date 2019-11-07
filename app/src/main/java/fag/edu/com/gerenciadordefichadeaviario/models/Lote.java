@@ -7,37 +7,39 @@ import java.util.Date;
 
 public class Lote extends SugarRecord {
     @Unique
-    int cd_lote;
+    int cdLote;
     Aviario aviario;
-    Date dt_chegada;
-    Date dt_entrega;
-    Date dt_estimado_entrega;
-    int qt_aves;
-    String ds_linhagem;
-    Date dt_cadastro;
-    Date dt_atualizacao;
+    Date dtChegada;
+    Date dtEntrega;
+    Date dtEstimadaEntrega;
+    int qtAves;
+    String dsLinhagem;
+    Date dtCadastro;
+    Date dtAtualizacao;
+    boolean blAtivo;
 
     public Lote() {
     }
 
-    public Lote(int cd_lote, Aviario aviario, Date dt_chegada, Date dt_entrega, Date dt_estimado_entrega , int qt_aves, String ds_linhagem, Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_lote = cd_lote;
+    public Lote(int cdLote, Aviario aviario, Date dtChegada, Date dtEntrega, Date dtEstimadaEntrega, int qtAves, String dsLinhagem, Date dtCadastro, Date dtAtualizacao, boolean blAtivo) {
+        this.cdLote = cdLote;
         this.aviario = aviario;
-        this.dt_chegada = dt_chegada;
-        this.dt_entrega = dt_entrega;
-        this.dt_estimado_entrega = dt_entrega;
-        this.qt_aves = qt_aves;
-        this.ds_linhagem = ds_linhagem;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+        this.dtChegada = dtChegada;
+        this.dtEntrega = dtEntrega;
+        this.dtEstimadaEntrega = dtEstimadaEntrega;
+        this.qtAves = qtAves;
+        this.dsLinhagem = dsLinhagem;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
+        this.blAtivo = blAtivo;
     }
 
-    public int getCd_lote() {
-        return cd_lote;
+    public int getCdLote() {
+        return cdLote;
     }
 
-    public void setCd_lote(int cd_lote) {
-        this.cd_lote = cd_lote;
+    public void setCdLote(int cdLote) {
+        this.cdLote = cdLote;
     }
 
     public Aviario getAviario() {
@@ -48,66 +50,83 @@ public class Lote extends SugarRecord {
         this.aviario = aviario;
     }
 
-    public Date getDt_chegada() {
-        return dt_chegada;
+    public Date getDtChegada() {
+        return dtChegada;
     }
 
-    public void setDt_chegada(Date dt_chegada) {
-        this.dt_chegada = dt_chegada;
+    public void setDtChegada(Date dtChegada) {
+        this.dtChegada = dtChegada;
     }
 
-    public Date getDt_entrega() {
-        return dt_entrega;
+    public Date getDtEntrega() {
+        return dtEntrega;
     }
 
-    public void setDt_entrega(Date dt_entrega) {
-        this.dt_entrega = dt_entrega;
+    public void setDtEntrega(Date dtEntrega) {
+        this.dtEntrega = dtEntrega;
     }
 
-    public Date getDt_estimado_entrega() {
-        return dt_estimado_entrega;
+    public Date getDtEstimadaEntrega() {
+        return dtEstimadaEntrega;
     }
 
-    public void setDt_estimado_entrega(Date dt_estimado_entrega) {
-        this.dt_estimado_entrega = dt_estimado_entrega;
+    public void setDtEstimadaEntrega(Date dtEstimadaEntrega) {
+        this.dtEstimadaEntrega = dtEstimadaEntrega;
     }
 
-    public int getQt_aves() {
-        return qt_aves;
+    public int getQtAves() {
+        return qtAves;
     }
 
-    public void setQt_aves(int qt_aves) {
-        this.qt_aves = qt_aves;
+    public void setQtAves(int qtAves) {
+        this.qtAves = qtAves;
     }
 
-    public String getDs_linhagem() {
-        return ds_linhagem;
+    public String getDsLinhagem() {
+        return dsLinhagem;
     }
 
-    public void setDs_linhagem(String ds_linhagem) {
-        this.ds_linhagem = ds_linhagem;
+    public void setDsLinhagem(String dsLinhagem) {
+        this.dsLinhagem = dsLinhagem;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
+    }
+
+    public boolean isBlAtivo() {
+        return blAtivo;
+    }
+
+    public void setBlAtivo(boolean blAtivo) {
+        this.blAtivo = blAtivo;
     }
 
     @Override
     public String toString() {
         return "Lote{" +
-                "cd_lote=" + cd_lote +
+                "cdLote=" + cdLote +
+                ", aviario=" + aviario +
+                ", dtChegada=" + dtChegada +
+                ", dtEntrega=" + dtEntrega +
+                ", dtEestimadaEntrega=" + dtEstimadaEntrega +
+                ", qtAves=" + qtAves +
+                ", dsLinhagem='" + dsLinhagem + '\'' +
+                ", dtCadastro=" + dtCadastro +
+                ", dtAtualizacao=" + dtAtualizacao +
+                ", blAtivo=" + blAtivo +
                 '}';
     }
 }

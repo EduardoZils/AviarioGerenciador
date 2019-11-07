@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fag.edu.com.gerenciadordefichadeaviario.Tasks.TaskGet;
+import fag.edu.com.gerenciadordefichadeaviario.Util.Adapters.SelecaoAdapter;
 import fag.edu.com.gerenciadordefichadeaviario.Util.Mensagem;
 import fag.edu.com.gerenciadordefichadeaviario.Util.TipoMensagem;
 import fag.edu.com.gerenciadordefichadeaviario.models.Aviario;
@@ -34,7 +36,8 @@ public class SelecaoAviario extends AppCompatActivity implements SwipeRefreshLay
     private Button btAdicionarAviario, btEditarAviario, btLoteAviario;
     private ListView lvAviario;
     private SwipeRefreshLayout mSwipeToRefresh;
-    private ArrayAdapter adapterAviario;
+    private SelecaoAdapter adapterAviario;
+    private boolean aviarioEmLote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +85,24 @@ public class SelecaoAviario extends AppCompatActivity implements SwipeRefreshLay
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 MainActivity.aviario_selecionado = Aviario.listAll(Aviario.class).get(position);
                 Mensagem.ExibirMensagem(SelecaoAviario.this, "Novo aviário selecionado" + MainActivity.aviario_selecionado.getNrIdentificador(), TipoMensagem.SUCESSO);
+                for (Lote l : Lote.listAll(Lote.class)) {
+                    if (l.getAviario().getCdAviario() == MainActivity.aviario_selecionado.getCdAviario()) {
+                        aviarioEmLote = true;
+                        break;
+                    } else {
+                        aviarioEmLote = false;
+                    }
+                }
+                atualizaCampo();
+            }
 
+            private void atualizaCampo() {
+                if (aviarioEmLote) {
+                    btLoteAviario.setText("FINALIZAR LOTE");
+                } else {
+                    btLoteAviario.setText("INICIAR LOTE");
+
+                }
             }
         });
 
@@ -93,14 +113,19 @@ public class SelecaoAviario extends AppCompatActivity implements SwipeRefreshLay
                 boolean erro = false;
                 List<Lote> loteList = Lote.listAll(Lote.class);
                 for (Lote l : loteList) {
-                    if (l.getAviario() == MainActivity.aviario_selecionado) {
-                        Mensagem.ExibirMensagem(SelecaoAviario.this, "Este aviário já possui LOTE Ativo", TipoMensagem.ERRO);
-                        erro = true;
+                    if (aviarioEmLote) {
+                        if (l.getAviario() == MainActivity.aviario_selecionado) {
+                            Mensagem.ExibirMensagem(SelecaoAviario.this, "LOTE FINALIZADO!", TipoMensagem.SUCESSO);
+                            erro = true;
+                            //CONTINUAR A PARTIR DAQUI, FINALIZAÇÃO DE LOTE
+                        }
                     }
+
                 }
                 if (!erro) {
                     Intent intent = new Intent(SelecaoAviario.this, LoteActivity.class);
                     startActivity(intent);
+
                 }
 
             }
@@ -129,9 +154,11 @@ public class SelecaoAviario extends AppCompatActivity implements SwipeRefreshLay
     private void atualizaLista() {
         if (Aviario.listAll(Aviario.class).size() != 0) {
             List<Aviario> aviarioList = Aviario.listAll(Aviario.class);
-            lvAviario.setAdapter(adapterAviario = new ArrayAdapter<>(SelecaoAviario.this,
-                    R.layout.support_simple_spinner_dropdown_item,
-                    aviarioList));
+            // List<Lote> loteList = Lote.listAll(Lote.class);
+
+            // lvAviario.setAdapter(adapterAviario = new SelecaoAdapter(SelecaoAviario.this, aviarioList, loteList));
+            lvAviario.setAdapter(new ArrayAdapter<>(SelecaoAviario.this, R.layout.support_simple_spinner_dropdown_item, aviarioList));
+
         } /*else if (Aviario.listAll(Aviario.class) == null) {
             try {
                 TaskGet task1 = new TaskGet(this, "Aviarios");

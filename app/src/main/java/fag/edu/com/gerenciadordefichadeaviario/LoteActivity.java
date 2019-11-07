@@ -64,22 +64,27 @@ public class LoteActivity extends AppCompatActivity implements DatePickerDialog.
                 try {
                     Aviario aviario = MainActivity.aviario_selecionado;
                     if (Integer.parseInt(et_qt_aves.getText().toString()) > aviario.getNrCapAves()) {
-                        Mensagem.ExibirMensagem(LoteActivity.this,"O aviário não suporta esta quantidade de aves, seu valor maximo é " + aviario.getNrCapAves(), TipoMensagem.ERRO);
-                    }
+                        Mensagem.ExibirMensagem(LoteActivity.this, "O aviário não suporta esta quantidade de aves, seu valor maximo é " + aviario.getNrCapAves(), TipoMensagem.ERRO);
+                    } else if (dt_selecionada.after(dt_selecionadaChegada)) {
 
-                    Lote lote = new Lote();
-                    lote.setCd_lote(Lote.listAll(Lote.class).size() + 1);
-                    lote.setDs_linhagem(et_linhagem.getText().toString());
-                    lote.setAviario(MainActivity.aviario_selecionado);
-                    lote.setDt_atualizacao(new Date());
-                    lote.setDt_cadastro(new Date());
-                    lote.setDt_entrega(dt_selecionada);
-                    lote.setDt_estimado_entrega(dt_selecionadaChegada);
-                    lote.setQt_aves(Integer.parseInt(et_qt_aves.getText().toString()));
-                    lote.save();
+                        Lote lote = new Lote();
+                        lote.setCdLote(Lote.listAll(Lote.class).size() + 1);
+                        lote.setDsLinhagem(et_linhagem.getText().toString());
+                        lote.setAviario(MainActivity.aviario_selecionado);
+                        lote.setDtAtualizacao(new Date());
+                        lote.setDtCadastro(new Date());
+                        lote.setDtEntrega(dt_selecionada);
+                        lote.setDtEstimadaEntrega(dt_selecionadaChegada);
+                        lote.setQtAves(Integer.parseInt(et_qt_aves.getText().toString()));
+                        lote.setBlAtivo(true);
+                        lote.save();
+                    } else {
+                        Mensagem.ExibirMensagem(LoteActivity.this, "Datas inválidas, verifique se estão corretas!", TipoMensagem.ERRO);
+                    }
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
+                finish();
             }
         });
 
