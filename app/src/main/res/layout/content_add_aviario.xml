@@ -137,6 +137,22 @@
             android:layout_margin="@dimen/fab_margin"
             android:hint="Referência do local" />
 
+
+        <EditText
+            android:id="@+id/et_logradouro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:hint="Logradouro" />
+
+
+        <EditText
+            android:id="@+id/et_estrada"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:hint="Estrada" />
+
         <Button
             android:id="@+id/bt_salvar_aviario"
             android:layout_width="match_parent"

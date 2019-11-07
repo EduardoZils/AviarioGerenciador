@@ -5,26 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".AlimentacaoActivity"
-    tools:showIn="@layout/activity_alimentacao">
+    tools:context=".LoteActivity">
 
     <TextView
-        android:id="@+id/tv_codigo_aviario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_comida"
+        android:drawableLeft="@drawable/ic_fazenda"
         android:gravity="center"
-        android:text="Alimentação"
+        android:text="Seleção de aviário"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="22dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_margin="@dimen/fab_margin"
-        android:text="Registre uma nova chegada de rações ao seu aviário"
+        android:gravity="center"
+        android:text="Crie seu novo LOTE"
+        android:textSize="@dimen/fab_margin" />
+
+    <TextView
+        android:id="@+id/tv_aviario_lote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:gravity="center"
+        android:text="Aviario"
+        android:textColor="@color/colorPreto"
         android:textSize="@dimen/fab_margin" />
 
     <LinearLayout
@@ -38,40 +45,20 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
             android:layout_weight="1"
-            android:text="Aviário selecionado"
+            android:text="Chegada"
             android:textSize="@dimen/fab_margin" />
 
         <TextView
+            android:id="@+id/tv_dt_chegada"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
             android:layout_weight="1"
-            android:text="Nenhum aviário selecionado"
+            android:text="Selecione uma data"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/fab_margin" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            android:layout_weight="1"
-            android:text="Ração"
-            android:textSize="@dimen/fab_margin" />
-
-        <Spinner
-            android:id="@+id/spAlimentacao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            android:layout_weight="0.3"></Spinner>
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -84,11 +71,11 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
             android:layout_weight="1"
-            android:text="Data do recebimento"
+            android:text="Entrega estimada"
             android:textSize="@dimen/fab_margin" />
 
         <TextView
-            android:id="@+id/tv_dt_recebimento"
+            android:id="@+id/tv_dt_estimada_entrega"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
@@ -99,18 +86,26 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/et_qt_recebida"
+        android:id="@+id/et_qt_aves"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        android:hint="Quantidade recebida"
+        android:hint="Quantidade de aves"
         android:inputType="number" />
 
-    <Button
-        android:id="@+id/bt_salvar_alimentacao"
-        android:text="SALVAR"
+    <EditText
+        android:id="@+id/et_linhagem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin" />
+        android:layout_margin="@dimen/fab_margin"
+        android:hint="Linhagem" />
+
+    <Button
+        android:id="@+id/bt_gerar_lote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:text="Gerar LOTE" />
+
 
 </LinearLayout>

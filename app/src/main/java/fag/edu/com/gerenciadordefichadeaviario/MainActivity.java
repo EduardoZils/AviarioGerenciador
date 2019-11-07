@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,10 +23,12 @@ import fag.edu.com.gerenciadordefichadeaviario.models.Aviario;
 import fag.edu.com.gerenciadordefichadeaviario.models.Usuario;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {
 
     public static Usuario usuarioLogado;
-    TextView tv_bem_vindo;
+    public static Aviario aviario_selecionado;
+    public static TextView tv_bem_vindo, tv_aviario_principal;
+    private SwipeRefreshLayout mSwipeToRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +36,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -50,7 +46,21 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         tv_bem_vindo = findViewById(R.id.tv_bem_vindo);
+        tv_aviario_principal = findViewById(R.id.tv_aviario_principal);
+        mSwipeToRefresh = findViewById(R.id.swipe_refresh_container1);
+        // Seta o Listener para atualizar o conteudo quando o gesto for feito
+        mSwipeToRefresh.setOnRefreshListener(this);
+
+        // O esquema de cores
+        mSwipeToRefresh.setColorSchemeResources(
+                R.color.colorPrimary,
+                R.color.colorPrimaryDark
+        );
+
+
         tv_bem_vindo.setText("Bem vindo " + usuarioLogado.getDsNome() + ", estavamos lhe esperando");
+
+
     }
 
     @Override
@@ -91,29 +101,44 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
+        if (id == R.id.nav_fazenda) {
             Intent intent = new Intent(MainActivity.this, SelecaoAviario.class);
             startActivity(intent);
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_morte) {
             Intent intent = new Intent(MainActivity.this, MortalidadeActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_agua) {
             Intent intent = new Intent(MainActivity.this, HidrometroActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_tools) {
+        } else if (id == R.id.nav_balanca) {
             Intent intent = new Intent(MainActivity.this, PesagemActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_seringa) {
             Intent intent = new Intent(MainActivity.this, VacinaActivity.class);
             startActivity(intent);
+        } else if (id == R.id.nav_comida) {
+            Intent intent = new Intent(MainActivity.this, AlimentacaoActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_relatorio) {
+
         } else if (id == R.id.nav_logoff) {
             usuarioLogado = null;
             Usuario.deleteAll(Usuario.class);
+            Aviario.deleteAll(Aviario.class);
             finish();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onRefresh() {
+        // Executar a atualizacao
+        if (aviario_selecionado != null) {
+            tv_aviario_principal.setText(String.valueOf(aviario_selecionado.getNrIdentificador()));
+        }
+        mSwipeToRefresh.setRefreshing(false);
     }
 }

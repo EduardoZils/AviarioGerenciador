@@ -9,8 +9,11 @@ public class Endereco extends SugarRecord {
     @Unique
     int cdEndereco;
     Municipio municipio;
+    int cdMunicipio;
     String dsCep;
     String dsAdjetivo;
+    String dsLogradouro;
+    String dsEstrada;
     Date dtCadastro;
     Date dtAtualizacao;
 
@@ -18,11 +21,14 @@ public class Endereco extends SugarRecord {
     }
 
 
-    public Endereco(int cdEndereco, Municipio municipio, String dsCep, String dsAdjetivo, Date dtCadastro, Date dtAtualizacao) {
+    public Endereco(int cdEndereco, Municipio municipio, int cdMunicipio, String dsCep, String dsAdjetivo, String dsLogradouro, String dsEstrada, Date dtCadastro, Date dtAtualizacao) {
         this.cdEndereco = cdEndereco;
         this.municipio = municipio;
+        this.cdMunicipio = cdMunicipio;
         this.dsCep = dsCep;
         this.dsAdjetivo = dsAdjetivo;
+        this.dsLogradouro = dsLogradouro;
+        this.dsEstrada = dsEstrada;
         this.dtCadastro = dtCadastro;
         this.dtAtualizacao = dtAtualizacao;
     }
@@ -75,6 +81,29 @@ public class Endereco extends SugarRecord {
         this.dtAtualizacao = dtAtualizacao;
     }
 
+    public String getDsLogradouro() {
+        return dsLogradouro;
+    }
+
+    public void setDsLogradouro(String dsLogradouro) {
+        this.dsLogradouro = dsLogradouro;
+    }
+
+    public String getDsEstrada() {
+        return dsEstrada;
+    }
+
+    public void setDsEstrada(String dsEstrada) {
+        this.dsEstrada = dsEstrada;
+    }
+
+    public int getCdMunicipio() {
+        return cdMunicipio;
+    }
+
+    public void setCdMunicipio(int cdMunicipio) {
+        this.cdMunicipio = cdMunicipio;
+    }
 
     @Override
     public String toString() {

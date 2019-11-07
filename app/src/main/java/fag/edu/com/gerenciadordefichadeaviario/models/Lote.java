@@ -17,7 +17,10 @@ public class Lote extends SugarRecord {
     Date dt_cadastro;
     Date dt_atualizacao;
 
-    public Lote(int cd_lote, Aviario aviario, Date dt_chegada, Date dt_entrega,Date dt_estimado_entrega , int qt_aves, String ds_linhagem, Date dt_cadastro, Date dt_atualizacao) {
+    public Lote() {
+    }
+
+    public Lote(int cd_lote, Aviario aviario, Date dt_chegada, Date dt_entrega, Date dt_estimado_entrega , int qt_aves, String ds_linhagem, Date dt_cadastro, Date dt_atualizacao) {
         this.cd_lote = cd_lote;
         this.aviario = aviario;
         this.dt_chegada = dt_chegada;

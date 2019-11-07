@@ -1,70 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/swipe_refresh_container1"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@color/colorPreto"
-        android:textSize="19dp"
-        android:textStyle="bold" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@drawable/fag" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:id="@+id/tv_bem_vindo"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        android:text="Bem vindo @, estavamos lhe esperando"
-        android:textAlignment="center"
-        android:textSize="20dp" />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
+        android:orientation="vertical"
+        android:layout_height="match_parent">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            android:layout_weight="1"
-            android:text="Aviário pricipal:"
-            android:textSize="@dimen/fab_margin" />
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPreto"
+            android:textSize="19dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/fag" />
 
         <TextView
-            android:id="@+id/tv_aviario_principal"
+            android:id="@+id/tv_bem_vindo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            android:layout_weight="1"
-            android:text="Nenhum aviário selecionado"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/fab_margin" />
+            android:text="Bem vindo @, estavamos lhe esperando"
+            android:textAlignment="center"
+            android:textSize="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:text="Aviário pricipal:"
+                android:textSize="@dimen/fab_margin" />
+
+            <TextView
+                android:id="@+id/tv_aviario_principal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:text="Nenhum aviário selecionado"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/fab_margin" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:text="Testing Build v1.0 - Development Visual"
+            android:textSize="15dp" />
+
+
     </LinearLayout>
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:text="Testing Build v1.0 - Development Visual"
-        android:textSize="15dp" />
-
-
-</LinearLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

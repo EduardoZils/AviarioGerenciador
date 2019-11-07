@@ -5,25 +5,29 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_fazenda"
             android:icon="@drawable/ic_fazenda"
             android:title="Seleção de Aviário" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_morte"
             android:icon="@drawable/ic_morte"
             android:title="Mortalidade" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_agua"
             android:icon="@drawable/ic_agua"
             android:title="Hidrometro" />
         <item
-            android:id="@+id/nav_tools"
+            android:id="@+id/nav_balanca"
             android:icon="@drawable/ic_balanca"
             android:title="Pesagem" />
         <item
-            android:id="@+id/nav_share"
+            android:id="@+id/nav_seringa"
             android:icon="@drawable/ic_seringa"
             android:title="Vacinas" />
+        <item
+            android:id="@+id/nav_comida"
+            android:icon="@drawable/ic_comida"
+            android:title="Alimentação" />
         <item
             android:id="@+id/nav_relatorio"
             android:icon="@drawable/ic_pdf"

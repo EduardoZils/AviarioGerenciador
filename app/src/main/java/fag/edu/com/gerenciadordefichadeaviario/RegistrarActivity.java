@@ -17,6 +17,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -119,6 +121,8 @@ public class RegistrarActivity extends AppCompatActivity implements DatePickerDi
 
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         //Mensagem.ExibirMensagem(RegistrarActivity.this, "Data selecionada (" + dayOfMonth + "/" + (month + 1) + "/" + year + ")", TipoMensagem.ALERTA);
+
+
         dt_selecionada = year + "/" + (month + 1) + "/" + dayOfMonth;
         tv_dtnascimento.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
     }
