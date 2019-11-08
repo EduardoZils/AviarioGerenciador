@@ -7,28 +7,31 @@ import java.util.Date;
 
 public class Hidrometro extends SugarRecord {
     @Unique
-    int cd_hidrometro;
+    int cdHidrometro;
     Lote lote;
-    Double qt_gasto;
-    Date dt_coleta;
-    Date dt_cadastro;
-    Date dt_atualizacao;
+    Double qtGasto;
+    Date dtColeta;
+    Date dtCadastro;
+    Date dtAtualizacao;
 
-    public Hidrometro(int cd_hidrometro, Lote lote, Double qt_gasto, Date dt_coleta, Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_hidrometro = cd_hidrometro;
+    public Hidrometro() {
+    }
+
+    public Hidrometro(int cdHidrometro, Lote lote, Double qtGasto, Date dtColeta, Date dtCadastro, Date dtAtualizacao) {
+        this.cdHidrometro = cdHidrometro;
         this.lote = lote;
-        this.qt_gasto = qt_gasto;
-        this.dt_coleta = dt_coleta;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+        this.qtGasto = qtGasto;
+        this.dtColeta = dtColeta;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
     }
 
-    public int getCd_hidrometro() {
-        return cd_hidrometro;
+    public int getCdHidrometro() {
+        return cdHidrometro;
     }
 
-    public void setCd_hidrometro(int cd_hidrometro) {
-        this.cd_hidrometro = cd_hidrometro;
+    public void setCdHidrometro(int cdHidrometro) {
+        this.cdHidrometro = cdHidrometro;
     }
 
     public Lote getLote() {
@@ -39,42 +42,43 @@ public class Hidrometro extends SugarRecord {
         this.lote = lote;
     }
 
-    public Double getQt_gasto() {
-        return qt_gasto;
+    public Double getQtGasto() {
+        return qtGasto;
     }
 
-    public void setQt_gasto(Double qt_gasto) {
-        this.qt_gasto = qt_gasto;
+    public void setQtGasto(Double qtGasto) {
+        this.qtGasto = qtGasto;
     }
 
-    public Date getDt_coleta() {
-        return dt_coleta;
+    public Date getDtColeta() {
+        return dtColeta;
     }
 
-    public void setDt_coleta(Date dt_coleta) {
-        this.dt_coleta = dt_coleta;
+    public void setDtColeta(Date dtColeta) {
+        this.dtColeta = dtColeta;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
     }
 
     @Override
     public String toString() {
         return "Hidrometro{" +
-                "cd_hidrometro=" + cd_hidrometro +
+                "qtGasto=" + qtGasto +
+                ", dtColeta=" + dtColeta +
                 '}';
     }
 }

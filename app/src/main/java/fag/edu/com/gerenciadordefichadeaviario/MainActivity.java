@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.orm.SugarContext;
 
 import fag.edu.com.gerenciadordefichadeaviario.models.Aviario;
+import fag.edu.com.gerenciadordefichadeaviario.models.Lote;
 import fag.edu.com.gerenciadordefichadeaviario.models.Usuario;
 
 public class MainActivity extends AppCompatActivity

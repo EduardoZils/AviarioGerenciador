@@ -51,7 +51,7 @@ public class TaskGet extends AsyncTask<String, Integer, Result> {
             try {
 
                 StringBuffer response = new StringBuffer();
-                URL url = new URL("http://192.168.43.8:80/api/" + jsonData[0]);
+                URL url = new URL("http://192.168.0.95:80/api/" + jsonData[0]);
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 

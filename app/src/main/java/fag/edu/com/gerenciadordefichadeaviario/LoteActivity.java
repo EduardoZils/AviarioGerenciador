@@ -73,10 +73,19 @@ public class LoteActivity extends AppCompatActivity implements DatePickerDialog.
                         lote.setAviario(MainActivity.aviario_selecionado);
                         lote.setDtAtualizacao(new Date());
                         lote.setDtCadastro(new Date());
-                        lote.setDtEntrega(dt_selecionada);
+                        lote.setDtChegada(dt_selecionada);
+                        lote.setDtEntrega(dt_selecionadaChegada);
                         lote.setDtEstimadaEntrega(dt_selecionadaChegada);
                         lote.setQtAves(Integer.parseInt(et_qt_aves.getText().toString()));
-                        lote.setBlAtivo(true);
+
+
+                        //------------------------------------------------------------------------------------------------------------------
+                        //PROBLEMAS COM SALVAR BOOLEAN EM SQLITE----------------------------------------------------------------------------
+                        //------------------------------------------------------------------------------------------------------------------
+
+                        //lote.setBlAtivo(true);
+
+
                         lote.save();
                     } else {
                         Mensagem.ExibirMensagem(LoteActivity.this, "Datas inválidas, verifique se estão corretas!", TipoMensagem.ERRO);

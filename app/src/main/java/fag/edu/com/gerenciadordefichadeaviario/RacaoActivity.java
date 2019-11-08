@@ -19,4 +19,12 @@ public class RacaoActivity extends AppCompatActivity {
 
     }
 
+    private void carregaComponentes() {
+
+    }
+
+    private void carregaEventos() {
+
+    }
+
 }

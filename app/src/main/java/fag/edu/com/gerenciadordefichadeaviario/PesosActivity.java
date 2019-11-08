@@ -19,4 +19,13 @@ public class PesosActivity extends AppCompatActivity {
 
     }
 
+
+    private void carregaComponentes() {
+
+    }
+
+    private void carregaEventos() {
+
+    }
+
 }

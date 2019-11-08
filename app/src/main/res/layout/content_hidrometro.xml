@@ -41,7 +41,7 @@
             android:textSize="@dimen/fab_margin" />
 
         <TextView
-            android:id="@+id/tv_aviario_principal"
+            android:id="@+id/tv_aviario_principal_hidrometro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
@@ -54,26 +54,31 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
             android:layout_weight="1"
-            android:text="Data Leitura:"
-            android:textSize="16dp" />
+            android:text="Data da leitura:"
+            android:textSize="@dimen/fab_margin" />
 
-        <EditText
+        <TextView
+            android:id="@+id/tv_dt_leitura_agua"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            android:layout_weight="0.7"
-            android:textSize="16dp" />
-
+            android:layout_weight="1"
+            android:text="Selecione uma data"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/fab_margin" />
     </LinearLayout>
 
     <EditText
+        android:id="@+id/tv_leitura_atual"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
@@ -85,6 +90,7 @@
         android:layout_height="match_parent">
 
         <Button
+            android:id="@+id/bt_salvar_hidrometro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"

@@ -84,15 +84,27 @@ public class SelecaoAviario extends AppCompatActivity implements SwipeRefreshLay
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 MainActivity.aviario_selecionado = Aviario.listAll(Aviario.class).get(position);
-                Mensagem.ExibirMensagem(SelecaoAviario.this, "Novo aviário selecionado" + MainActivity.aviario_selecionado.getNrIdentificador(), TipoMensagem.SUCESSO);
-                for (Lote l : Lote.listAll(Lote.class)) {
-                    if (l.getAviario().getCdAviario() == MainActivity.aviario_selecionado.getCdAviario()) {
-                        aviarioEmLote = true;
-                        break;
-                    } else {
-                        aviarioEmLote = false;
+
+                String txt = null;
+
+
+                if (Lote.listAll(Lote.class).isEmpty()) {
+                    txt = "NÃO";
+                    aviarioEmLote = false;
+                } else {
+                    for (Lote l : Lote.listAll(Lote.class)) {
+                        if (l.getAviario().getCdAviario() == MainActivity.aviario_selecionado.getCdAviario()) {
+                            aviarioEmLote = true;
+                            txt = "SIM";
+                            break;
+                        } else {
+                            txt = "NÃO";
+                            aviarioEmLote = false;
+                        }
                     }
                 }
+                Mensagem.ExibirMensagem(SelecaoAviario.this, "Novo aviário selecionado" + MainActivity.aviario_selecionado.getNrIdentificador() + "\n" +
+                        "Em lote: " + txt, TipoMensagem.SUCESSO);
                 atualizaCampo();
             }
 
@@ -113,11 +125,11 @@ public class SelecaoAviario extends AppCompatActivity implements SwipeRefreshLay
                 boolean erro = false;
                 List<Lote> loteList = Lote.listAll(Lote.class);
                 for (Lote l : loteList) {
-                    if (aviarioEmLote) {
-                        if (l.getAviario() == MainActivity.aviario_selecionado) {
+                    if (aviarioEmLote && l.isBlAtivo()) {
+                        if (l.getAviario().getCdAviario() == MainActivity.aviario_selecionado.getCdAviario()) {
                             Mensagem.ExibirMensagem(SelecaoAviario.this, "LOTE FINALIZADO!", TipoMensagem.SUCESSO);
                             erro = true;
-                            //CONTINUAR A PARTIR DAQUI, FINALIZAÇÃO DE LOTE
+                            l.setBlAtivo(false);
                         }
                     }
 
