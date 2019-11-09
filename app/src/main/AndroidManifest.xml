@@ -11,7 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoteActivity"></activity>
+        <activity
+            android:name=".RelatorioActivity"
+            android:label="@string/title_activity_relatorio"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".LoteActivity" />
         <activity
             android:name=".RacaoActivity"
             android:label="@string/title_activity_racao"
@@ -41,7 +45,8 @@
         <activity
             android:name=".MortalidadeActivity"
             android:label="@string/title_activity_mortalidade"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".PesagemActivity"
             android:label="@string/title_activity_pesagem"
@@ -68,7 +73,7 @@
             android:value="projeto.db" />
         <meta-data
             android:name="VERSION"
-            android:value="2" />
+            android:value="1" />
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />

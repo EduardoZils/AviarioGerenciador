@@ -46,7 +46,7 @@
                 android:textSize="@dimen/fab_margin" />
 
             <TextView
-                android:id="@+id/tv_aviario_principal"
+                android:id="@+id/tv_aviario_principal_mortalidade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/fab_margin"
@@ -72,7 +72,7 @@
                 android:textSize="@dimen/fab_margin" />
 
             <TextView
-                android:id="@+id/tv_dt_leitura_agua"
+                android:id="@+id/tv_dt_leitura_mortalidade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/fab_margin"
@@ -81,13 +81,6 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/fab_margin" />
         </LinearLayout>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="Leitura atual"
-            android:inputType="number" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -118,21 +111,25 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <EditText
+                android:id="@+id/et_aves_mortas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:inputType="numberDecimal"
                 android:gravity="center"
-                android:text="143"
+                android:text="0"
                 android:textSize="40dp"
                 android:textStyle="bold" />
 
-            <TextView
+            <EditText
+                android:id="@+id/et_aves_eliminadas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="125"
+                android:text="0"
                 android:textSize="40dp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -156,6 +153,7 @@
                     android:orientation="horizontal">
 
                     <ImageButton
+                        android:id="@+id/bt_mais_mortas"
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
                         android:layout_gravity="center_vertical"
@@ -174,6 +172,7 @@
                     android:orientation="horizontal">
 
                     <ImageButton
+                        android:id="@+id/bt_menos_mortas"
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
                         android:layout_gravity="center_vertical"
@@ -198,6 +197,7 @@
                     android:orientation="horizontal">
 
                     <ImageButton
+                        android:id="@+id/bt_mais_eliminadas"
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
                         android:layout_gravity="center_vertical"
@@ -216,6 +216,7 @@
                     android:orientation="horizontal">
 
                     <ImageButton
+                        android:id="@+id/bt_menos_eliminadas"
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
                         android:layout_gravity="center_vertical"
@@ -229,6 +230,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/bt_salvar_mortalidade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Salvar" />

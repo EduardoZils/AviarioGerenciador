@@ -121,7 +121,8 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this, AlimentacaoActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_relatorio) {
-
+            Intent intent = new Intent(MainActivity.this, RelatorioActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_logoff) {
             usuarioLogado = null;
             Usuario.deleteAll(Usuario.class);

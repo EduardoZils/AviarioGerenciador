@@ -85,6 +85,11 @@ public class HidrometroActivity extends AppCompatActivity implements DatePickerD
                             podeGravar = false;
                             break;
                         }
+                        if (h.getDtColeta().getMonth() > new Date().getMonth()) {
+                            Mensagem.ExibirMensagem(HidrometroActivity.this, "Você não pode efetuar lançamentos futuros", TipoMensagem.ERRO);
+                            podeGravar = false;
+                            break;
+                        }
                     }
                 }
                 if (podeGravar) {

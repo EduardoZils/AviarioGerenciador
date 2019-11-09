@@ -11,16 +11,14 @@ import android.widget.TextView;
 import java.util.List;
 
 import fag.edu.com.gerenciadordefichadeaviario.R;
-import fag.edu.com.gerenciadordefichadeaviario.models.Aviario;
 import fag.edu.com.gerenciadordefichadeaviario.models.Lote;
 
 public class SelecaoAdapter extends BaseAdapter {
     LayoutInflater myInflater;
-    List<Aviario> aviarioList;
     List<Lote> loteList;
 
-    public SelecaoAdapter(Context context, List<Aviario> aviarioList, List<Lote> loteList) {
-        this.aviarioList = aviarioList;
+    public SelecaoAdapter(Context context, List<Lote> loteList) {
+        this.loteList = loteList;
         myInflater = LayoutInflater.from(context); //Responsavel por inflar o layout
     }
 
@@ -41,12 +39,13 @@ public class SelecaoAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        Aviario aviario = aviarioList.get(position);
         Lote lote = loteList.get(position);
         view = myInflater.inflate(R.layout.support_simple_spinner_dropdown_item, null);
-        ((TextView) view.findViewById(R.id.tv_nome)).setText(String.valueOf(aviario.getNrIdentificador()));
-        ((TextView) view.findViewById(R.id.tv_cap)).setText(String.valueOf(aviario.getNrCapAves()));
-        ((CheckBox) view.findViewById(R.id.cb_lote)).setChecked(lote.isBlAtivo());
+        ((TextView) view.findViewById(R.id.tv_nome)).setText(String.valueOf(lote.getCdLote()));
+        ((TextView) view.findViewById(R.id.tv_cap)).setText(String.valueOf(lote.getQtAves()));
+        ((TextView) view.findViewById(R.id.tv_dt_chegada)).setText(String.valueOf(lote.getDtChegada()));
+        ((TextView) view.findViewById(R.id.tv_dt_entrega)).setText(String.valueOf(lote.getDtEntrega()));
+        ((CheckBox) view.findViewById(R.id.cb_ativo)).setChecked(lote.isBlAtivo());
 
         return view;
     }
