@@ -7,30 +7,35 @@ import java.util.Date;
 
 public class Alimentacao extends SugarRecord {
     @Unique
-    int cd_alimentacao;
+    int cdAlimentacao;
     Lote lote;
     Racao racao;
-    Date dt_recebimento;
-    Double qt_recebida;
-    Date dt_cadastro;
-    Date dt_atualizacao;
+    Date dtRecebimento;
+    Double qtRecebida;
+    Date dtCadastro;
+    Date dtAtualizacao;
+    boolean blAtivo;
 
-    public Alimentacao(int cd_alimentacao, Lote lote, Racao racao, Date dt_recebimento, Double qt_recebida, Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_alimentacao = cd_alimentacao;
+    public Alimentacao() {
+    }
+
+    public Alimentacao(int cdAlimentacao, Lote lote, Racao racao, Date dtRecebimento, Double qtRecebida, Date dtCadastro, Date dtAtualizacao, boolean blAtivo) {
+        this.cdAlimentacao = cdAlimentacao;
         this.lote = lote;
         this.racao = racao;
-        this.dt_recebimento = dt_recebimento;
-        this.qt_recebida = qt_recebida;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+        this.dtRecebimento = dtRecebimento;
+        this.qtRecebida = qtRecebida;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
+        this.blAtivo = blAtivo;
     }
 
-    public int getCd_alimentacao() {
-        return cd_alimentacao;
+    public int getCdAlimentacao() {
+        return cdAlimentacao;
     }
 
-    public void setCd_alimentacao(int cd_alimentacao) {
-        this.cd_alimentacao = cd_alimentacao;
+    public void setCdAlimentacao(int cdAlimentacao) {
+        this.cdAlimentacao = cdAlimentacao;
     }
 
     public Lote getLote() {
@@ -49,42 +54,57 @@ public class Alimentacao extends SugarRecord {
         this.racao = racao;
     }
 
-    public Date getDt_recebimento() {
-        return dt_recebimento;
+    public Date getDtRecebimento() {
+        return dtRecebimento;
     }
 
-    public void setDt_recebimento(Date dt_recebimento) {
-        this.dt_recebimento = dt_recebimento;
+    public void setDtRecebimento(Date dtRecebimento) {
+        this.dtRecebimento = dtRecebimento;
     }
 
-    public Double getQt_recebida() {
-        return qt_recebida;
+    public Double getQtRecebida() {
+        return qtRecebida;
     }
 
-    public void setQt_recebida(Double qt_recebida) {
-        this.qt_recebida = qt_recebida;
+    public void setQtRecebida(Double qtRecebida) {
+        this.qtRecebida = qtRecebida;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
+    }
+
+    public boolean isBlAtivo() {
+        return blAtivo;
+    }
+
+    public void setBlAtivo(boolean blAtivo) {
+        this.blAtivo = blAtivo;
     }
 
     @Override
     public String toString() {
         return "Alimentacao{" +
-                "cd_alimentacao=" + cd_alimentacao +
+                "cdAlimentacao=" + cdAlimentacao +
+                ", lote=" + lote +
+                ", racao=" + racao +
+                ", dtRecebimento=" + dtRecebimento +
+                ", qtRecebida=" + qtRecebida +
+                ", dtCadastro=" + dtCadastro +
+                ", dtAtualizacao=" + dtAtualizacao +
+                ", blAtivo=" + blAtivo +
                 '}';
     }
 }

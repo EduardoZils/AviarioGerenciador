@@ -132,6 +132,7 @@ public class AddAviario extends AppCompatActivity {
                     endereco.setDsLogradouro(et_logradouro.getText().toString());
                     endereco.setDtCadastro(new Date());
                     endereco.setDtAtualizacao(new Date());
+
                     endereco.save();
 
                     /*
@@ -151,6 +152,7 @@ public class AddAviario extends AppCompatActivity {
                     aviario.setDtCadastro(new Date());
                     aviario.setDtAtualizacao(new Date());
                     aviario.setEndereco(endereco);
+                    aviario.setBlAtivo(true);
                     aviario.save();
                     /*
                     AviarioTask task1 = new AviarioTask(AddAviario.this);

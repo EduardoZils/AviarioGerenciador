@@ -114,7 +114,7 @@ public class RegistrarActivity extends AppCompatActivity implements DatePickerDi
         et_rg = findViewById(R.id.et_rg);
         et_senha = findViewById(R.id.et_senha);
         et_senhaC = findViewById(R.id.et_senhaC);
-        tv_dtnascimento = findViewById(R.id.tv_dtnascimento);
+        tv_dtnascimento = findViewById(R.id.tv_dt_nascimento);
         et_email = findViewById(R.id.et_email);
         bt_registrar = findViewById(R.id.bt_registrar);
     }

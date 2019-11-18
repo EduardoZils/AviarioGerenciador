@@ -77,13 +77,10 @@ public class LoteActivity extends AppCompatActivity implements DatePickerDialog.
                         lote.setDtEntrega(dt_selecionadaChegada);
                         lote.setDtEstimadaEntrega(dt_selecionadaChegada);
                         lote.setQtAves(Integer.parseInt(et_qt_aves.getText().toString()));
-
-
-                        //------------------------------------------------------------------------------------------------------------------
-                        //PROBLEMAS COM SALVAR BOOLEAN EM SQLITE----------------------------------------------------------------------------
-                        //------------------------------------------------------------------------------------------------------------------
-
-                        //lote.setBlAtivo(true);
+// -------------------------------------------------------------------
+//   ESTAVAMOS COM PROBLEMA EM SALVAR BOOLEAN ANTERIORMENTE, REVISAR
+// -------------------------------------------------------------------
+                        lote.setBlAtivo(true);
 
 
                         lote.save();

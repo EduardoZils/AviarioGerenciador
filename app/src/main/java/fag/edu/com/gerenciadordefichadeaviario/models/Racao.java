@@ -7,65 +7,75 @@ import java.util.Date;
 
 public class Racao extends SugarRecord {
     @Unique
-    int cd_racao;
-    String ds_nome;
-    String ds_tipo;
-    Date dt_cadastro;
-    Date dt_atualizacao;
+    int cdRacao;
+    String dsNome;
+    String dsTipo;
+    Date dtCadastro;
+    Date dtAtualizacao;
+    boolean blAtivo;
 
-    public Racao(int cd_racao, String ds_nome, String ds_tipo, Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_racao = cd_racao;
-        this.ds_nome = ds_nome;
-        this.ds_tipo = ds_tipo;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+    public Racao() {
     }
 
-    public int getCd_racao() {
-        return cd_racao;
+    public Racao(int cdRacao, String dsNome, String dsTipo, Date dtCadastro, Date dtAtualizacao, boolean blAtivo) {
+        this.cdRacao = cdRacao;
+        this.dsNome = dsNome;
+        this.dsTipo = dsTipo;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
+        this.blAtivo = blAtivo;
     }
 
-    public void setCd_racao(int cd_racao) {
-        this.cd_racao = cd_racao;
+    public int getCdRacao() {
+        return cdRacao;
     }
 
-    public String getDs_nome() {
-        return ds_nome;
+    public void setCdRacao(int cdRacao) {
+        this.cdRacao = cdRacao;
     }
 
-    public void setDs_nome(String ds_nome) {
-        this.ds_nome = ds_nome;
+    public String getDsNome() {
+        return dsNome;
     }
 
-    public String getDs_tipo() {
-        return ds_tipo;
+    public void setDsNome(String dsNome) {
+        this.dsNome = dsNome;
     }
 
-    public void setDs_tipo(String ds_tipo) {
-        this.ds_tipo = ds_tipo;
+    public String getDsTipo() {
+        return dsTipo;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public void setDsTipo(String dsTipo) {
+        this.dsTipo = dsTipo;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
+    }
+
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
+    }
+
+    public boolean isBlAtivo() {
+        return blAtivo;
+    }
+
+    public void setBlAtivo(boolean blAtivo) {
+        this.blAtivo = blAtivo;
     }
 
     @Override
     public String toString() {
-        return "Racao{" +
-                "ds_nome='" + ds_nome + '\'' +
-                ", ds_tipo='" + ds_tipo + '\'' +
-                '}';
+        return dsNome + " - " + dsTipo;
     }
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe_refresh_container_pesagem"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,112 +10,124 @@
     tools:context=".PesagemActivity"
     tools:showIn="@layout/activity_pesagem">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_balanca"
-            android:gravity="center"
-            android:text="Pesagem"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="22dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            android:gravity="center"
-            android:text="Grave aqui a pesagem de suas aves"
-            android:textSize="@dimen/fab_margin" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_balanca"
+                android:gravity="center"
+                android:text="Pesagem"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="22dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/fab_margin"
-                android:layout_weight="1"
-                android:text="Aviário pricipal:"
+                android:gravity="center"
+                android:text="Grave aqui a pesagem de suas aves"
                 android:textSize="@dimen/fab_margin" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:layout_weight="1"
+                    android:text="Aviário pricipal:"
+                    android:textSize="@dimen/fab_margin" />
+
+                <TextView
+                    android:id="@+id/tv_aviario_principal_pesagem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:layout_weight="1"
+                    android:text="Nenhum aviário selecionado"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/fab_margin" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:layout_weight="1"
+                    android:text="Data da Pesagem"
+                    android:textSize="@dimen/fab_margin" />
+
+                <TextView
+                    android:id="@+id/tv_dt_pesagem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:layout_weight="1"
+                    android:text="Selecione uma data"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/fab_margin" />
+            </LinearLayout>
+
             <TextView
-                android:id="@+id/tv_aviario_principal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/fab_margin"
-                android:layout_weight="1"
-                android:text="Nenhum aviário selecionado"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/fab_margin" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/fab_margin"
-                android:layout_weight="1"
-                android:text="Data Pesagem: "
+                android:text="Pesos: "
                 android:textSize="16dp" />
 
-            <EditText
+
+            <ListView
+                android:id="@+id/lv_pesos"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:layout_margin="@dimen/fab_margin"
-                android:layout_weight="0.7"
-                android:textSize="16dp" />
+                android:layout_weight="0.5"
+                android:cacheColorHint="@color/colorPrimary"
+                android:outlineSpotShadowColor="@color/colorPrimary"></ListView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/fab_margin"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bt_adicionar_pesos"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_add_circle"
+                    android:text="Adicionar pesos" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:id="@+id/bt_salvar_pesagem"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Salvar" />
+            </LinearLayout>
+
 
         </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            android:text="Pesagens de hoje: "
-            android:textSize="16dp" />
+    </ScrollView>
 
 
-        <ListView
-            android:id="@+id/lvAviario"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_margin="@dimen/fab_margin"
-            android:layout_weight="0.5"
-            android:cacheColorHint="@color/colorPrimary"
-            android:outlineSpotShadowColor="@color/colorPrimary"></ListView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_add_circle"
-                android:text="Adicionar pesos" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Salvar Pesagens" />
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-
-</ScrollView>
+</android.support.v4.widget.SwipeRefreshLayout>

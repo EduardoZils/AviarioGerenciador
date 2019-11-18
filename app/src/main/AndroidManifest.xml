@@ -12,9 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".RelatorioDetalhadoActivity"
+            android:label="@string/title_activity_relatorio_detalhado"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".RelatorioActivity"
             android:label="@string/title_activity_relatorio"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LoteActivity" />
         <activity
             android:name=".RacaoActivity"

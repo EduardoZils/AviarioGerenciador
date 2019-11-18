@@ -18,17 +18,17 @@
             android:id="@+id/tv_codigo_aviario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Criação de Aviário #(ERROR)"
             android:drawableLeft="@drawable/ic_fazenda"
-            android:textColor="@color/colorPrimaryDark"
             android:gravity="center"
+            android:text="Criação de Aviário #(ERROR)"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="22dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_margin="@dimen/fab_margin"
+            android:gravity="center"
             android:text="Registre um novo aviário preenchendo os campos abaixo"
             android:textSize="@dimen/fab_margin" />
 
@@ -143,7 +143,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            android:hint="Logradouro" />
+            android:hint="Logradouro"
+            android:inputType="text" />
 
 
         <EditText
@@ -151,7 +152,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            android:hint="Estrada" />
+            android:hint="Estrada"
+            android:inputType="text" />
 
         <Button
             android:id="@+id/bt_salvar_aviario"

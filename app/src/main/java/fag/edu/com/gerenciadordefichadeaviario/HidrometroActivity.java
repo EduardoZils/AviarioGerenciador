@@ -53,7 +53,7 @@ public class HidrometroActivity extends AppCompatActivity implements DatePickerD
 
     private boolean validaLote() {
         boolean inLote = false;
-        if(MainActivity.aviario_selecionado == null){
+        if (MainActivity.aviario_selecionado == null) {
             return inLote;
         }
         if (!Lote.listAll(Lote.class).isEmpty()) {
@@ -93,18 +93,22 @@ public class HidrometroActivity extends AppCompatActivity implements DatePickerD
                     }
                 }
                 if (podeGravar) {
-                    Hidrometro h = new Hidrometro();
-                    h.setCdHidrometro(Hidrometro.listAll(Hidrometro.class).size() + 1);
-                    h.setLote(lote);
-                    h.setDtAtualizacao(new Date());
-                    h.setDtCadastro(new Date());
-                    h.setDtColeta(dt_selecionada);
-                    h.setQtGasto(Double.parseDouble(tv_leitura_atual.getText().toString()));
+                    if (tv_leitura_atual.getText().length() > 0) {
+                        Hidrometro h = new Hidrometro();
+                        h.setCdHidrometro(Hidrometro.listAll(Hidrometro.class).size() + 1);
+                        h.setLote(lote);
+                        h.setDtAtualizacao(new Date());
+                        h.setDtCadastro(new Date());
+                        h.setDtColeta(dt_selecionada);
+                        h.setQtGasto(Double.parseDouble(tv_leitura_atual.getText().toString()));
 
 
-                    h.save();
+                        h.save();
 
-                    Mensagem.ExibirMensagem(HidrometroActivity.this, "Leitura salva com sucesso!", TipoMensagem.SUCESSO);
+                        Mensagem.ExibirMensagem(HidrometroActivity.this, "Leitura salva com sucesso!", TipoMensagem.SUCESSO);
+                    } else {
+                        Mensagem.ExibirMensagem(HidrometroActivity.this, "Verifique se todos os campos estão devidamente preenchidos!", TipoMensagem.ERRO);
+                    }
                 }
             }
         });
@@ -142,9 +146,7 @@ public class HidrometroActivity extends AppCompatActivity implements DatePickerD
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         sdf.format(dt_selecionada);
         System.out.println(sdf.format(dt_selecionada));
-        //tv_dt_leitura_agua.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
         tv_dt_leitura_agua.setText(sdf.format(dt_selecionada));
-
 
 
     }

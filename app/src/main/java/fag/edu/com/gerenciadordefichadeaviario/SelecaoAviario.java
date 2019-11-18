@@ -1,35 +1,23 @@
 package fag.edu.com.gerenciadordefichadeaviario;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
-import fag.edu.com.gerenciadordefichadeaviario.Tasks.TaskGet;
 import fag.edu.com.gerenciadordefichadeaviario.Util.Adapters.SelecaoAdapter;
 import fag.edu.com.gerenciadordefichadeaviario.Util.Mensagem;
 import fag.edu.com.gerenciadordefichadeaviario.Util.TipoMensagem;
 import fag.edu.com.gerenciadordefichadeaviario.models.Aviario;
 import fag.edu.com.gerenciadordefichadeaviario.models.Lote;
-import fag.edu.com.gerenciadordefichadeaviario.models.Result;
 
 public class SelecaoAviario extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -84,7 +72,6 @@ public class SelecaoAviario extends AppCompatActivity implements SwipeRefreshLay
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 MainActivity.aviario_selecionado = Aviario.listAll(Aviario.class).get(position);
-
                 String txt = null;
 
 

@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".PesosActivity"
     tools:showIn="@layout/activity_pesos">
@@ -12,46 +12,65 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pesos"
         android:drawableLeft="@drawable/ic_balanca"
-        android:textColor="@color/colorPrimaryDark"
         android:gravity="center"
+        android:text="Pesos"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="22dp" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_margin="@dimen/fab_margin"
+        android:gravity="center"
         android:text="Efetue a pesagem de suas aves"
         android:textSize="@dimen/fab_margin" />
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        android:textSize="16dp"
-        android:text="Aviário da pesagem: "
-        />
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_weight="1"
+            android:text="Aviário pricipal:"
+            android:textSize="@dimen/fab_margin" />
+
+        <TextView
+            android:id="@+id/tv_aviario_principal_pesos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_weight="1"
+            android:text="Nenhum aviário selecionado"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/fab_margin" />
+    </LinearLayout>
 
     <EditText
+        android:id="@+id/et_qt_aves_peso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        android:inputType="number"
         android:hint="Quantidade de aves nesta pesagem"
-        />
+        android:inputType="number" />
+
     <EditText
+        android:id="@+id/et_peso_total"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        android:inputType="numberDecimal"
         android:hint="Peso total (Kg)"
-        />
+        android:inputType="numberDecimal" />
 
     <Button
+        android:id="@+id/bt_salvar_pesos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        android:text="Salvar"
-        />
+        android:text="Salvar" />
 </LinearLayout>

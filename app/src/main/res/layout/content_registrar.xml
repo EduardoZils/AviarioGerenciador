@@ -36,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
+            android:inputType="text"
             android:hint="Nome completo" />
 
         <EditText
@@ -51,6 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
+            android:inputType="number"
             android:hint="RG"
             android:maxLength="12" />
 
@@ -58,6 +60,7 @@
             android:id="@+id/et_cpf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:layout_margin="@dimen/fab_margin"
             android:hint="CPF"
             android:maxLength="13" />
@@ -93,7 +96,7 @@
                 android:textSize="@dimen/fab_margin" />
 
             <TextView
-                android:id="@+id/tv_dtnascimento"
+                android:id="@+id/tv_dt_nascimento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/fab_margin"

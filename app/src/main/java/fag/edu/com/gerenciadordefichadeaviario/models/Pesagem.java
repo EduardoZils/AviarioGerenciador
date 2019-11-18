@@ -7,34 +7,43 @@ import java.util.Date;
 
 public class Pesagem extends SugarRecord {
     @Unique
-    int cd_pesagem;
+    int cdPesagem;
     Lote lote;
-    Double vl_peso_semana;
-    Double vl_peso_medio;
-    int nm_semana;
-    Date dt_pesagem;
-    int qt_pesagens;
-    Date dt_cadastro;
-    Date dt_atualizacao;
+    Double vlPesoSemana;
+    Double vlPesoMedio;
+    int nmSemana;
+    Date dtPesagem;
+    int qtPesagens;
+    Date dtCadastro;
+    Date dtAtualizacao;
+    boolean blAtivo;
 
-    public Pesagem(int cd_pesagem, Lote lote, Double vl_peso_semana, Double vl_peso_medio, int nm_semana, Date dt_pesagem, int qt_pesagens, Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_pesagem = cd_pesagem;
+    public Pesagem(int cdPesagem) {
+        this.cdPesagem = cdPesagem;
+    }
+
+    public Pesagem(int cdPesagem, Lote lote, Double vlPesoSemana, Double vlPesoMedio, int nmSemana, Date dtPesagem, int qtPesagens, Date dtCadastro, Date dtAtualizacao, boolean blAtivo) {
+        this.cdPesagem = cdPesagem;
         this.lote = lote;
-        this.vl_peso_semana = vl_peso_semana;
-        this.vl_peso_medio = vl_peso_medio;
-        this.nm_semana = nm_semana;
-        this.dt_pesagem = dt_pesagem;
-        this.qt_pesagens = qt_pesagens;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+        this.vlPesoSemana = vlPesoSemana;
+        this.vlPesoMedio = vlPesoMedio;
+        this.nmSemana = nmSemana;
+        this.dtPesagem = dtPesagem;
+        this.qtPesagens = qtPesagens;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
+        this.blAtivo = blAtivo;
     }
 
-    public int getCd_pesagem() {
-        return cd_pesagem;
+    public Pesagem() {
     }
 
-    public void setCd_pesagem(int cd_pesagem) {
-        this.cd_pesagem = cd_pesagem;
+    public int getCdPesagem() {
+        return cdPesagem;
+    }
+
+    public void setCdPesagem(int cdPesagem) {
+        this.cdPesagem = cdPesagem;
     }
 
     public Lote getLote() {
@@ -45,68 +54,74 @@ public class Pesagem extends SugarRecord {
         this.lote = lote;
     }
 
-    public Double getVl_peso_semana() {
-        return vl_peso_semana;
+    public Double getVlPesoSemana() {
+        return vlPesoSemana;
     }
 
-    public void setVl_peso_semana(Double vl_peso_semana) {
-        this.vl_peso_semana = vl_peso_semana;
+    public void setVlPesoSemana(Double vlPesoSemana) {
+        this.vlPesoSemana = vlPesoSemana;
     }
 
-    public Double getVl_peso_medio() {
-        return vl_peso_medio;
+    public Double getVlPesoMedio() {
+        return vlPesoMedio;
     }
 
-    public void setVl_peso_medio(Double vl_peso_medio) {
-        this.vl_peso_medio = vl_peso_medio;
+    public void setVlPesoMedio(Double vlPesoMedio) {
+        this.vlPesoMedio = vlPesoMedio;
     }
 
-    public int getNm_semana() {
-        return nm_semana;
+    public int getNmSemana() {
+        return nmSemana;
     }
 
-    public void setNm_semana(int nm_semana) {
-        this.nm_semana = nm_semana;
+    public void setNmSemana(int nmSemana) {
+        this.nmSemana = nmSemana;
     }
 
-    public Date getDt_pesagem() {
-        return dt_pesagem;
+    public Date getDtPesagem() {
+        return dtPesagem;
     }
 
-    public void setDt_pesagem(Date dt_pesagem) {
-        this.dt_pesagem = dt_pesagem;
+    public void setDtPesagem(Date dtPesagem) {
+        this.dtPesagem = dtPesagem;
     }
 
-    public int getQt_pesagens() {
-        return qt_pesagens;
+    public int getQtPesagens() {
+        return qtPesagens;
     }
 
-    public void setQt_pesagens(int qt_pesagens) {
-        this.qt_pesagens = qt_pesagens;
+    public void setQtPesagens(int qtPesagens) {
+        this.qtPesagens = qtPesagens;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
+    }
+
+    public boolean isBlAtivo() {
+        return blAtivo;
+    }
+
+    public void setBlAtivo(boolean blAtivo) {
+        this.blAtivo = blAtivo;
     }
 
     @Override
     public String toString() {
         return "Pesagem{" +
-                "vl_peso_semana=" + vl_peso_semana +
-                ", vl_peso_medio=" + vl_peso_medio +
-                ", nm_semana=" + nm_semana +
+                "qtPesagens=" + qtPesagens +
                 '}';
     }
 }

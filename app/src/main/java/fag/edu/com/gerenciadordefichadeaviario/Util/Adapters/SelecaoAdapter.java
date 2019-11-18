@@ -46,7 +46,6 @@ public class SelecaoAdapter extends BaseAdapter {
         ((TextView) view.findViewById(R.id.tv_dt_chegada)).setText(String.valueOf(lote.getDtChegada()));
         ((TextView) view.findViewById(R.id.tv_dt_entrega)).setText(String.valueOf(lote.getDtEntrega()));
         ((CheckBox) view.findViewById(R.id.cb_ativo)).setChecked(lote.isBlAtivo());
-
         return view;
     }
 }

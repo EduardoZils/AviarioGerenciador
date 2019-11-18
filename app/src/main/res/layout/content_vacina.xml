@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,76 +9,118 @@
     tools:context=".VacinaActivity"
     tools:showIn="@layout/activity_vacina">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_seringa"
-        android:gravity="center"
-        android:text="Vacina"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="22dp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        android:gravity="center"
-        android:text="Aplique vacinas em seus aviários"
-        android:textSize="@dimen/fab_margin" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_seringa"
+            android:gravity="center"
+            android:text="Vacina"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="22dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            android:layout_weight="1"
-            android:text="Aviário pricipal:"
+            android:gravity="center"
+            android:text="Aplique vacinas em seus aviários"
             android:textSize="@dimen/fab_margin" />
 
-        <TextView
-            android:id="@+id/tv_aviario_principal"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:text="Aviário pricipal:"
+                android:textSize="@dimen/fab_margin" />
+
+            <TextView
+                android:id="@+id/tv_aviario_principal_vacina"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:text="Nenhum aviário selecionado"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/fab_margin" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/et_nome_vacina"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            android:layout_weight="1"
-            android:text="Nenhum aviário selecionado"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/fab_margin" />
-    </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        android:text="Selecione uma vacina" />
+            android:hint="Nome da vacina"
+            android:inputType="text" />
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"></ListView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1.6"
-        android:gravity="bottom"
-        android:orientation="horizontal">
-
-        <Button
+        <EditText
+            android:id="@+id/et_prescricao_vacina"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Aplicar Vacina" />
+            android:layout_margin="@dimen/fab_margin"
+            android:hint="Prescrição"
+            android:inputType="text" />
 
-        <Button
+        <EditText
+            android:id="@+id/et_dosagem_vacina"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Nova vacina" />
+            android:layout_margin="@dimen/fab_margin"
+            android:hint="Dosagem - ml"
+            android:inputType="numberDecimal" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:text="Data da vacinação"
+                android:textSize="@dimen/fab_margin" />
+
+            <TextView
+                android:id="@+id/tv_dt_vacina"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:text="Selecione uma data"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/fab_margin" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/et_forma_de_uso_vacina"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_margin="@dimen/fab_margin"
+            android:hint="Forma de uso" />
+
+        <Button
+            android:id="@+id/bt_adicionar_vacina"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aplicar vacina" />
+
 
     </LinearLayout>
-</LinearLayout>
+
+
+</ScrollView>

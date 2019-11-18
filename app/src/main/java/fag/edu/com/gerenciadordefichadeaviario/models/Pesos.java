@@ -7,28 +7,33 @@ import java.util.Date;
 
 public class Pesos extends SugarRecord {
     @Unique
-    int cd_peso;
+    int cdPeso;
     Pesagem pesagem;
-    int qt_aves_utilizadas;
-    Double vl_pesagem;
-    Date dt_cadastro;
-    Date dt_atualizacao;
+    int qtAvesUtilizadas;
+    Double vlPesagem;
+    Date dtCadastro;
+    Date dtAtualizacao;
+    boolean blAtivo;
 
-    public Pesos(int cd_peso, Pesagem pesagem, int qt_aves_utilizadas, Double vl_pesagem, Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_peso = cd_peso;
+    public Pesos() {
+    }
+
+    public Pesos(int cdPeso, Pesagem pesagem, int qtAvesUtilizadas, Double vlPesagem, Date dtCadastro, Date dtAtualizacao, boolean blAtivo) {
+        this.cdPeso = cdPeso;
         this.pesagem = pesagem;
-        this.qt_aves_utilizadas = qt_aves_utilizadas;
-        this.vl_pesagem = vl_pesagem;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+        this.qtAvesUtilizadas = qtAvesUtilizadas;
+        this.vlPesagem = vlPesagem;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
+        this.blAtivo = blAtivo;
     }
 
-    public int getCd_peso() {
-        return cd_peso;
+    public int getCdPeso() {
+        return cdPeso;
     }
 
-    public void setCd_peso(int cd_peso) {
-        this.cd_peso = cd_peso;
+    public void setCdPeso(int cdPeso) {
+        this.cdPeso = cdPeso;
     }
 
     public Pesagem getPesagem() {
@@ -39,42 +44,51 @@ public class Pesos extends SugarRecord {
         this.pesagem = pesagem;
     }
 
-    public int getQt_aves_utilizadas() {
-        return qt_aves_utilizadas;
+    public int getQtAvesUtilizadas() {
+        return qtAvesUtilizadas;
     }
 
-    public void setQt_aves_utilizadas(int qt_aves_utilizadas) {
-        this.qt_aves_utilizadas = qt_aves_utilizadas;
+    public void setQtAvesUtilizadas(int qtAvesUtilizadas) {
+        this.qtAvesUtilizadas = qtAvesUtilizadas;
     }
 
-    public Double getVl_pesagem() {
-        return vl_pesagem;
+    public Double getVlPesagem() {
+        return vlPesagem;
     }
 
-    public void setVl_pesagem(Double vl_pesagem) {
-        this.vl_pesagem = vl_pesagem;
+    public void setVlPesagem(Double vlPesagem) {
+        this.vlPesagem = vlPesagem;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
+    }
+
+    public boolean isBlAtivo() {
+        return blAtivo;
+    }
+
+    public void setBlAtivo(boolean blAtivo) {
+        this.blAtivo = blAtivo;
     }
 
     @Override
     public String toString() {
         return "Pesos{" +
-                "vl_pesagem=" + vl_pesagem +
+                "qtAvesUtilizadas=" + qtAvesUtilizadas +
+                ", vlPesagem=" + vlPesagem +
                 '}';
     }
 }
