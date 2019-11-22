@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,13 +22,15 @@ import fag.edu.com.gerenciadordefichadeaviario.R;
 import fag.edu.com.gerenciadordefichadeaviario.Util.Conexao;
 import fag.edu.com.gerenciadordefichadeaviario.models.Aviario;
 import fag.edu.com.gerenciadordefichadeaviario.models.Endereco;
+import fag.edu.com.gerenciadordefichadeaviario.models.Hidrometro;
+import fag.edu.com.gerenciadordefichadeaviario.models.Lote;
 
-public class EnderecoTask extends AsyncTask<String, Integer, List<Endereco>> {
+public class LoteTask extends AsyncTask<String, Integer, List<Lote>> {
 
     private ProgressDialog progress;
     private Context context;
 
-    public EnderecoTask(Context context) {
+    public LoteTask(Context context) {
         this.context = context;
     }
 
@@ -38,7 +39,7 @@ public class EnderecoTask extends AsyncTask<String, Integer, List<Endereco>> {
         super.onPreExecute();
         progress = new ProgressDialog(context);
         progress.setTitle("Aguarde");
-        progress.setMessage("Estamos cadastrando seu endereço em nosso sistema...");
+        progress.setMessage("Estamos registrando seu lote em nosso sistema...");
         progress.setIcon(R.drawable.ic_fazenda);
         progress.setCancelable(false);
         progress.show();
@@ -46,15 +47,15 @@ public class EnderecoTask extends AsyncTask<String, Integer, List<Endereco>> {
 
 
     @Override
-    protected List<Endereco> doInBackground(String... jsonData) {
-        List<Endereco> enderecoResult = null;
+    protected List<Lote> doInBackground(String... jsonData) {
+        List<Lote> loteResult = null;
         HttpURLConnection connection = null;
         String data = jsonData[0];
         try {
 
             StringBuffer response = new StringBuffer();
 
-            connection = Conexao.realizaConexao("Enderecoes", "POST");
+            connection = Conexao.realizaConexao("Lotes", "POST");
 
             //Escrevo na Conexão que montamos
             OutputStream os = new BufferedOutputStream(connection.getOutputStream());
@@ -93,24 +94,24 @@ public class EnderecoTask extends AsyncTask<String, Integer, List<Endereco>> {
         } finally {
             connection.disconnect();
         }
-        return enderecoResult;
+        return loteResult;
     }
 
 
     @Override
-    protected void onPostExecute(List<Endereco> s) {
+    protected void onPostExecute(List<Lote> s) {
         super.onPostExecute(s);
         progress.cancel();
 
-        List<Aviario> aviariosList = new ArrayList<>();
+        List<Hidrometro> hidrometroList = new ArrayList<>();
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        for (Aviario a : Aviario.listAll(Aviario.class)) {
-            if (!a.isIntegrado()) {
-                aviariosList.add(a);
+        for (Hidrometro h : Hidrometro.listAll(Hidrometro.class)) {
+            if (!h.isIntegrado()) {
+                hidrometroList.add(h);
             }
         }
-        AviarioTask taskAviario = new AviarioTask(context, "POST");
-        taskAviario.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(aviariosList)});
+        //AviarioTask taskAviario = new AviarioTask(context);
+        //taskAviario.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(hidrometroList)});
 
     }
 }

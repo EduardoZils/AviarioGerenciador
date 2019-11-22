@@ -136,7 +136,7 @@ public class SelecaoAviario extends AppCompatActivity implements SwipeRefreshLay
         btEditarAviario = findViewById(R.id.btEditarAviario);
         btLoteAviario = findViewById(R.id.btLoteAviario);
         lvAviario = findViewById(R.id.lvAviario);
-// Recupera o SwipeRefreshLayout
+        // Recupera o SwipeRefreshLayout
         mSwipeToRefresh = findViewById(R.id.swipe_refresh_container);
 
         // Seta o Listener para atualizar o conteudo quando o gesto for feito
@@ -153,33 +153,9 @@ public class SelecaoAviario extends AppCompatActivity implements SwipeRefreshLay
     private void atualizaLista() {
         if (Aviario.listAll(Aviario.class).size() != 0) {
             List<Aviario> aviarioList = Aviario.listAll(Aviario.class);
-            // List<Lote> loteList = Lote.listAll(Lote.class);
-
-            // lvAviario.setAdapter(adapterAviario = new SelecaoAdapter(SelecaoAviario.this, aviarioList, loteList));
             lvAviario.setAdapter(new ArrayAdapter<>(SelecaoAviario.this, R.layout.support_simple_spinner_dropdown_item, aviarioList));
 
-        } /*else if (Aviario.listAll(Aviario.class) == null) {
-            try {
-                TaskGet task1 = new TaskGet(this, "Aviarios");
-                Result result = task1.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Aviarios/byUsuario/" + MainActivity.usuarioLogado.getCdUsuario()}).get();
-                System.out.println("VERIFICA Result1 ------------------->" + result);
-                Type typeAviario = new TypeToken<List<Aviario>>() {
-                }.getType();
-                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-                List<Aviario> aviarioList = gson.fromJson(result.getContent(), typeAviario);
-
-                Aviario.deleteAll(Aviario.class);
-                for (Aviario a : aviarioList) {
-                    a.save();
-                }
-
-                lvAviario.setAdapter(adapterAviario = new ArrayAdapter<>(SelecaoAviario.this,
-                        R.layout.support_simple_spinner_dropdown_item,
-                        aviarioList));
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }*/ else {
+        }  else {
             Mensagem.ExibirMensagem(SelecaoAviario.this, "Não existem aviários cadastrados! Adicione um novo aviário no canto superior direito!", TipoMensagem.ALERTA);
         }
     }

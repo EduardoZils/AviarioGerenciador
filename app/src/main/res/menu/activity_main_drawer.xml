@@ -33,7 +33,19 @@
             android:icon="@drawable/ic_pdf"
             android:title="Relatório" />
     </group>
+    <item android:title="Dados">
+        <menu>
 
+            <item
+                android:id="@+id/nav_import"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Importar dados" />
+            <item
+                android:id="@+id/nav_export"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Exportar dados" />
+        </menu>
+    </item>
     <item android:title="Usuário">
         <menu>
 

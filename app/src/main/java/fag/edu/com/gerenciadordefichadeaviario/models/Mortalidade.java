@@ -96,15 +96,7 @@ public class Mortalidade extends SugarRecord {
 
     @Override
     public String toString() {
-        return "Mortalidade{" +
-                "cdMortalidade=" + cdMortalidade +
-                ", lote=" + lote +
-                ", NrAvesAbatidas=" + NrAvesAbatidas +
-                ", NrAvesEliminadas=" + NrAvesEliminadas +
-                ", DtMorte=" + DtMorte +
-                ", DtCadastro=" + DtCadastro +
-                ", DtAtualizacao=" + DtAtualizacao +
-                ", BlAtivo=" + BlAtivo +
-                '}';
+        return  "M " + NrAvesAbatidas +
+                " - E " + NrAvesEliminadas;
     }
 }

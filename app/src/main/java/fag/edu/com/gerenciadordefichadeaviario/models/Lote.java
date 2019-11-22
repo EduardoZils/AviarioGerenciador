@@ -3,6 +3,7 @@ package fag.edu.com.gerenciadordefichadeaviario.models;
 import com.orm.SugarRecord;
 import com.orm.dsl.Unique;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Lote extends SugarRecord {
@@ -17,11 +18,12 @@ public class Lote extends SugarRecord {
     Date dtCadastro;
     Date dtAtualizacao;
     boolean blAtivo;
+    boolean integrado;
 
     public Lote() {
     }
 
-    public Lote(int cdLote, Aviario aviario, Date dtChegada, Date dtEntrega, Date dtEstimadaEntrega, int qtAves, String dsLinhagem, Date dtCadastro, Date dtAtualizacao, boolean blAtivo) {
+    public Lote(int cdLote, Aviario aviario, Date dtChegada, Date dtEntrega, Date dtEstimadaEntrega, int qtAves, String dsLinhagem, Date dtCadastro, Date dtAtualizacao, boolean blAtivo, boolean integrado) {
         this.cdLote = cdLote;
         this.aviario = aviario;
         this.dtChegada = dtChegada;
@@ -32,6 +34,7 @@ public class Lote extends SugarRecord {
         this.dtCadastro = dtCadastro;
         this.dtAtualizacao = dtAtualizacao;
         this.blAtivo = blAtivo;
+        this.integrado = integrado;
     }
 
     public int getCdLote() {
@@ -114,19 +117,20 @@ public class Lote extends SugarRecord {
         this.blAtivo = blAtivo;
     }
 
+    public boolean isIntegrado() {
+        return integrado;
+    }
+
+    public void setIntegrado(boolean integrado) {
+        this.integrado = integrado;
+    }
+
     @Override
     public String toString() {
-        return "Lote{" +
-                "cdLote=" + cdLote +
-                ", aviario=" + aviario +
-                ", dtChegada=" + dtChegada +
-                ", dtEntrega=" + dtEntrega +
-                ", dtEestimadaEntrega=" + dtEstimadaEntrega +
-                ", qtAves=" + qtAves +
-                ", dsLinhagem='" + dsLinhagem + '\'' +
-                ", dtCadastro=" + dtCadastro +
-                ", dtAtualizacao=" + dtAtualizacao +
-                ", blAtivo=" + blAtivo +
-                '}';
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+        return cdLote +
+                " -C: " + sdf.format(dtChegada) +
+                " - " + dsLinhagem;
     }
 }

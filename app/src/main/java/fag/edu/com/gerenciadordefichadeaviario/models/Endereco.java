@@ -1,27 +1,45 @@
 package fag.edu.com.gerenciadordefichadeaviario.models;
 
+import com.google.gson.annotations.Expose;
 import com.orm.SugarRecord;
+import com.orm.dsl.Ignore;
+import com.orm.dsl.NotNull;
 import com.orm.dsl.Unique;
 
 import java.util.Date;
 
 public class Endereco extends SugarRecord {
     @Unique
+    @Expose
     int cdEndereco;
+    @NotNull
     Municipio municipio;
+    @Expose
     int cdMunicipio;
+    @Expose
+    @NotNull
     String dsCep;
+    @Expose
+    @NotNull
     String dsAdjetivo;
+    @Expose
+    @NotNull
     String dsLogradouro;
+    @Expose
+    @NotNull
     String dsEstrada;
+    @Expose
+    @NotNull
     Date dtCadastro;
+    @Expose
+    @NotNull
     Date dtAtualizacao;
+    boolean integrado;
 
     public Endereco() {
     }
 
-
-    public Endereco(int cdEndereco, Municipio municipio, int cdMunicipio, String dsCep, String dsAdjetivo, String dsLogradouro, String dsEstrada, Date dtCadastro, Date dtAtualizacao) {
+    public Endereco(int cdEndereco, Municipio municipio, int cdMunicipio, String dsCep, String dsAdjetivo, String dsLogradouro, String dsEstrada, Date dtCadastro, Date dtAtualizacao, boolean integrado) {
         this.cdEndereco = cdEndereco;
         this.municipio = municipio;
         this.cdMunicipio = cdMunicipio;
@@ -31,6 +49,7 @@ public class Endereco extends SugarRecord {
         this.dsEstrada = dsEstrada;
         this.dtCadastro = dtCadastro;
         this.dtAtualizacao = dtAtualizacao;
+        this.integrado = integrado;
     }
 
     public int getCdEndereco() {
@@ -103,6 +122,14 @@ public class Endereco extends SugarRecord {
 
     public void setCdMunicipio(int cdMunicipio) {
         this.cdMunicipio = cdMunicipio;
+    }
+
+    public boolean isIntegrado() {
+        return integrado;
+    }
+
+    public void setIntegrado(boolean integrado) {
+        this.integrado = integrado;
     }
 
     @Override

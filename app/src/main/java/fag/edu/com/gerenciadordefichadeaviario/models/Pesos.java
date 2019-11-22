@@ -86,9 +86,7 @@ public class Pesos extends SugarRecord {
 
     @Override
     public String toString() {
-        return "Pesos{" +
-                "qtAvesUtilizadas=" + qtAvesUtilizadas +
-                ", vlPesagem=" + vlPesagem +
-                '}';
+        return qtAvesUtilizadas + " aves - " + vlPesagem +
+                " Kg";
     }
 }

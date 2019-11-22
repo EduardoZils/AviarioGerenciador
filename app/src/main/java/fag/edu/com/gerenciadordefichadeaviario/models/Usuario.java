@@ -1,21 +1,44 @@
 package fag.edu.com.gerenciadordefichadeaviario.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.orm.SugarRecord;
+import com.orm.dsl.NotNull;
 import com.orm.dsl.Unique;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Usuario extends SugarRecord {
+public class Usuario extends SugarRecord implements Serializable {
     @Unique
+    @Expose
     int cdUsuario;
+    @Expose
+    @NotNull
     String dsNome;
+    @Expose
+    @NotNull
     String dsEmail;
+    @Expose
+    @NotNull
     String dsSenha;
+    @Expose
+    @NotNull
     String dsCpf;
+    @Expose
+    @NotNull
     String dsRg;
+    @Expose
+    @NotNull
     Date dtNascimento;
+    @Expose
+    @NotNull
     Date dtCadastro;
+    @Expose
+    @NotNull
     Date dtAtualizacao;
+    @Expose
+    @NotNull
     boolean blAtivo;
 
     public Usuario(int cdUsuario, String dsNome, String dsEmail, String dsSenha, String dsCpf, String dsRg, Date dtNascimento, Date dtCadastro, Date dtAtualizacao, boolean blAtivo) {

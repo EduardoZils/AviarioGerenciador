@@ -17,12 +17,13 @@ public class Pesagem extends SugarRecord {
     Date dtCadastro;
     Date dtAtualizacao;
     boolean blAtivo;
+    boolean integrado;
 
     public Pesagem(int cdPesagem) {
         this.cdPesagem = cdPesagem;
     }
 
-    public Pesagem(int cdPesagem, Lote lote, Double vlPesoSemana, Double vlPesoMedio, int nmSemana, Date dtPesagem, int qtPesagens, Date dtCadastro, Date dtAtualizacao, boolean blAtivo) {
+    public Pesagem(int cdPesagem, Lote lote, Double vlPesoSemana, Double vlPesoMedio, int nmSemana, Date dtPesagem, int qtPesagens, Date dtCadastro, Date dtAtualizacao, boolean blAtivo, boolean integrado) {
         this.cdPesagem = cdPesagem;
         this.lote = lote;
         this.vlPesoSemana = vlPesoSemana;
@@ -33,6 +34,7 @@ public class Pesagem extends SugarRecord {
         this.dtCadastro = dtCadastro;
         this.dtAtualizacao = dtAtualizacao;
         this.blAtivo = blAtivo;
+        this.integrado = integrado;
     }
 
     public Pesagem() {

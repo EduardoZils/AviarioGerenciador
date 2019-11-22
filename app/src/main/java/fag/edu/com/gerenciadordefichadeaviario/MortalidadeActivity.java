@@ -84,25 +84,30 @@ public class MortalidadeActivity extends AppCompatActivity implements DatePicker
         if (Mortalidade.listAll(Mortalidade.class).isEmpty()) {
             isEdicao = false;
         } else {
-            for (Mortalidade m : Mortalidade.listAll(Mortalidade.class)) {
-                //if (m.getDtMorte().getDay() == new Date().getDay() && m.getDtMorte().getMonth() != new Date().getMonth() && m.getDtMorte().getYear() != new Date().getYear()) {
+            if (Mortalidade.listAll(Mortalidade.class) == null) {
+                isEdicao = false;
+            } else {
+                for (Mortalidade m : Mortalidade.listAll(Mortalidade.class)) {
+                    sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    //if (m.getDtMorte().getDay() == new Date().getDay() && m.getDtMorte().getMonth() != new Date().getMonth() && m.getDtMorte().getYear() != new Date().getYear()) {
 
 
-                if (sdf.format(new Date()).compareTo(sdf.format(m.getDtMorte())) == 0) {
-                    Mensagem.ExibirMensagem(MortalidadeActivity.this, "Você está editando o valor de hoje", TipoMensagem.ALERTA);
+                    if (sdf.format(new Date()).equalsIgnoreCase(sdf.format(m.getDtMorte()))) {
+                        Mensagem.ExibirMensagem(MortalidadeActivity.this, "Você está editando o valor de hoje", TipoMensagem.ALERTA);
 
-                    et_aves_eliminadas.setText(String.valueOf(m.getNrAvesEliminadas()));
-                    et_aves_mortas.setText(String.valueOf(m.getNrAvesAbatidas()));
-                    isEdicao = true;
-                    aviario_mortalidade = m;
+                        et_aves_eliminadas.setText(String.valueOf(m.getNrAvesEliminadas()));
+                        et_aves_mortas.setText(String.valueOf(m.getNrAvesAbatidas()));
+                        isEdicao = true;
+                        aviario_mortalidade = m;
 
-                    dt_selecionada = m.getDtMorte();
-                    sdf.format(dt_selecionada);
-                    System.out.println(sdf.format(dt_selecionada));
-                    tv_dt_leitura_mortalidade.setText(sdf.format(dt_selecionada));
-                    break;
-                } else {
-                    isEdicao = false;
+                        dt_selecionada = m.getDtMorte();
+                        sdf.format(dt_selecionada);
+                        System.out.println(sdf.format(dt_selecionada));
+                        tv_dt_leitura_mortalidade.setText(sdf.format(dt_selecionada));
+                        break;
+                    } else {
+                        isEdicao = false;
+                    }
                 }
             }
         }
@@ -245,6 +250,8 @@ public class MortalidadeActivity extends AppCompatActivity implements DatePicker
                         }
                     } catch (Exception ex) {
                         ex.printStackTrace();
+                    }finally {
+                        finish();
                     }
                 }
             }

@@ -24,6 +24,7 @@ public class RelatorioActivity extends AppCompatActivity {
 
     ListView lv_lotes;
     TextView tv_aviario_principal_relatorio;
+    Aviario aviario = MainActivity.aviario_selecionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,8 @@ public class RelatorioActivity extends AppCompatActivity {
 
         if (MainActivity.aviario_selecionado != null) {
             tv_aviario_principal_relatorio.setText(String.valueOf(MainActivity.aviario_selecionado.getNrIdentificador()));
+
+            Aviario aviario = MainActivity.aviario_selecionado;
         }
 
         carregaLista();
@@ -62,18 +65,23 @@ public class RelatorioActivity extends AppCompatActivity {
     }
 
     private void carregaLista() {
-        Aviario aviario = MainActivity.aviario_selecionado;
-        if (Lote.listAll(Lote.class).size() != 0) {
-            //List<Lote> loteList = Lote.listAll(Lote.class);
-            List<Lote> loteList = new ArrayList<>();
-            for (Lote l : Lote.listAll(Lote.class)) {
-                if (l.getAviario().getCdAviario() == aviario.getCdAviario()) {
-                    loteList.add(l);
+
+        if (aviario != null) {
+            if (Lote.listAll(Lote.class).size() != 0) {
+                //List<Lote> loteList = Lote.listAll(Lote.class);
+                List<Lote> loteList = new ArrayList<>();
+                for (Lote l : Lote.listAll(Lote.class)) {
+                    if (l.getAviario().getCdAviario() == aviario.getCdAviario()) {
+                        loteList.add(l);
+                    }
                 }
+                lv_lotes.setAdapter(new ArrayAdapter<>(RelatorioActivity.this, R.layout.support_simple_spinner_dropdown_item, loteList));
+            } else {
+                Mensagem.ExibirMensagem(RelatorioActivity.this, "Não existem LOTES cadastrados!", TipoMensagem.ALERTA);
             }
-            lv_lotes.setAdapter(new ArrayAdapter<>(RelatorioActivity.this, R.layout.support_simple_spinner_dropdown_item, loteList));
         } else {
-            Mensagem.ExibirMensagem(RelatorioActivity.this, "Não existem LOTES cadastrados!", TipoMensagem.ALERTA);
+            Mensagem.ExibirMensagem(RelatorioActivity.this, "Selecione um aviário!", TipoMensagem.ALERTA);
+
         }
     }
 

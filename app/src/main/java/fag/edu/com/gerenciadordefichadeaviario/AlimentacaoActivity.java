@@ -133,10 +133,8 @@ public class AlimentacaoActivity extends AppCompatActivity implements DatePicker
         bt_salvar_alimentacao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Racao.listAll(Racao.class).size() != 0 || et_qt_recebida.getText().length() == 0 || dt_selecionada == null) {
-                    Mensagem.ExibirMensagem(AlimentacaoActivity.this, "Favor verifique se todos os campos estão devidamente preenchidos!", TipoMensagem.ERRO);
 
-                } else {
+                if (Racao.listAll(Racao.class).size() > 0 && et_qt_recebida.getText().length() > 0) {
                     Alimentacao alimentacao = new Alimentacao();
                     alimentacao.setCdAlimentacao(Alimentacao.listAll(Alimentacao.class).size() + 1);
                     alimentacao.setBlAtivo(true);
@@ -146,7 +144,11 @@ public class AlimentacaoActivity extends AppCompatActivity implements DatePicker
                     alimentacao.setQtRecebida(Double.parseDouble(et_qt_recebida.getText().toString()));
                     alimentacao.setRacao((Racao) sp_alimentacao.getSelectedItem());
                     alimentacao.save();
+                    Mensagem.ExibirMensagem(AlimentacaoActivity.this, "Alimentação salva com sucesso!", TipoMensagem.SUCESSO);
+                } else {
+                    Mensagem.ExibirMensagem(AlimentacaoActivity.this, "Favor verifique se todos os campos estão devidamente preenchidos!", TipoMensagem.ERRO);
                 }
+
             }
         });
 

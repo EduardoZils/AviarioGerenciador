@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import fag.edu.com.gerenciadordefichadeaviario.Util.Mensagem;
 import fag.edu.com.gerenciadordefichadeaviario.Util.TipoMensagem;
@@ -21,6 +23,7 @@ public class PesosActivity extends AppCompatActivity {
     TextView tv_aviario_principal_pesos;
     EditText et_qt_aves_peso, et_peso_total;
     Button bt_salvar_pesos;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,7 @@ public class PesosActivity extends AppCompatActivity {
                         pesos.setPesagem(PesagemActivity.pesagem);
                         pesos.setQtAvesUtilizadas(Integer.valueOf(et_qt_aves_peso.getText().toString()));
                         pesos.setVlPesagem(Double.parseDouble(et_peso_total.getText().toString()));
-                        pesos.save();
+                        PesagemActivity.pesosList.add(pesos);
                     } else {
                         Mensagem.ExibirMensagem(PesosActivity.this, "Verifique se todos os campos estão devidamente preenchidos", TipoMensagem.ERRO);
                     }

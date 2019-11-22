@@ -10,21 +10,26 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
 
 import fag.edu.com.gerenciadordefichadeaviario.R;
+import fag.edu.com.gerenciadordefichadeaviario.Util.Conexao;
 import fag.edu.com.gerenciadordefichadeaviario.models.Aviario;
 import fag.edu.com.gerenciadordefichadeaviario.models.Endereco;
 
-public class AviarioTask extends AsyncTask<String, Integer, Aviario> {
+public class AviarioTask extends AsyncTask<String, Integer, List<Aviario>> {
 
     private ProgressDialog progress;
     private Context context;
+    private String method;
 
-    public AviarioTask(Context context) {
+    public AviarioTask(Context context, String method) {
         this.context = context;
+        this.method = method;
     }
 
     @Override
@@ -40,24 +45,14 @@ public class AviarioTask extends AsyncTask<String, Integer, Aviario> {
 
 
     @Override
-    protected Aviario doInBackground(String... jsonData) {
-        Aviario aviarioResult = null;
-
+    protected List<Aviario> doInBackground(String... jsonData) {
+        List<Aviario> aviarioResult = new ArrayList<>();
+        HttpURLConnection connection = null;
         String data = jsonData[0];
         try {
 
             StringBuffer response = new StringBuffer();
-
-            URL urlUsuario = new URL("http://192.168.43.8:80/api/aviarios");
-            HttpURLConnection connection = (HttpURLConnection) urlUsuario.openConnection();
-
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/json");
-            //connection.setRequestProperty("Accept", "application/json");
-            connection.setConnectTimeout(20000);
-            connection.setDoInput(true);
-            connection.setReadTimeout(30000);
-            connection.connect();
+            connection = Conexao.realizaConexao("Aviarios", method);
 
             //Escrevo na Conexão que montamos
             OutputStream os = new BufferedOutputStream(connection.getOutputStream());
@@ -87,13 +82,15 @@ public class AviarioTask extends AsyncTask<String, Integer, Aviario> {
                 IOException e) {
             e.printStackTrace();
 
+        } finally {
+            connection.disconnect();
         }
         return aviarioResult;
     }
 
 
     @Override
-    protected void onPostExecute(Aviario s) {
+    protected void onPostExecute(List<Aviario> s) {
         super.onPostExecute(s);
         progress.cancel();
     }

@@ -36,7 +36,7 @@ public class PesagemActivity extends AppCompatActivity implements DatePickerDial
     private Date dt_selecionada = null;
     private Calendar calendar = Calendar.getInstance();
     private DatePickerDialog datePickerDialog;
-    private List<Pesos> pesosList;
+    public static List<Pesos> pesosList = new ArrayList<Pesos>();
 
     Button bt_adicionar_pesos, bt_salvar_pesagem;
     ListView lv_pesos;
@@ -119,13 +119,7 @@ public class PesagemActivity extends AppCompatActivity implements DatePickerDial
 
     private void atualizaList() {
         try {
-            List<Pesos> pesosList = new ArrayList<>();
-            if (Pesos.listAll(Pesos.class).size() > 0) {
-                for (Pesos p : Pesos.listAll(Pesos.class)) {
-                    if (p.getPesagem().getCdPesagem() == pesagem.getCdPesagem()) {
-                        pesosList.add(p);
-                    }
-                }
+            if (pesosList.size() > 0) {
                 lv_pesos.setAdapter(new ArrayAdapter<>(PesagemActivity.this, R.layout.support_simple_spinner_dropdown_item, pesosList));
             } else {
                 Mensagem.ExibirMensagem(PesagemActivity.this, "Lista de Pesos vazia, favor adicione mais!", TipoMensagem.ALERTA);
@@ -170,6 +164,12 @@ public class PesagemActivity extends AppCompatActivity implements DatePickerDial
                     pesagem.save();
                     Mensagem.ExibirMensagem(PesagemActivity.this, "Pesagem salva com sucesso!", TipoMensagem.SUCESSO);
 
+                    for (Pesos p : pesosList) {
+                        p.save();
+                    }
+
+                    pesosList = new ArrayList<Pesos>();
+                    atualizaList();
                 } else {
                     Mensagem.ExibirMensagem(PesagemActivity.this, "Lista de Pesos vazia, favor adicione mais!", TipoMensagem.ALERTA);
                 }

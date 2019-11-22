@@ -1,6 +1,7 @@
 package fag.edu.com.gerenciadordefichadeaviario;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,10 +18,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.orm.SugarContext;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+import fag.edu.com.gerenciadordefichadeaviario.Tasks.AviarioTask;
+import fag.edu.com.gerenciadordefichadeaviario.Tasks.EnderecoTask;
+import fag.edu.com.gerenciadordefichadeaviario.Tasks.LoteTask;
+import fag.edu.com.gerenciadordefichadeaviario.Tasks.TaskGet;
+import fag.edu.com.gerenciadordefichadeaviario.Tasks.UsuarioTask;
 import fag.edu.com.gerenciadordefichadeaviario.models.Aviario;
+import fag.edu.com.gerenciadordefichadeaviario.models.Endereco;
 import fag.edu.com.gerenciadordefichadeaviario.models.Lote;
+import fag.edu.com.gerenciadordefichadeaviario.models.Result;
 import fag.edu.com.gerenciadordefichadeaviario.models.Usuario;
 
 public class MainActivity extends AppCompatActivity
@@ -123,6 +138,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_relatorio) {
             Intent intent = new Intent(MainActivity.this, RelatorioActivity.class);
             startActivity(intent);
+
+        } else if (id == R.id.nav_export) {
+            exportaDados();
+        } else if (id == R.id.nav_import) {
+            importaDados();
         } else if (id == R.id.nav_logoff) {
             usuarioLogado = null;
             Usuario.deleteAll(Usuario.class);
@@ -135,6 +155,49 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    private void importaDados() {
+        Endereco.deleteAll(Endereco.class);
+        Aviario.deleteAll(Aviario.class);
+        Lote.deleteAll(Lote.class);
+
+
+        try {
+            List<Endereco> enderecoList = new ArrayList<>();
+            TaskGet task = new TaskGet(this, "Endereços");
+            Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Enderecoes/"}).get();
+            Type typeUser = new TypeToken<List<Endereco>>() {
+            }.getType();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+            enderecoList = gson.fromJson(result.getContent(), typeUser);
+            for (Endereco e : enderecoList) {
+                e.setIntegrado(true);
+                e.save();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    private void exportaDados() {
+
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+
+
+        List<Lote> loteList = new ArrayList<>();
+        if (Lote.listAll(Lote.class).size() > 0) {
+            for (Lote l : Lote.listAll(Lote.class)) {
+                if (!l.isIntegrado()) {
+                    loteList.add(l);
+                }
+            }
+            LoteTask loteTask = new LoteTask(MainActivity.this);
+            loteTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(loteList)});
+        }
+
+
+    }
+
     @Override
     public void onRefresh() {
         // Executar a atualizacao
@@ -143,4 +206,7 @@ public class MainActivity extends AppCompatActivity
         }
         mSwipeToRefresh.setRefreshing(false);
     }
+
+
+
 }

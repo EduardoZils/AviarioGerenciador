@@ -101,6 +101,8 @@ public class HidrometroActivity extends AppCompatActivity implements DatePickerD
                         h.setDtCadastro(new Date());
                         h.setDtColeta(dt_selecionada);
                         h.setQtGasto(Double.parseDouble(tv_leitura_atual.getText().toString()));
+                        h.setBlAtivo(true);
+                        h.setIntegrado(false);
 
 
                         h.save();
