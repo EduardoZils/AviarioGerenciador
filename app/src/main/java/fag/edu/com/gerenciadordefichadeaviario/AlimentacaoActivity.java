@@ -66,7 +66,7 @@ public class AlimentacaoActivity extends AppCompatActivity implements DatePicker
         }
         if (!Lote.listAll(Lote.class).isEmpty()) {
             for (Lote l : Lote.listAll(Lote.class)) {
-                if (l.getAviario().getCdAviario() == MainActivity.aviario_selecionado.getCdAviario()) {
+                if (l.getCdAviario() == MainActivity.aviario_selecionado.getCdAviario()) {
                     inLote = true;
                     lote = l;
                     break;

@@ -50,7 +50,7 @@ public class AviarioTask extends AsyncTask<String, Integer, List<Aviario>> {
         HttpURLConnection connection = null;
         String data = jsonData[0];
         try {
-
+            System.out.println("==================================================================== AVIARIOTASK ====================================================================");
             StringBuffer response = new StringBuffer();
             connection = Conexao.realizaConexao("Aviarios", method);
 
@@ -62,10 +62,14 @@ public class AviarioTask extends AsyncTask<String, Integer, List<Aviario>> {
 
             System.out.println("=================Retorno da Req ==>   " + connection.getResponseCode());
 
+            if (response.length() > 0) {
+                response.toString();
+            }
+
             if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK) {
                 Scanner scanner = new Scanner(connection.getInputStream());
                 while (scanner.hasNext()) {
-                    response.append(scanner.next());
+                    response.append(scanner.next() + " ");
                 }
             } else {
                 System.out.println("========================== Erro ao realizar Conexão ==========================");
@@ -93,6 +97,13 @@ public class AviarioTask extends AsyncTask<String, Integer, List<Aviario>> {
     protected void onPostExecute(List<Aviario> s) {
         super.onPostExecute(s);
         progress.cancel();
+
+        for (Aviario a : Aviario.listAll(Aviario.class)) {
+            if (!a.isIntegrado()) {
+                a.setIntegrado(true);
+                a.update();
+            }
+        }
     }
 }
 

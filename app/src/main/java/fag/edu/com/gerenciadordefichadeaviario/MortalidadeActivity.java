@@ -68,7 +68,7 @@ public class MortalidadeActivity extends AppCompatActivity implements DatePicker
         }
         if (!Lote.listAll(Lote.class).isEmpty()) {
             for (Lote l : Lote.listAll(Lote.class)) {
-                if (l.getAviario().getCdAviario() == MainActivity.aviario_selecionado.getCdAviario()) {
+                if (l.getCdAviario() == MainActivity.aviario_selecionado.getCdAviario()) {
                     inLote = true;
                     lote = l;
                     break;
@@ -266,7 +266,6 @@ public class MortalidadeActivity extends AppCompatActivity implements DatePicker
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
         dt_selecionada = new Date(year - 1900, month, dayOfMonth);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         sdf.format(dt_selecionada);
         System.out.println(sdf.format(dt_selecionada));
         tv_dt_leitura_mortalidade.setText(sdf.format(dt_selecionada));

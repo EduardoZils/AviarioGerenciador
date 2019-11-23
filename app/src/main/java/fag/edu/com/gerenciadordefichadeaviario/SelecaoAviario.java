@@ -72,6 +72,7 @@ public class SelecaoAviario extends AppCompatActivity implements SwipeRefreshLay
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 MainActivity.aviario_selecionado = Aviario.listAll(Aviario.class).get(position);
+                Aviario a = Aviario.listAll(Aviario.class).get(position);
                 String txt = null;
 
 
@@ -80,7 +81,7 @@ public class SelecaoAviario extends AppCompatActivity implements SwipeRefreshLay
                     aviarioEmLote = false;
                 } else {
                     for (Lote l : Lote.listAll(Lote.class)) {
-                        if (l.getAviario().getCdAviario() == MainActivity.aviario_selecionado.getCdAviario()) {
+                        if (l.getCdAviario() == a.getCdAviario()) {
                             aviarioEmLote = true;
                             txt = "SIM";
                             break;

@@ -51,7 +51,7 @@ public class EnderecoTask extends AsyncTask<String, Integer, List<Endereco>> {
         HttpURLConnection connection = null;
         String data = jsonData[0];
         try {
-
+            System.out.println("==================================================================== ENDERECO TASK ====================================================================");
             StringBuffer response = new StringBuffer();
 
             connection = Conexao.realizaConexao("Enderecoes", "POST");
@@ -111,6 +111,7 @@ public class EnderecoTask extends AsyncTask<String, Integer, List<Endereco>> {
         }
         AviarioTask taskAviario = new AviarioTask(context, "POST");
         taskAviario.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(aviariosList)});
+
 
     }
 }

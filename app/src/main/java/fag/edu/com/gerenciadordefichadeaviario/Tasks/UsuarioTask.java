@@ -15,15 +15,18 @@ import java.util.Scanner;
 import javax.net.ssl.HttpsURLConnection;
 
 import fag.edu.com.gerenciadordefichadeaviario.R;
+import fag.edu.com.gerenciadordefichadeaviario.Util.Conexao;
 import fag.edu.com.gerenciadordefichadeaviario.models.Usuario;
 
 public class UsuarioTask extends AsyncTask<String, Integer, Usuario> {
 
     private ProgressDialog progress;
     private Context context;
+    private String method;
 
-    public UsuarioTask(Context context) {
+    public UsuarioTask(Context context, String method) {
         this.context = context;
+        this.method = method;
     }
 
     @Override
@@ -42,21 +45,13 @@ public class UsuarioTask extends AsyncTask<String, Integer, Usuario> {
     protected Usuario doInBackground(String... jsonData) {
         Usuario usuarioResult = null;
 
+        HttpURLConnection connection = null;
         String data = jsonData[0];
         try {
 
             StringBuffer response = new StringBuffer();
 
-            URL urlUsuario = new URL("http://192.168.43.8:80/api/usuarios");
-            HttpURLConnection connection = (HttpURLConnection) urlUsuario.openConnection();
-
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/json");
-            //connection.setRequestProperty("Accept", "application/json");
-            connection.setConnectTimeout(20000);
-            connection.setDoInput(true);
-            connection.setReadTimeout(30000);
-            connection.connect();
+            connection = Conexao.realizaConexao("Usuarios", method);
 
             //Escrevo na Conexão que montamos
             OutputStream os = new BufferedOutputStream(connection.getOutputStream());
@@ -85,7 +80,8 @@ public class UsuarioTask extends AsyncTask<String, Integer, Usuario> {
         } catch (
                 IOException e) {
             e.printStackTrace();
-
+        } finally {
+            connection.disconnect();
         }
         return usuarioResult;
     }

@@ -6,6 +6,7 @@ import com.orm.dsl.MultiUnique;
 import com.orm.dsl.NotNull;
 import com.orm.dsl.Unique;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @MultiUnique("cdVacina, cdLote")
@@ -151,9 +152,10 @@ public class Vacina extends SugarRecord {
 
     @Override
     public String toString() {
-        return "Vacina{" +
-                "ds_nome='" + dsNome + '\'' +
-                ", ds_forma_uso='" + dsFormaUso + '\'' +
-                '}';
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+        return  dsNome + " - " +
+                qtUsada + "ml - " +
+                sdf.format(dtUso);
     }
 }

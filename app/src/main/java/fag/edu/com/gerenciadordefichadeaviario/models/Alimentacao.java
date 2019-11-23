@@ -5,6 +5,7 @@ import com.orm.SugarRecord;
 import com.orm.dsl.MultiUnique;
 import com.orm.dsl.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @MultiUnique("cdAlimentacao, cdLote")
@@ -139,15 +140,19 @@ public class Alimentacao extends SugarRecord  {
 
     @Override
     public String toString() {
-        return "Alimentacao{" +
-                "cdAlimentacao=" + cdAlimentacao +
-                ", lote=" + lote +
-                ", racao=" + racao +
-                ", dtRecebimento=" + dtRecebimento +
-                ", qtRecebida=" + qtRecebida +
-                ", dtCadastro=" + dtCadastro +
-                ", dtAtualizacao=" + dtAtualizacao +
-                ", blAtivo=" + blAtivo +
-                '}';
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+        return cdAlimentacao +
+                " " + qtRecebida +
+                "T " + sdf.format(dtRecebimento);
+    }
+
+    public String toStringRelatorio() {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+        return cdAlimentacao + " " +
+                racao.getDsNome() +
+                " " + qtRecebida +
+                "T " + sdf.format(dtRecebimento);
     }
 }

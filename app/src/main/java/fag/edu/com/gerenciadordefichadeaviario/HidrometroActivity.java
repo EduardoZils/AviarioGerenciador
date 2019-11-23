@@ -58,7 +58,7 @@ public class HidrometroActivity extends AppCompatActivity implements DatePickerD
         }
         if (!Lote.listAll(Lote.class).isEmpty()) {
             for (Lote l : Lote.listAll(Lote.class)) {
-                if (l.getAviario().getCdAviario() == MainActivity.aviario_selecionado.getCdAviario()) {
+                if (l.getCdAviario() == MainActivity.aviario_selecionado.getCdAviario()) {
                     inLote = true;
                     lote = l;
                     break;
@@ -75,17 +75,19 @@ public class HidrometroActivity extends AppCompatActivity implements DatePickerD
             @Override
             public void onClick(View view) {
                 boolean podeGravar = false;
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                Date hoje = new Date();
                 if (Hidrometro.listAll(Hidrometro.class).isEmpty()) {
                     podeGravar = true;
                 } else {
                     for (Hidrometro h : Hidrometro.listAll(Hidrometro.class)) {
                         podeGravar = true;
-                        if (h.getDtColeta().getMonth() == new Date().getMonth()) {
-                            Mensagem.ExibirMensagem(HidrometroActivity.this, "Você já inseriu uma leitura este mês", TipoMensagem.ERRO);
+                        if (sdf.format(hoje).equalsIgnoreCase(sdf.format(h.getDtColeta()))) {
+                            Mensagem.ExibirMensagem(HidrometroActivity.this, "Você já inseriu uma leitura hoje", TipoMensagem.ERRO);
                             podeGravar = false;
                             break;
                         }
-                        if (h.getDtColeta().getMonth() > new Date().getMonth()) {
+                        if (sdf.format(hoje).compareTo(sdf.format(h.getDtColeta())) > 0) {
                             Mensagem.ExibirMensagem(HidrometroActivity.this, "Você não pode efetuar lançamentos futuros", TipoMensagem.ERRO);
                             podeGravar = false;
                             break;

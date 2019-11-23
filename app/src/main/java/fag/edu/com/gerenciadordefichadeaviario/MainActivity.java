@@ -152,8 +152,19 @@ public class MainActivity extends AppCompatActivity
             importaDados();
         } else if (id == R.id.nav_logoff) {
             usuarioLogado = null;
+            aviario_selecionado = null;
+            tv_aviario_principal = null;
             Usuario.deleteAll(Usuario.class);
+            Endereco.deleteAll(Endereco.class);
             Aviario.deleteAll(Aviario.class);
+            Lote.deleteAll(Lote.class);
+            Racao.deleteAll(Racao.class);
+            Vacina.deleteAll(Vacina.class);
+            Alimentacao.deleteAll(Alimentacao.class);
+            Mortalidade.deleteAll(Mortalidade.class);
+            Pesagem.deleteAll(Pesagem.class);
+            Pesos.deleteAll(Pesos.class);
+            Hidrometro.deleteAll(Hidrometro.class);
             finish();
         }
 
@@ -220,7 +231,6 @@ public class MainActivity extends AppCompatActivity
         }
         mSwipeToRefresh.setRefreshing(false);
     }
-
 
 
 }

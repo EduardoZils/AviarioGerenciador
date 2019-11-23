@@ -4,6 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -18,6 +21,7 @@ import javax.net.ssl.HttpsURLConnection;
 import fag.edu.com.gerenciadordefichadeaviario.R;
 import fag.edu.com.gerenciadordefichadeaviario.Util.Conexao;
 import fag.edu.com.gerenciadordefichadeaviario.models.Pesagem;
+import fag.edu.com.gerenciadordefichadeaviario.models.Pesos;
 import fag.edu.com.gerenciadordefichadeaviario.models.Vacina;
 
 public class PesagemTask extends AsyncTask<String, Integer, List<Pesagem>> {
@@ -92,6 +96,17 @@ public class PesagemTask extends AsyncTask<String, Integer, List<Pesagem>> {
     protected void onPostExecute(List<Pesagem> s) {
         super.onPostExecute(s);
         progress.cancel();
+
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        List<Pesagem> pesagemList = new ArrayList<>();
+        for (Pesagem h : Pesagem.listAll(Pesagem.class)) {
+            if (!h.isIntegrado()) {
+                pesagemList.add(h);
+            }
+        }
+
+        PesosTask pesosTask = new PesosTask(context, "POST");
+        pesosTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(pesagemList)});
     }
 }
 

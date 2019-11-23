@@ -18,7 +18,7 @@ public class Hidrometro extends SugarRecord {
     @NotNull
     Lote lote;
     @Expose
-    Double qtGasto;
+    Double qtGastoDia;
     @Expose
     Date dtColeta;
     @Expose
@@ -32,11 +32,11 @@ public class Hidrometro extends SugarRecord {
     public Hidrometro() {
     }
 
-    public Hidrometro(int cdHidrometro, int cdLote, Lote lote, Double qtGasto, Date dtColeta, Date dtCadastro, Date dtAtualizacao, boolean blAtivo, boolean integrado) {
+    public Hidrometro(int cdHidrometro, int cdLote, Lote lote, Double qtGastoDia, Date dtColeta, Date dtCadastro, Date dtAtualizacao, boolean blAtivo, boolean integrado) {
         this.cdHidrometro = cdHidrometro;
         this.cdLote = cdLote;
         this.lote = lote;
-        this.qtGasto = qtGasto;
+        this.qtGastoDia = qtGastoDia;
         this.dtColeta = dtColeta;
         this.dtCadastro = dtCadastro;
         this.dtAtualizacao = dtAtualizacao;
@@ -52,6 +52,14 @@ public class Hidrometro extends SugarRecord {
         this.cdHidrometro = cdHidrometro;
     }
 
+    public int getCdLote() {
+        return cdLote;
+    }
+
+    public void setCdLote(int cdLote) {
+        this.cdLote = cdLote;
+    }
+
     public Lote getLote() {
         return lote;
     }
@@ -61,11 +69,11 @@ public class Hidrometro extends SugarRecord {
     }
 
     public Double getQtGasto() {
-        return qtGasto;
+        return qtGastoDia;
     }
 
     public void setQtGasto(Double qtGasto) {
-        this.qtGasto = qtGasto;
+        this.qtGastoDia = qtGasto;
     }
 
     public Date getDtColeta() {
@@ -112,7 +120,7 @@ public class Hidrometro extends SugarRecord {
     public String toString() {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return qtGasto + "L " +
+        return qtGastoDia + "L   " +
                 sdf.format(dtColeta)
                 ;
     }

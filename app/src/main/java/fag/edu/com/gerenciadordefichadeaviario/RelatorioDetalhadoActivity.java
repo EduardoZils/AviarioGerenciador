@@ -93,7 +93,7 @@ public class RelatorioDetalhadoActivity extends AppCompatActivity {
             float porcento = 0;
             List<Mortalidade> mortalidadeList = new ArrayList<>();
             for (Mortalidade m : Mortalidade.listAll(Mortalidade.class)) {
-                if (m.getLote().getCdLote() == lote.getCdLote()) {
+                if (m.getCdLote() == lote.getCdLote()) {
                     mortes += m.getNrAvesAbatidas() + m.getNrAvesEliminadas();
                     mortalidadeList.add(m);
                 }
@@ -106,11 +106,11 @@ public class RelatorioDetalhadoActivity extends AppCompatActivity {
 
             //ALIMENTACAO -------------------------------------------------------------------------------------------------------------------------------------------------------
 
-            List<Alimentacao> alimentacaoList = new ArrayList<>();
+            List<String> alimentacaoList = new ArrayList<>();
             float qt_racao = 0;
             for (Alimentacao a : Alimentacao.listAll(Alimentacao.class)) {
-                if (a.getLote().getCdLote() == lote.getCdLote()) {
-                    alimentacaoList.add(a);
+                if (a.getCdLote() == lote.getCdLote()) {
+                    alimentacaoList.add(a.toStringRelatorio());
                     qt_racao += a.getQtRecebida();
                 }
             }
@@ -123,12 +123,11 @@ public class RelatorioDetalhadoActivity extends AppCompatActivity {
             float consumo = 0;
             List<Pesagem> pesagemList = new ArrayList<>();
             for (Pesagem p : Pesagem.listAll(Pesagem.class)) {
-                if (p.getLote().getCdLote() == lote.getCdLote()) {
+                if (p.getCdLote() == lote.getCdLote()) {
                     pesoTotal += p.getVlPesoMedio();
                     pesagemList.add(p);
                 }
             }
-
             pesoMedio = pesoTotal / pesagemList.size();
             tv_peso_total.setText(String.valueOf(pesoTotal));
             tv_media_peso.setText(String.valueOf(pesoMedio));
@@ -139,7 +138,7 @@ public class RelatorioDetalhadoActivity extends AppCompatActivity {
             //VACINA -------------------------------------------------------------------------------------------------------------------------------------------------------
             List<Vacina> vacinaList = new ArrayList<>();
             for (Vacina v : Vacina.listAll(Vacina.class)) {
-                if (v.getLote().getCdLote() == lote.getCdLote()) {
+                if (v.getCdLote() == lote.getCdLote()) {
                     vacinaList.add(v);
                 }
             }
@@ -149,7 +148,7 @@ public class RelatorioDetalhadoActivity extends AppCompatActivity {
 
             List<Hidrometro> hidrometroList = new ArrayList<>();
             for (Hidrometro h : Hidrometro.listAll(Hidrometro.class)) {
-                if (h.getLote().getCdLote() == lote.getCdLote()) {
+                if (h.getCdLote() == lote.getCdLote()) {
                     hidrometroList.add(h);
                 }
             }

@@ -1,5 +1,6 @@
 package fag.edu.com.gerenciadordefichadeaviario.models;
 
+import com.google.gson.annotations.Expose;
 import com.orm.SugarRecord;
 import com.orm.dsl.Unique;
 
@@ -8,23 +9,35 @@ import java.util.Date;
 
 public class Lote extends SugarRecord {
     @Unique
+    @Expose
     int cdLote;
+    @Expose
+    int cdAviario;
     Aviario aviario;
+    @Expose
     Date dtChegada;
+    @Expose
     Date dtEntrega;
+    @Expose
     Date dtEstimadaEntrega;
+    @Expose
     int qtAves;
+    @Expose
     String dsLinhagem;
+    @Expose
     Date dtCadastro;
+    @Expose
     Date dtAtualizacao;
+    @Expose
     boolean blAtivo;
     boolean integrado;
 
     public Lote() {
     }
 
-    public Lote(int cdLote, Aviario aviario, Date dtChegada, Date dtEntrega, Date dtEstimadaEntrega, int qtAves, String dsLinhagem, Date dtCadastro, Date dtAtualizacao, boolean blAtivo, boolean integrado) {
+    public Lote(int cdLote, int cdAviario, Aviario aviario, Date dtChegada, Date dtEntrega, Date dtEstimadaEntrega, int qtAves, String dsLinhagem, Date dtCadastro, Date dtAtualizacao, boolean blAtivo, boolean integrado) {
         this.cdLote = cdLote;
+        this.cdAviario = cdAviario;
         this.aviario = aviario;
         this.dtChegada = dtChegada;
         this.dtEntrega = dtEntrega;
@@ -43,6 +56,14 @@ public class Lote extends SugarRecord {
 
     public void setCdLote(int cdLote) {
         this.cdLote = cdLote;
+    }
+
+    public int getCdAviario() {
+        return cdAviario;
+    }
+
+    public void setCdAviario(int cdAviario) {
+        this.cdAviario = cdAviario;
     }
 
     public Aviario getAviario() {
@@ -130,7 +151,8 @@ public class Lote extends SugarRecord {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
         return cdLote +
-                " -C: " + sdf.format(dtChegada) +
-                " - " + dsLinhagem;
+                " Chegada: " + sdf.format(dtChegada) +
+                " Saida: " + sdf.format(dtEntrega) +
+                " " + dsLinhagem;
     }
 }

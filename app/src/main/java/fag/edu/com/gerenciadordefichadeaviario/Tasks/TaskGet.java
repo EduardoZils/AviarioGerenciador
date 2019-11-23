@@ -81,7 +81,7 @@ public class TaskGet extends AsyncTask<String, Integer, Result> {
                 if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK) {
                     Scanner scanner = new Scanner(connection.getInputStream());
                     while (scanner.hasNext()) {
-                        response.append(scanner.next());
+                        response.append(scanner.next() + " ");
                     }
                 } else {
                     System.out.println("========================== Erro ao realizar Conexão ==========================");
@@ -151,6 +151,7 @@ public class TaskGet extends AsyncTask<String, Integer, Result> {
                     loteList = gson.fromJson(result.getContent(), typeUser);
                     System.out.println(loteList);
                     for (Lote l : loteList) {
+                        l.setAviario(Aviario.findById(Aviario.class, aviario.getCdAviario()));
                         l.setIntegrado(true);
                         l.save();
                     }
@@ -166,11 +167,12 @@ public class TaskGet extends AsyncTask<String, Integer, Result> {
                 TaskGet task = new TaskGet(context, "Hidrometros");
                 for (Lote lote : Lote.listAll(Lote.class)) {
                     Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Hidrometros/byLote/" + lote.getCdLote()}).get();
-                    Type typeUser = new TypeToken<List<Lote>>() {
+                    Type typeUser = new TypeToken<List<Hidrometro>>() {
                     }.getType();
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
                     hidrometroList = gson.fromJson(result.getContent(), typeUser);
                     for (Hidrometro l : hidrometroList) {
+                        l.setLote(Lote.findById(Lote.class, lote.getCdAviario()));
                         l.setIntegrado(true);
                         l.save();
                     }
@@ -186,11 +188,12 @@ public class TaskGet extends AsyncTask<String, Integer, Result> {
                 TaskGet task = new TaskGet(context, "Vacinas");
                 for (Lote lote : Lote.listAll(Lote.class)) {
                     Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Vacinas/byLote/" + lote.getCdLote()}).get();
-                    Type typeUser = new TypeToken<List<Lote>>() {
+                    Type typeUser = new TypeToken<List<Vacina>>() {
                     }.getType();
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
                     vacinaList = gson.fromJson(result.getContent(), typeUser);
                     for (Vacina l : vacinaList) {
+                        l.setLote(Lote.findById(Lote.class, lote.getCdAviario()));
                         l.setIntegrado(true);
                         l.save();
                     }
@@ -205,11 +208,12 @@ public class TaskGet extends AsyncTask<String, Integer, Result> {
                 TaskGet task = new TaskGet(context, "Mortalidades");
                 for (Lote lote : Lote.listAll(Lote.class)) {
                     Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Mortalidades/byLote/" + lote.getCdLote()}).get();
-                    Type typeUser = new TypeToken<List<Lote>>() {
+                    Type typeUser = new TypeToken<List<Mortalidade>>() {
                     }.getType();
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
                     mortalidadeList = gson.fromJson(result.getContent(), typeUser);
                     for (Mortalidade l : mortalidadeList) {
+                        l.setLote(Lote.findById(Lote.class, lote.getCdAviario()));
                         l.setIntegrado(true);
                         l.save();
                     }
@@ -225,11 +229,12 @@ public class TaskGet extends AsyncTask<String, Integer, Result> {
                 TaskGet task = new TaskGet(context, "Pesagens");
                 for (Lote lote : Lote.listAll(Lote.class)) {
                     Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Pesagems/byLote/" + lote.getCdLote()}).get();
-                    Type typeUser = new TypeToken<List<Lote>>() {
+                    Type typeUser = new TypeToken<List<Pesagem>>() {
                     }.getType();
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
                     pesagemList = gson.fromJson(result.getContent(), typeUser);
                     for (Pesagem l : pesagemList) {
+                        l.setLote(Lote.findById(Lote.class, lote.getCdAviario()));
                         l.setIntegrado(true);
                         l.save();
                     }
@@ -244,7 +249,7 @@ public class TaskGet extends AsyncTask<String, Integer, Result> {
                 List<Racao> racaoList = new ArrayList<>();
                 TaskGet task = new TaskGet(context, "Rações");
                 Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Racaos"}).get();
-                Type typeUser = new TypeToken<List<Lote>>() {
+                Type typeUser = new TypeToken<List<Racao>>() {
                 }.getType();
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
                 racaoList = gson.fromJson(result.getContent(), typeUser);
@@ -265,7 +270,7 @@ public class TaskGet extends AsyncTask<String, Integer, Result> {
                 TaskGet task = new TaskGet(context, "Pesos");
                 for (Lote lotes : Lote.listAll(Lote.class)) {
                     Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Pesos/byLote/" + lotes.getCdLote()}).get();
-                    Type typeUser = new TypeToken<List<Lote>>() {
+                    Type typeUser = new TypeToken<List<Pesos>>() {
                     }.getType();
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
                     pesosList = gson.fromJson(result.getContent(), typeUser);
@@ -278,30 +283,44 @@ public class TaskGet extends AsyncTask<String, Integer, Result> {
                 ex.printStackTrace();
             }
         } else if (title.equalsIgnoreCase("Pesos")) {
-
-        } else if (title.equalsIgnoreCase("Rações")) {
+//
+//        } else if (title.equalsIgnoreCase("Rações")) {
             //GET ALIMENTAÇÃO
             try {
                 List<Alimentacao> alimentacaoList = new ArrayList<>();
                 TaskGet task = new TaskGet(context, "Alimentos");
                 for (Lote lotes : Lote.listAll(Lote.class)) {
                     Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Alimentacaos/byLote/" + lotes.getCdLote()}).get();
-                    Type typeUser = new TypeToken<List<Lote>>() {
+                    Type typeUser = new TypeToken<List<Alimentacao>>() {
                     }.getType();
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
                     alimentacaoList = gson.fromJson(result.getContent(), typeUser);
                     for (Alimentacao l : alimentacaoList) {
+                        l.setLote(Lote.findById(Lote.class, lotes.getCdAviario()));
                         l.setIntegrado(true);
                         l.save();
                     }
-                    for (Alimentacao l : alimentacaoList) {
-                        for (Racao r : Racao.listAll(Racao.class)) {
-                            if (r.getCdRacao() != l.getCdRacao()) {
-                                r.delete();
+                    boolean excluir = false;
+                    for (Racao r : Racao.listAll(Racao.class)) {
+                        excluir = true;
+                        for (Alimentacao l : alimentacaoList) {
+                            if (r.getCdRacao() == l.getCdRacao()) {
+                                l.setRacao(r);
+                                l.update();
+                                excluir = false;
                             }
                         }
+                        if(excluir){
+                            r.delete();
+                        }
                     }
-
+//                    for (Alimentacao a : Alimentacao.listAll(Alimentacao.class)) {
+//                        for (Racao r : Racao.listAll(Racao.class)) {
+//                            if (r.getCdRacao() == a.getCdRacao()) {
+//
+//                            }
+//                        }
+//                    }
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();

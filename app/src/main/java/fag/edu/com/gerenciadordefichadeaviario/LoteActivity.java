@@ -53,8 +53,11 @@ public class LoteActivity extends AppCompatActivity implements DatePickerDialog.
         day = calendar.get(Calendar.DAY_OF_MONTH);
         datePickerDialog = new DatePickerDialog(LoteActivity.this, this, year, mounth, day);
         datePickerDialogChegada = new DatePickerDialog(LoteActivity.this, this, year, mounth, day);
-
-        tv_aviario_lote.setText(String.valueOf(MainActivity.aviario_selecionado.getNrIdentificador()));
+        if (MainActivity.aviario_selecionado != null) {
+            tv_aviario_lote.setText(String.valueOf(MainActivity.aviario_selecionado.getNrIdentificador()));
+        }else{
+            finish();
+        }
     }
 
     private void carregaEventos() {
@@ -69,17 +72,15 @@ public class LoteActivity extends AppCompatActivity implements DatePickerDialog.
 
                         Lote lote = new Lote();
                         lote.setCdLote(Lote.listAll(Lote.class).size() + 1);
+                        lote.setCdAviario(aviario.getCdAviario());
                         lote.setDsLinhagem(et_linhagem.getText().toString());
                         lote.setAviario(MainActivity.aviario_selecionado);
                         lote.setDtAtualizacao(new Date());
                         lote.setDtCadastro(new Date());
-                        lote.setDtChegada(dt_selecionada);
-                        lote.setDtEntrega(dt_selecionadaChegada);
-                        lote.setDtEstimadaEntrega(dt_selecionadaChegada);
+                        lote.setDtChegada(dt_selecionadaChegada);
+                        lote.setDtEntrega(dt_selecionada);
+                        lote.setDtEstimadaEntrega(dt_selecionada);
                         lote.setQtAves(Integer.parseInt(et_qt_aves.getText().toString()));
-// -------------------------------------------------------------------
-//   ESTAVAMOS COM PROBLEMA EM SALVAR BOOLEAN ANTERIORMENTE, REVISAR
-// -------------------------------------------------------------------
                         lote.setBlAtivo(true);
                         lote.setIntegrado(false);
 

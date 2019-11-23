@@ -23,6 +23,7 @@ public class Mortalidade extends SugarRecord {
     @Expose
     int nrAvesEliminadas;
     @Expose
+    @NotNull
     Date dtMorte;
     @Expose
     Date dtCadastro;

@@ -123,7 +123,7 @@ public class AddAviario extends AppCompatActivity {
                     }
 
                     Endereco endereco = new Endereco();
-                    endereco.setCdEndereco(codigoAviario);
+                    endereco.setCdEndereco(verificaCodigoEndereco());
                     endereco.setDsAdjetivo(et_referencia.getText().toString());
                     endereco.setDsCep(et_cep.getText().toString());
                     endereco.setMunicipio((Municipio) spMunicipio.getSelectedItem());
@@ -144,7 +144,7 @@ public class AddAviario extends AppCompatActivity {
                         aviario = new Aviario();
                     }
 
-                    aviario.setCdAviario(codigoAviario);
+                    aviario.setCdAviario(verificaCodigoAviario());
                     aviario.setUsuario(MainActivity.usuarioLogado);
                     aviario.setNrIdentificador(Integer.valueOf(et_numero_aviario.getText().toString()));
                     aviario.setNrCapAves(Integer.valueOf(et_qt_aves.getText().toString()));
@@ -255,9 +255,6 @@ public class AddAviario extends AppCompatActivity {
                 endereco.update();
                 System.out.println(endereco);
 
-                Aviario aviario = Aviario.last(Aviario.class);
-                aviario.setIntegrado(true);
-                aviario.update();
 
             }
         }
@@ -267,8 +264,28 @@ public class AddAviario extends AppCompatActivity {
 
     private int verificaCodigoAviario() {
         try {
-            TaskGet task1 = new TaskGet(this, "Aviarios");
+            TaskGet task1 = new TaskGet(this, "Aviario");
             Result result1 = task1.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Aviarios/Count"}).get();
+            System.out.println("VERIFICA Result1 ------------------->" + result1);
+
+            Type typeUser1 = new TypeToken<Integer>() {
+            }.getType();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+            int tamanho = gson.fromJson(result1.getContent(), typeUser1);
+            System.out.println("tamanho da Lista--------------> " + tamanho);
+            codigoAviario = tamanho + 1;
+            return tamanho + 1;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 1;
+
+    }
+
+    private int verificaCodigoEndereco() {
+        try {
+            TaskGet task1 = new TaskGet(this, "Endereco");
+            Result result1 = task1.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Enderecoes/Count"}).get();
             System.out.println("VERIFICA Result1 ------------------->" + result1);
 
             Type typeUser1 = new TypeToken<Integer>() {

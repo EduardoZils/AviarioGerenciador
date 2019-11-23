@@ -71,7 +71,7 @@ public class RelatorioActivity extends AppCompatActivity {
                 //List<Lote> loteList = Lote.listAll(Lote.class);
                 List<Lote> loteList = new ArrayList<>();
                 for (Lote l : Lote.listAll(Lote.class)) {
-                    if (l.getAviario().getCdAviario() == aviario.getCdAviario()) {
+                    if (l.getCdAviario() == aviario.getCdAviario()) {
                         loteList.add(l);
                     }
                 }

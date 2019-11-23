@@ -4,7 +4,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Conexao {
-    public static String ipApi = "http://192.168.43.8:80/api/";
+    public static String ipApi = "http://192.168.0.94:80/api/";
 
     public static HttpURLConnection realizaConexao(String url, String method) {
         try {

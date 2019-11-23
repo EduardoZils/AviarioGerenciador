@@ -35,7 +35,7 @@ public class RegistrarActivity extends AppCompatActivity implements DatePickerDi
     TextView tv_dtnascimento;
     Button bt_registrar;
     private int day, mounth, year;
-    private String dt_selecionada;
+    private Date dt_selecionada;
     private Calendar calendar = Calendar.getInstance();
     private DatePickerDialog datePickerDialog;//Dialog pra Date
 
@@ -69,40 +69,44 @@ public class RegistrarActivity extends AppCompatActivity implements DatePickerDi
             public void onClick(View v) {
 
                 Usuario u = new Usuario();
+                boolean registra = true;
 
                 u.setCdUsuario(verificaCodigoUsuario());
                 if (u.getCdUsuario() == -1) {
                     Mensagem.ExibirMensagem(RegistrarActivity.this, "Este e-mail já está cadastrado no sistema!", TipoMensagem.ERRO);
                     et_email.setBackgroundColor(Color.rgb(247, 118, 118));
+                    registra = false;
                 }
 
                 u.setDsNome(et_nome.getText().toString());
                 u.setDsEmail(et_email.getText().toString());
                 u.setDsCpf(et_cpf.getText().toString());
                 u.setDsRg(et_rg.getText().toString());
+                u.setDtNascimento(dt_selecionada);
                 u.setDtAtualizacao(new Date());
                 u.setBlAtivo(true);
                 u.setDtCadastro(new Date());
 
-                if (et_senha.getText().toString().equals(et_senhaC.getText().toString())) {
+                if (et_senha.getText().toString().equalsIgnoreCase(et_senhaC.getText().toString())) {
                     u.setDsSenha(et_senha.getText().toString());
                 } else {
                     Mensagem.ExibirMensagem(RegistrarActivity.this, "As senhas não coincidem", TipoMensagem.ERRO);
                     et_senha.setBackgroundColor(Color.rgb(247, 118, 118));
                     et_senhaC.setBackgroundColor(Color.rgb(247, 118, 118));
+                    registra = false;
                 }
-
-                try {
-
-                    UsuarioTask task = new UsuarioTask(RegistrarActivity.this);
-                    Usuario usuario = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{new Gson().toJson(u)}).get();
-                    System.out.println("VERIFICA Result ------------------->" + usuario);
-                    Mensagem.ExibirMensagem(RegistrarActivity.this, "Usuário cadastrado com sucesso!", TipoMensagem.SUCESSO);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                if (registra) {
+                    try {
+                        UsuarioTask task = new UsuarioTask(RegistrarActivity.this, "POST");
+                        Usuario usuario = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{new Gson().toJson(u)}).get();
+                        System.out.println("VERIFICA Result ------------------->" + usuario);
+                        Mensagem.ExibirMensagem(RegistrarActivity.this, "Usuário cadastrado com sucesso!", TipoMensagem.SUCESSO);
+                        u.save();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                    finish();
                 }
-                u.save();
-                finish();
 
             }
         });
@@ -122,8 +126,7 @@ public class RegistrarActivity extends AppCompatActivity implements DatePickerDi
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         //Mensagem.ExibirMensagem(RegistrarActivity.this, "Data selecionada (" + dayOfMonth + "/" + (month + 1) + "/" + year + ")", TipoMensagem.ALERTA);
 
-
-        dt_selecionada = year + "/" + (month + 1) + "/" + dayOfMonth;
+        dt_selecionada = new Date(year - 1900, month, dayOfMonth);
         tv_dtnascimento.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
     }
 
