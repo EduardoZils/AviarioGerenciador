@@ -32,11 +32,18 @@ import fag.edu.com.gerenciadordefichadeaviario.Tasks.EnderecoTask;
 import fag.edu.com.gerenciadordefichadeaviario.Tasks.LoteTask;
 import fag.edu.com.gerenciadordefichadeaviario.Tasks.TaskGet;
 import fag.edu.com.gerenciadordefichadeaviario.Tasks.UsuarioTask;
+import fag.edu.com.gerenciadordefichadeaviario.models.Alimentacao;
 import fag.edu.com.gerenciadordefichadeaviario.models.Aviario;
 import fag.edu.com.gerenciadordefichadeaviario.models.Endereco;
+import fag.edu.com.gerenciadordefichadeaviario.models.Hidrometro;
 import fag.edu.com.gerenciadordefichadeaviario.models.Lote;
+import fag.edu.com.gerenciadordefichadeaviario.models.Mortalidade;
+import fag.edu.com.gerenciadordefichadeaviario.models.Pesagem;
+import fag.edu.com.gerenciadordefichadeaviario.models.Pesos;
+import fag.edu.com.gerenciadordefichadeaviario.models.Racao;
 import fag.edu.com.gerenciadordefichadeaviario.models.Result;
 import fag.edu.com.gerenciadordefichadeaviario.models.Usuario;
+import fag.edu.com.gerenciadordefichadeaviario.models.Vacina;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {
@@ -159,6 +166,13 @@ public class MainActivity extends AppCompatActivity
         Endereco.deleteAll(Endereco.class);
         Aviario.deleteAll(Aviario.class);
         Lote.deleteAll(Lote.class);
+        Racao.deleteAll(Racao.class);
+        Vacina.deleteAll(Vacina.class);
+        Alimentacao.deleteAll(Alimentacao.class);
+        Mortalidade.deleteAll(Mortalidade.class);
+        Pesagem.deleteAll(Pesagem.class);
+        Pesos.deleteAll(Pesos.class);
+        Hidrometro.deleteAll(Hidrometro.class);
 
 
         try {

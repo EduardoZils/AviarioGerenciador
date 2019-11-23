@@ -30,7 +30,7 @@ import fag.edu.com.gerenciadordefichadeaviario.models.Pesos;
 import fag.edu.com.gerenciadordefichadeaviario.models.Racao;
 
 public class PesagemActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, SwipeRefreshLayout.OnRefreshListener {
-    private Lote lote;
+    public static Lote lote;
     private SwipeRefreshLayout mSwipeToRefresh;
     private int day, mounth, year;
     private Date dt_selecionada = null;
@@ -145,10 +145,12 @@ public class PesagemActivity extends AppCompatActivity implements DatePickerDial
             @Override
             public void onClick(View view) {
                 if (pesosList.size() > 0) {
+                    pesagem.setCdPesagem(Pesagem.listAll(Pesagem.class).size() + 1);
                     pesagem.setBlAtivo(true);
                     pesagem.setDtAtualizacao(new Date());
                     pesagem.setDtCadastro(new Date());
                     pesagem.setDtPesagem(dt_selecionada);
+                    pesagem.setCdLote(lote.getCdLote());
                     pesagem.setLote(lote);
                     pesagem.setNmSemana(Calendar.getInstance().getFirstDayOfWeek());
                     pesagem.setQtPesagens(pesosList.size());
@@ -161,10 +163,12 @@ public class PesagemActivity extends AppCompatActivity implements DatePickerDial
 
                     pesagem.setVlPesoMedio(valorMedio);
                     pesagem.setVlPesoSemana(valorMedio);
+                    pesagem.setIntegrado(false);
                     pesagem.save();
                     Mensagem.ExibirMensagem(PesagemActivity.this, "Pesagem salva com sucesso!", TipoMensagem.SUCESSO);
 
                     for (Pesos p : pesosList) {
+                        p.setCdPesagem(pesagem.getCdPesagem());
                         p.save();
                     }
 

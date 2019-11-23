@@ -16,6 +16,7 @@ import java.util.List;
 
 import fag.edu.com.gerenciadordefichadeaviario.Util.Mensagem;
 import fag.edu.com.gerenciadordefichadeaviario.Util.TipoMensagem;
+import fag.edu.com.gerenciadordefichadeaviario.models.Pesagem;
 import fag.edu.com.gerenciadordefichadeaviario.models.Pesos;
 
 public class PesosActivity extends AppCompatActivity {
@@ -58,12 +59,14 @@ public class PesosActivity extends AppCompatActivity {
                     if (et_peso_total.getText().length() > 0 && et_qt_aves_peso.getText().length() > 0) {
                         Pesos pesos = new Pesos();
                         pesos.setCdPeso(Pesos.listAll(Pesos.class).size() + 1);
+                        pesos.setCdLote(PesagemActivity.lote.getCdLote());
                         pesos.setBlAtivo(true);
                         pesos.setDtCadastro(new Date());
                         pesos.setDtAtualizacao(new Date());
                         pesos.setPesagem(PesagemActivity.pesagem);
                         pesos.setQtAvesUtilizadas(Integer.valueOf(et_qt_aves_peso.getText().toString()));
                         pesos.setVlPesagem(Double.parseDouble(et_peso_total.getText().toString()));
+                        pesos.setIntegrado(false);
                         PesagemActivity.pesosList.add(pesos);
                     } else {
                         Mensagem.ExibirMensagem(PesosActivity.this, "Verifique se todos os campos estão devidamente preenchidos", TipoMensagem.ERRO);

@@ -1,28 +1,46 @@
 package fag.edu.com.gerenciadordefichadeaviario.models;
 
+import com.google.gson.annotations.Expose;
 import com.orm.SugarRecord;
+import com.orm.dsl.MultiUnique;
+import com.orm.dsl.NotNull;
 import com.orm.dsl.Unique;
 
 import java.util.Date;
 
+@MultiUnique("cdVacina, cdLote")
 public class Vacina extends SugarRecord {
-    @Unique
+
+    @Expose
     int cdVacina;
+    @Expose
+    int cdLote;
+    @NotNull
     Lote lote;
+    @Expose
     String dsNome;
+    @Expose
     String dsFormaUso;
+    @Expose
     Date dtUso;
+    @Expose
     String dsPrescricao;
+    @Expose
     Double qtUsada;
+    @Expose
     Date dtCadastro;
+    @Expose
     Date dtAtualizacao;
+    @Expose
     boolean blAtivo;
+    boolean integrado;
 
     public Vacina() {
     }
 
-    public Vacina(int cdVacina, Lote lote, String dsNome, String dsFormaUso, Date dtUso, String dsPrescricao, Double qtUsada, Date dtCadastro, Date dtAtualizacao, boolean blAtivo) {
+    public Vacina(int cdVacina, int cdLote, Lote lote, String dsNome, String dsFormaUso, Date dtUso, String dsPrescricao, Double qtUsada, Date dtCadastro, Date dtAtualizacao, boolean blAtivo, boolean integrado) {
         this.cdVacina = cdVacina;
+        this.cdLote = cdLote;
         this.lote = lote;
         this.dsNome = dsNome;
         this.dsFormaUso = dsFormaUso;
@@ -32,6 +50,7 @@ public class Vacina extends SugarRecord {
         this.dtCadastro = dtCadastro;
         this.dtAtualizacao = dtAtualizacao;
         this.blAtivo = blAtivo;
+        this.integrado = integrado;
     }
 
     public int getCdVacina() {
@@ -112,6 +131,22 @@ public class Vacina extends SugarRecord {
 
     public void setBlAtivo(boolean blAtivo) {
         this.blAtivo = blAtivo;
+    }
+
+    public int getCdLote() {
+        return cdLote;
+    }
+
+    public void setCdLote(int cdLote) {
+        this.cdLote = cdLote;
+    }
+
+    public boolean isIntegrado() {
+        return integrado;
+    }
+
+    public void setIntegrado(boolean integrado) {
+        this.integrado = integrado;
     }
 
     @Override

@@ -1,33 +1,52 @@
 package fag.edu.com.gerenciadordefichadeaviario.models;
 
+import com.google.gson.annotations.Expose;
 import com.orm.SugarRecord;
-import com.orm.dsl.Unique;
+import com.orm.dsl.MultiUnique;
+import com.orm.dsl.NotNull;
 
 import java.util.Date;
 
-public class Alimentacao extends SugarRecord {
-    @Unique
+@MultiUnique("cdAlimentacao, cdLote")
+
+public class Alimentacao extends SugarRecord  {
+    @Expose
     int cdAlimentacao;
+    @Expose
+    int cdLote;
+    @NotNull
     Lote lote;
+    @Expose
+    int cdRacao;
+    @NotNull
     Racao racao;
+    @Expose
     Date dtRecebimento;
+    @Expose
     Double qtRecebida;
+    @Expose
     Date dtCadastro;
+    @Expose
     Date dtAtualizacao;
+    @Expose
     boolean blAtivo;
+    boolean integrado;
 
     public Alimentacao() {
     }
 
-    public Alimentacao(int cdAlimentacao, Lote lote, Racao racao, Date dtRecebimento, Double qtRecebida, Date dtCadastro, Date dtAtualizacao, boolean blAtivo) {
+    public Alimentacao(int cdAlimentacao, int cdLote, Lote lote, int cdRacao, Racao racao, Date dtRecebimento, Double qtRecebida, Date dtCadastro, Date dtAtualizacao, boolean blAtivo, boolean integrado) {
         this.cdAlimentacao = cdAlimentacao;
+        this.cdLote = cdLote;
         this.lote = lote;
+        this.cdRacao = cdRacao;
         this.racao = racao;
         this.dtRecebimento = dtRecebimento;
         this.qtRecebida = qtRecebida;
         this.dtCadastro = dtCadastro;
         this.dtAtualizacao = dtAtualizacao;
         this.blAtivo = blAtivo;
+        this.integrado = integrado;
     }
 
     public int getCdAlimentacao() {
@@ -92,6 +111,30 @@ public class Alimentacao extends SugarRecord {
 
     public void setBlAtivo(boolean blAtivo) {
         this.blAtivo = blAtivo;
+    }
+
+    public boolean isIntegrado() {
+        return integrado;
+    }
+
+    public void setIntegrado(boolean integrado) {
+        this.integrado = integrado;
+    }
+
+    public int getCdLote() {
+        return cdLote;
+    }
+
+    public void setCdLote(int cdLote) {
+        this.cdLote = cdLote;
+    }
+
+    public int getCdRacao() {
+        return cdRacao;
+    }
+
+    public void setCdRacao(int cdRacao) {
+        this.cdRacao = cdRacao;
     }
 
     @Override

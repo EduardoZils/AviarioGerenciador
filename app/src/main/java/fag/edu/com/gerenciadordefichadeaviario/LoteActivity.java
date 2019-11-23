@@ -81,6 +81,7 @@ public class LoteActivity extends AppCompatActivity implements DatePickerDialog.
 //   ESTAVAMOS COM PROBLEMA EM SALVAR BOOLEAN ANTERIORMENTE, REVISAR
 // -------------------------------------------------------------------
                         lote.setBlAtivo(true);
+                        lote.setIntegrado(false);
 
 
                         lote.save();

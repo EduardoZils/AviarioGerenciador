@@ -1,27 +1,40 @@
 package fag.edu.com.gerenciadordefichadeaviario.models;
 
+import com.google.gson.annotations.Expose;
 import com.orm.SugarRecord;
+import com.orm.dsl.MultiUnique;
+import com.orm.dsl.NotNull;
 import com.orm.dsl.Unique;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@MultiUnique("cdHidrometro, cdLote")
 public class Hidrometro extends SugarRecord {
-    @Unique
+    @Expose
     int cdHidrometro;
+    @Expose
+    int cdLote;
+    @NotNull
     Lote lote;
+    @Expose
     Double qtGasto;
+    @Expose
     Date dtColeta;
+    @Expose
     Date dtCadastro;
+    @Expose
     Date dtAtualizacao;
+    @Expose
     boolean blAtivo;
     boolean integrado;
 
     public Hidrometro() {
     }
 
-    public Hidrometro(int cdHidrometro, Lote lote, Double qtGasto, Date dtColeta, Date dtCadastro, Date dtAtualizacao, boolean blAtivo, boolean integrado) {
+    public Hidrometro(int cdHidrometro, int cdLote, Lote lote, Double qtGasto, Date dtColeta, Date dtCadastro, Date dtAtualizacao, boolean blAtivo, boolean integrado) {
         this.cdHidrometro = cdHidrometro;
+        this.cdLote = cdLote;
         this.lote = lote;
         this.qtGasto = qtGasto;
         this.dtColeta = dtColeta;
@@ -99,7 +112,7 @@ public class Hidrometro extends SugarRecord {
     public String toString() {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return qtGasto +"L "+
+        return qtGasto + "L " +
                 sdf.format(dtColeta)
                 ;
     }

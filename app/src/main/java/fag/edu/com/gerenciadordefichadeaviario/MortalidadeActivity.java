@@ -226,6 +226,7 @@ public class MortalidadeActivity extends AppCompatActivity implements DatePicker
 
                             Mortalidade m = new Mortalidade();
                             m.setCdMortalidade(codigo);
+                            m.setCdLote(lote.getCdLote());
                             m.setLote(lote);
                             m.setBlAtivo(true);
                             m.setDtAtualizacao(new Date());
@@ -233,11 +234,13 @@ public class MortalidadeActivity extends AppCompatActivity implements DatePicker
                             m.setDtMorte(data);
                             m.setNrAvesAbatidas(Integer.valueOf(et_aves_mortas.getText().toString()));
                             m.setNrAvesEliminadas(Integer.valueOf(et_aves_eliminadas.getText().toString()));
+                            m.setIntegrado(false);
                             m.save();
                             Mensagem.ExibirMensagem(MortalidadeActivity.this, "Mortes atualizadas com sucesso!", TipoMensagem.SUCESSO);
                         } else {
                             Mortalidade m = new Mortalidade();
                             m.setCdMortalidade(Mortalidade.listAll(Mortalidade.class).size() + 1);
+                            m.setCdLote(lote.getCdLote());
                             m.setLote(lote);
                             m.setBlAtivo(true);
                             m.setDtMorte(dt_selecionada);
@@ -245,12 +248,13 @@ public class MortalidadeActivity extends AppCompatActivity implements DatePicker
                             m.setDtCadastro(new Date());
                             m.setNrAvesAbatidas(Integer.valueOf(et_aves_mortas.getText().toString()));
                             m.setNrAvesEliminadas(Integer.valueOf(et_aves_eliminadas.getText().toString()));
+                            m.setIntegrado(false);
                             m.save();
                             Mensagem.ExibirMensagem(MortalidadeActivity.this, "Mortes salvas com sucesso!", TipoMensagem.SUCESSO);
                         }
                     } catch (Exception ex) {
                         ex.printStackTrace();
-                    }finally {
+                    } finally {
                         finish();
                     }
                 }

@@ -1,21 +1,36 @@
 package fag.edu.com.gerenciadordefichadeaviario.models;
 
+import com.google.gson.annotations.Expose;
 import com.orm.SugarRecord;
+import com.orm.dsl.MultiUnique;
+import com.orm.dsl.NotNull;
 import com.orm.dsl.Unique;
 
 import java.util.Date;
 
+@MultiUnique("cdPesagem, cdLote")
 public class Pesagem extends SugarRecord {
-    @Unique
+    @Expose
     int cdPesagem;
+    @Expose
+    int cdLote;
+    @NotNull
     Lote lote;
+    @Expose
     Double vlPesoSemana;
+    @Expose
     Double vlPesoMedio;
+    @Expose
     int nmSemana;
+    @Expose
     Date dtPesagem;
+    @Expose
     int qtPesagens;
+    @Expose
     Date dtCadastro;
+    @Expose
     Date dtAtualizacao;
+    @Expose
     boolean blAtivo;
     boolean integrado;
 
@@ -118,6 +133,22 @@ public class Pesagem extends SugarRecord {
 
     public void setBlAtivo(boolean blAtivo) {
         this.blAtivo = blAtivo;
+    }
+
+    public int getCdLote() {
+        return cdLote;
+    }
+
+    public void setCdLote(int cdLote) {
+        this.cdLote = cdLote;
+    }
+
+    public boolean isIntegrado() {
+        return integrado;
+    }
+
+    public void setIntegrado(boolean integrado) {
+        this.integrado = integrado;
     }
 
     @Override

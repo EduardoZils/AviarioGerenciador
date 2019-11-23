@@ -1,5 +1,6 @@
 package fag.edu.com.gerenciadordefichadeaviario.models;
 
+import com.google.gson.annotations.Expose;
 import com.orm.SugarRecord;
 import com.orm.dsl.Unique;
 
@@ -7,23 +8,31 @@ import java.util.Date;
 
 public class Racao extends SugarRecord {
     @Unique
+    @Expose
     int cdRacao;
+    @Expose
     String dsNome;
+    @Expose
     String dsTipo;
+    @Expose
     Date dtCadastro;
+    @Expose
     Date dtAtualizacao;
+    @Expose
     boolean blAtivo;
+    boolean integrado;
 
     public Racao() {
     }
 
-    public Racao(int cdRacao, String dsNome, String dsTipo, Date dtCadastro, Date dtAtualizacao, boolean blAtivo) {
+    public Racao(int cdRacao, String dsNome, String dsTipo, Date dtCadastro, Date dtAtualizacao, boolean blAtivo, boolean integrado) {
         this.cdRacao = cdRacao;
         this.dsNome = dsNome;
         this.dsTipo = dsTipo;
         this.dtCadastro = dtCadastro;
         this.dtAtualizacao = dtAtualizacao;
         this.blAtivo = blAtivo;
+        this.integrado = integrado;
     }
 
     public int getCdRacao() {
@@ -72,6 +81,14 @@ public class Racao extends SugarRecord {
 
     public void setBlAtivo(boolean blAtivo) {
         this.blAtivo = blAtivo;
+    }
+
+    public boolean isIntegrado() {
+        return integrado;
+    }
+
+    public void setIntegrado(boolean integrado) {
+        this.integrado = integrado;
     }
 
     @Override
