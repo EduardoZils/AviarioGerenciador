@@ -141,6 +141,7 @@ public class AlimentacaoActivity extends AppCompatActivity implements DatePicker
                     alimentacao.setDtCadastro(new Date());
                     alimentacao.setDtAtualizacao(new Date());
                     alimentacao.setLote(lote);
+                    alimentacao.setCdLote(lote.getCdLote());
                     alimentacao.setQtRecebida(Double.parseDouble(et_qt_recebida.getText().toString()));
                     alimentacao.setRacao((Racao) sp_alimentacao.getSelectedItem());
                     alimentacao.save();

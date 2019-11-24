@@ -146,6 +146,7 @@ public class PesagemActivity extends AppCompatActivity implements DatePickerDial
             public void onClick(View view) {
                 if (pesosList.size() > 0) {
                     pesagem.setCdPesagem(Pesagem.listAll(Pesagem.class).size() + 1);
+                    pesagem.setCdLote(lote.getCdLote());
                     pesagem.setBlAtivo(true);
                     pesagem.setDtAtualizacao(new Date());
                     pesagem.setDtCadastro(new Date());

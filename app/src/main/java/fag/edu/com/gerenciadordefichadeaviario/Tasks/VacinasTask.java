@@ -71,6 +71,7 @@ public class VacinasTask extends AsyncTask<String, Integer, List<Vacina>> {
                 System.out.println(connection.getResponseMessage());
             }
 
+            System.out.println("==================================================================== VACINA  TASK ====================================================================");
             System.out.println("========================== RESULTADO ==========================");
             System.out.println(data.toString());
             System.out.println(response.toString());

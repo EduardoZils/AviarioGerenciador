@@ -71,6 +71,7 @@ public class RacaoTask extends AsyncTask<String, Integer, List<Racao>> {
                 System.out.println(connection.getResponseMessage());
             }
 
+            System.out.println("=================== RACAOS TASK =========================");
             System.out.println("========================== RESULTADO ==========================");
             System.out.println(data.toString());
             System.out.println(response.toString());

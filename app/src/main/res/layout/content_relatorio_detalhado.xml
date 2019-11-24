@@ -41,6 +41,54 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/fab_margin"
                 android:layout_weight="1"
+                android:text="Aviário: "
+                android:textSize="@dimen/fab_margin" />
+
+            <TextView
+                android:id="@+id/tv_aviario_r"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:text="VALORES"
+                android:textSize="@dimen/fab_margin" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:text="Código do lote: "
+                android:textSize="@dimen/fab_margin" />
+
+            <TextView
+                android:id="@+id/tv_lote_r"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:text="VALORES"
+                android:textSize="@dimen/fab_margin" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
                 android:text="Data inicial"
                 android:textSize="@dimen/fab_margin" />
 
@@ -76,10 +124,85 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/fab_margin"
                 android:layout_weight="1"
-                android:text="Data termino"
+                android:text="Ainda em andamento"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/fab_margin" />
 
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:text="Data prevista"
+                android:textSize="@dimen/fab_margin" />
+
+            <TextView
+                android:id="@+id/tv_dt_prevista_r"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:text="Data prevista"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/fab_margin" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:text="Aves inseridas: "
+                android:textSize="@dimen/fab_margin" />
+
+            <TextView
+                android:id="@+id/tv_aves_inseridas_r"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:text="VALORES"
+                android:textSize="@dimen/fab_margin" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:text="Linhagem das aves: "
+                android:textSize="@dimen/fab_margin" />
+
+            <TextView
+                android:id="@+id/tv_linhagem_r"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:text="VALORES"
+                android:textSize="@dimen/fab_margin" />
 
         </LinearLayout>
 
@@ -91,14 +214,42 @@
             android:text="Relação de aves mortas"
             android:textSize="@dimen/fab_margin" />
 
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="300dp">
 
             <ListView
                 android:id="@+id/lv_mortalidade_r"
                 android:layout_width="match_parent"
-                android:layout_height="150dp" />
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:text="Aves restantes no Lote"
+                android:textSize="@dimen/fab_margin" />
+
+            <TextView
+                android:id="@+id/tv_aves_restantes_r"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_weight="1"
+                android:text="VALORES"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/fab_margin" />
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -153,7 +304,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            android:text="Consumo da ração"
+            android:text="Consumo da alimentação"
             android:textSize="@dimen/fab_margin" />
 
         <LinearLayout
@@ -163,7 +314,7 @@
             <ListView
                 android:id="@+id/lv_racao_r"
                 android:layout_width="match_parent"
-                android:layout_height="150dp" />
+                android:layout_height="match_parent" />
         </LinearLayout>
 
         <LinearLayout

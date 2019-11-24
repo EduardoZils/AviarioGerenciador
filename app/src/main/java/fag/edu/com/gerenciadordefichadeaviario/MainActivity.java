@@ -27,11 +27,16 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import fag.edu.com.gerenciadordefichadeaviario.Tasks.AlimentacaoTask;
 import fag.edu.com.gerenciadordefichadeaviario.Tasks.AviarioTask;
 import fag.edu.com.gerenciadordefichadeaviario.Tasks.EnderecoTask;
+import fag.edu.com.gerenciadordefichadeaviario.Tasks.HidrometroTask;
 import fag.edu.com.gerenciadordefichadeaviario.Tasks.LoteTask;
+import fag.edu.com.gerenciadordefichadeaviario.Tasks.MortalidadeTask;
+import fag.edu.com.gerenciadordefichadeaviario.Tasks.PesagemTask;
 import fag.edu.com.gerenciadordefichadeaviario.Tasks.TaskGet;
 import fag.edu.com.gerenciadordefichadeaviario.Tasks.UsuarioTask;
+import fag.edu.com.gerenciadordefichadeaviario.Tasks.VacinasTask;
 import fag.edu.com.gerenciadordefichadeaviario.models.Alimentacao;
 import fag.edu.com.gerenciadordefichadeaviario.models.Aviario;
 import fag.edu.com.gerenciadordefichadeaviario.models.Endereco;
@@ -209,17 +214,69 @@ public class MainActivity extends AppCompatActivity
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
 
-        List<Lote> loteList = new ArrayList<>();
-        if (Lote.listAll(Lote.class).size() > 0) {
-            for (Lote l : Lote.listAll(Lote.class)) {
-                if (!l.isIntegrado()) {
-                    loteList.add(l);
-                }
+//        List<Lote> loteList = new ArrayList<>();
+//        if (Lote.listAll(Lote.class).size() > 0) {
+//            for (Lote l : Lote.listAll(Lote.class)) {
+//                if (!l.isIntegrado()) {
+//                    loteList.add(l);
+//                }
+//            }
+//            LoteTask loteTask = new LoteTask(MainActivity.this);
+//            loteTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(loteList)});
+//        }
+
+
+
+        List<Hidrometro> hidrometroList = new ArrayList<>();
+        for (Hidrometro h : Hidrometro.listAll(Hidrometro.class)) {
+            if (!h.isIntegrado()) {
+                hidrometroList.add(h);
             }
-            LoteTask loteTask = new LoteTask(MainActivity.this);
-            loteTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(loteList)});
         }
 
+        List<Mortalidade> mortalidadeList = new ArrayList<>();
+        for (Mortalidade h : Mortalidade.listAll(Mortalidade.class)) {
+            if (!h.isIntegrado()) {
+                mortalidadeList.add(h);
+            }
+        }
+
+        List<Vacina> vacinaList = new ArrayList<>();
+        for (Vacina h : Vacina.listAll(Vacina.class)) {
+            if (!h.isIntegrado()) {
+                vacinaList.add(h);
+            }
+        }
+
+        List<Alimentacao> alimentacaoList = new ArrayList<>();
+        for (Alimentacao h : Alimentacao.listAll(Alimentacao.class)) {
+            if (!h.isIntegrado()) {
+                alimentacaoList.add(h);
+            }
+        }
+
+        List<Pesagem> pesagemList = new ArrayList<>();
+        for (Pesagem h : Pesagem.listAll(Pesagem.class)) {
+            if (!h.isIntegrado()) {
+                pesagemList.add(h);
+            }
+        }
+
+
+        PesagemTask pesagemTask = new PesagemTask(MainActivity.this, "POST");
+        pesagemTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(pesagemList)});
+
+        AlimentacaoTask alimentacaoTask = new AlimentacaoTask(MainActivity.this, "POST");
+        alimentacaoTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(alimentacaoList)});
+
+        MortalidadeTask mortalidadeTask = new MortalidadeTask(MainActivity.this, "POST");
+        mortalidadeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(mortalidadeList)});
+
+        HidrometroTask hidrometroTask = new HidrometroTask(MainActivity.this, "POST");
+        hidrometroTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(hidrometroList)});
+
+        VacinasTask vacinaTask = new VacinasTask(MainActivity.this, "POST");
+        vacinaTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(vacinaList)});
 
     }
 

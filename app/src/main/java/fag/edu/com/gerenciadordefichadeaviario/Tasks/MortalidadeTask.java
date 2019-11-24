@@ -71,6 +71,7 @@ public class MortalidadeTask extends AsyncTask<String, Integer, List<Mortalidade
                 System.out.println(connection.getResponseMessage());
             }
 
+            System.out.println("==================================================================== MORTALIDADE TASK ====================================================================");
             System.out.println("========================== RESULTADO ==========================");
             System.out.println(data.toString());
             System.out.println(response.toString());

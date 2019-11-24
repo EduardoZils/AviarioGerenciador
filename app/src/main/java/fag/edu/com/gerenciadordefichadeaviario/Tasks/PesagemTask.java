@@ -75,6 +75,7 @@ public class PesagemTask extends AsyncTask<String, Integer, List<Pesagem>> {
                 System.out.println(connection.getResponseMessage());
             }
 
+            System.out.println("==================================================================== PESAGEM TASK ====================================================================");
             System.out.println("========================== RESULTADO ==========================");
             System.out.println(data.toString());
             System.out.println(response.toString());
@@ -96,17 +97,17 @@ public class PesagemTask extends AsyncTask<String, Integer, List<Pesagem>> {
     protected void onPostExecute(List<Pesagem> s) {
         super.onPostExecute(s);
         progress.cancel();
-
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        List<Pesagem> pesagemList = new ArrayList<>();
-        for (Pesagem h : Pesagem.listAll(Pesagem.class)) {
-            if (!h.isIntegrado()) {
-                pesagemList.add(h);
-            }
-        }
-
-        PesosTask pesosTask = new PesosTask(context, "POST");
-        pesosTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(pesagemList)});
+//          NÃO TEM MAIS NECESSIDADE SUBIR PARA O BANCO ISSO
+//        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+//        List<Pesagem> pesagemList = new ArrayList<>();
+//        for (Pesagem h : Pesagem.listAll(Pesagem.class)) {
+//            if (!h.isIntegrado()) {
+//                pesagemList.add(h);
+//            }
+//        }
+//
+//        PesosTask pesosTask = new PesosTask(context, "POST");
+//        pesosTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(pesagemList)});
     }
 }
 

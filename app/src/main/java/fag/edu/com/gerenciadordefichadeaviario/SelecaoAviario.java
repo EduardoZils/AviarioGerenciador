@@ -1,6 +1,7 @@
 package fag.edu.com.gerenciadordefichadeaviario;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -11,8 +12,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import fag.edu.com.gerenciadordefichadeaviario.Tasks.LoteTask;
 import fag.edu.com.gerenciadordefichadeaviario.Util.Adapters.SelecaoAdapter;
 import fag.edu.com.gerenciadordefichadeaviario.Util.Mensagem;
 import fag.edu.com.gerenciadordefichadeaviario.Util.TipoMensagem;
@@ -81,7 +88,7 @@ public class SelecaoAviario extends AppCompatActivity implements SwipeRefreshLay
                     aviarioEmLote = false;
                 } else {
                     for (Lote l : Lote.listAll(Lote.class)) {
-                        if (l.getCdAviario() == a.getCdAviario()) {
+                        if (l.getCdAviario() == a.getCdAviario() && l.isBlAtivo()) {
                             aviarioEmLote = true;
                             txt = "SIM";
                             break;
@@ -114,10 +121,13 @@ public class SelecaoAviario extends AppCompatActivity implements SwipeRefreshLay
                 List<Lote> loteList = Lote.listAll(Lote.class);
                 for (Lote l : loteList) {
                     if (aviarioEmLote && l.isBlAtivo()) {
-                        if (l.getAviario().getCdAviario() == MainActivity.aviario_selecionado.getCdAviario()) {
+                        if (l.getCdAviario() == MainActivity.aviario_selecionado.getCdAviario()) {
                             Mensagem.ExibirMensagem(SelecaoAviario.this, "LOTE FINALIZADO!", TipoMensagem.SUCESSO);
                             erro = true;
                             l.setBlAtivo(false);
+                            l.setDtAtualizacao(new Date());
+                            l.update();
+                            atualizaDadosLote(l);
                         }
                     }
 
@@ -130,6 +140,19 @@ public class SelecaoAviario extends AppCompatActivity implements SwipeRefreshLay
 
             }
         });
+    }
+
+    private void atualizaDadosLote(Lote lote) {
+
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+
+        lote.setAviario(MainActivity.aviario_selecionado);
+        lote.setDtEntrega(new Date());
+        lote.update();
+        LoteTask loteTask = new LoteTask(SelecaoAviario.this, "PUT");
+        loteTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(lote), String.valueOf(lote.getCdLote())});
+
+
     }
 
     private void carregaComponentes() {
@@ -153,10 +176,10 @@ public class SelecaoAviario extends AppCompatActivity implements SwipeRefreshLay
 
     private void atualizaLista() {
         if (Aviario.listAll(Aviario.class).size() != 0) {
-            List<Aviario> aviarioList = Aviario.listAll(Aviario.class);
+            List<Aviario> aviarioList = Aviario.listAll(Aviario.class, "cd_aviario");
             lvAviario.setAdapter(new ArrayAdapter<>(SelecaoAviario.this, R.layout.support_simple_spinner_dropdown_item, aviarioList));
 
-        }  else {
+        } else {
             Mensagem.ExibirMensagem(SelecaoAviario.this, "Não existem aviários cadastrados! Adicione um novo aviário no canto superior direito!", TipoMensagem.ALERTA);
         }
     }

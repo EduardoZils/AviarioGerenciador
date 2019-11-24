@@ -71,6 +71,7 @@ public class HidrometroTask extends AsyncTask<String, Integer, List<Hidrometro>>
                 System.out.println(connection.getResponseMessage());
             }
 
+            System.out.println("==================================================================== HIDROMETRO TASK ====================================================================");
             System.out.println("========================== RESULTADO ==========================");
             System.out.println(data.toString());
             System.out.println(response.toString());

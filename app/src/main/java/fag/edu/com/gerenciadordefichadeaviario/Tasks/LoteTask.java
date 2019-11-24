@@ -29,15 +29,18 @@ import fag.edu.com.gerenciadordefichadeaviario.models.Lote;
 import fag.edu.com.gerenciadordefichadeaviario.models.Mortalidade;
 import fag.edu.com.gerenciadordefichadeaviario.models.Pesagem;
 import fag.edu.com.gerenciadordefichadeaviario.models.Pesos;
+import fag.edu.com.gerenciadordefichadeaviario.models.Result;
 import fag.edu.com.gerenciadordefichadeaviario.models.Vacina;
 
 public class LoteTask extends AsyncTask<String, Integer, List<Lote>> {
 
     private ProgressDialog progress;
     private Context context;
+    private String method;
 
-    public LoteTask(Context context) {
+    public LoteTask(Context context, String method) {
         this.context = context;
+        this.method = method;
     }
 
     @Override
@@ -60,8 +63,14 @@ public class LoteTask extends AsyncTask<String, Integer, List<Lote>> {
         try {
 
             StringBuffer response = new StringBuffer();
-
-            connection = Conexao.realizaConexao("Lotes", "POST");
+            if (method.equals("PUT")) {
+                connection = Conexao.realizaConexao("Lotes/" + jsonData[1],  method);
+            } else {
+                connection = Conexao.realizaConexao("Lotes", method);
+            }
+//
+//            if(method.equals("PUT")){
+//            }
 
             //Escrevo na Conexão que montamos
             OutputStream os = new BufferedOutputStream(connection.getOutputStream());
@@ -110,58 +119,58 @@ public class LoteTask extends AsyncTask<String, Integer, List<Lote>> {
         progress.cancel();
 
 
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-
-        List<Hidrometro> hidrometroList = new ArrayList<>();
-        for (Hidrometro h : Hidrometro.listAll(Hidrometro.class)) {
-            if (!h.isIntegrado()) {
-                hidrometroList.add(h);
-            }
-        }
-
-        List<Mortalidade> mortalidadeList = new ArrayList<>();
-        for (Mortalidade h : Mortalidade.listAll(Mortalidade.class)) {
-            if (!h.isIntegrado()) {
-                mortalidadeList.add(h);
-            }
-        }
-
-        List<Vacina> vacinaList = new ArrayList<>();
-        for (Vacina h : Vacina.listAll(Vacina.class)) {
-            if (!h.isIntegrado()) {
-                vacinaList.add(h);
-            }
-        }
-
-        List<Alimentacao> alimentacaoList = new ArrayList<>();
-        for (Alimentacao h : Alimentacao.listAll(Alimentacao.class)) {
-            if (!h.isIntegrado()) {
-                alimentacaoList.add(h);
-            }
-        }
-
-        List<Pesagem> pesagemList = new ArrayList<>();
-        for (Pesagem h : Pesagem.listAll(Pesagem.class)) {
-            if (!h.isIntegrado()) {
-                pesagemList.add(h);
-            }
-        }
-
-
-        PesagemTask pesagemTask = new PesagemTask(context, "POST");
-        pesagemTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(pesagemList)});
-
-        AlimentacaoTask alimentacaoTask = new AlimentacaoTask(context, "POST");
-        alimentacaoTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(alimentacaoList)});
-
-        MortalidadeTask mortalidadeTask = new MortalidadeTask(context, "POST");
-        mortalidadeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(mortalidadeList)});
-
-        HidrometroTask hidrometroTask = new HidrometroTask(context, "POST");
-        hidrometroTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(hidrometroList)});
-
-        VacinasTask vacinaTask = new VacinasTask(context, "POST");
-        vacinaTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(vacinaList)});
+//        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+//
+//        List<Hidrometro> hidrometroList = new ArrayList<>();
+//        for (Hidrometro h : Hidrometro.listAll(Hidrometro.class)) {
+//            if (!h.isIntegrado()) {
+//                hidrometroList.add(h);
+//            }
+//        }
+//
+//        List<Mortalidade> mortalidadeList = new ArrayList<>();
+//        for (Mortalidade h : Mortalidade.listAll(Mortalidade.class)) {
+//            if (!h.isIntegrado()) {
+//                mortalidadeList.add(h);
+//            }
+//        }
+//
+//        List<Vacina> vacinaList = new ArrayList<>();
+//        for (Vacina h : Vacina.listAll(Vacina.class)) {
+//            if (!h.isIntegrado()) {
+//                vacinaList.add(h);
+//            }
+//        }
+//
+//        List<Alimentacao> alimentacaoList = new ArrayList<>();
+//        for (Alimentacao h : Alimentacao.listAll(Alimentacao.class)) {
+//            if (!h.isIntegrado()) {
+//                alimentacaoList.add(h);
+//            }
+//        }
+//
+//        List<Pesagem> pesagemList = new ArrayList<>();
+//        for (Pesagem h : Pesagem.listAll(Pesagem.class)) {
+//            if (!h.isIntegrado()) {
+//                pesagemList.add(h);
+//            }
+//        }
+//
+//
+//        PesagemTask pesagemTask = new PesagemTask(context, "POST");
+//        pesagemTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(pesagemList)});
+//
+//        AlimentacaoTask alimentacaoTask = new AlimentacaoTask(context, "POST");
+//        alimentacaoTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(alimentacaoList)});
+//
+//        MortalidadeTask mortalidadeTask = new MortalidadeTask(context, "POST");
+//        mortalidadeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(mortalidadeList)});
+//
+//        HidrometroTask hidrometroTask = new HidrometroTask(context, "POST");
+//        hidrometroTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(hidrometroList)});
+//
+//        VacinasTask vacinaTask = new VacinasTask(context, "POST");
+//        vacinaTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(vacinaList)});
     }
 }
 

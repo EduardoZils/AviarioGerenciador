@@ -1,6 +1,7 @@
 package fag.edu.com.gerenciadordefichadeaviario;
 
 import android.app.DatePickerDialog;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,14 +10,24 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+import fag.edu.com.gerenciadordefichadeaviario.Tasks.LoteTask;
+import fag.edu.com.gerenciadordefichadeaviario.Tasks.TaskGet;
 import fag.edu.com.gerenciadordefichadeaviario.Util.Mensagem;
 import fag.edu.com.gerenciadordefichadeaviario.Util.TipoMensagem;
 import fag.edu.com.gerenciadordefichadeaviario.models.Aviario;
 import fag.edu.com.gerenciadordefichadeaviario.models.Lote;
+import fag.edu.com.gerenciadordefichadeaviario.models.Result;
 
 public class LoteActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -55,7 +66,7 @@ public class LoteActivity extends AppCompatActivity implements DatePickerDialog.
         datePickerDialogChegada = new DatePickerDialog(LoteActivity.this, this, year, mounth, day);
         if (MainActivity.aviario_selecionado != null) {
             tv_aviario_lote.setText(String.valueOf(MainActivity.aviario_selecionado.getNrIdentificador()));
-        }else{
+        } else {
             finish();
         }
     }
@@ -71,7 +82,7 @@ public class LoteActivity extends AppCompatActivity implements DatePickerDialog.
                     } else if (dt_selecionada.after(dt_selecionadaChegada)) {
 
                         Lote lote = new Lote();
-                        lote.setCdLote(Lote.listAll(Lote.class).size() + 1);
+                        lote.setCdLote(verificaCodigoLote());
                         lote.setCdAviario(aviario.getCdAviario());
                         lote.setDsLinhagem(et_linhagem.getText().toString());
                         lote.setAviario(MainActivity.aviario_selecionado);
@@ -86,6 +97,8 @@ public class LoteActivity extends AppCompatActivity implements DatePickerDialog.
 
 
                         lote.save();
+
+                        integraDados();
                     } else {
                         Mensagem.ExibirMensagem(LoteActivity.this, "Datas inválidas, verifique se estão corretas!", TipoMensagem.ERRO);
                     }
@@ -127,6 +140,47 @@ public class LoteActivity extends AppCompatActivity implements DatePickerDialog.
             sdf.format(dt_selecionadaChegada);
             System.out.println(sdf.format(dt_selecionadaChegada));
             tv_dt_chegada.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+        }
+    }
+
+    private int verificaCodigoLote() {
+        try {
+            TaskGet task1 = new TaskGet(this, "Lote");
+            Result result1 = task1.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Lotes/Count"}).get();
+            System.out.println("VERIFICA Result1 ------------------->" + result1);
+
+            Type typeUser1 = new TypeToken<Integer>() {
+            }.getType();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+            int tamanho = gson.fromJson(result1.getContent(), typeUser1);
+            System.out.println("tamanho da Lista--------------> " + tamanho);
+            return tamanho + 1;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 1;
+
+    }
+
+    private void integraDados() {
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+
+        List<Lote> loteList = new ArrayList<>();
+        if (Lote.listAll(Lote.class).size() > 0) {
+            for (Lote e : Lote.listAll(Lote.class)) {
+                if (!e.isIntegrado()) {
+                    loteList.add(e);
+                }
+            }
+            LoteTask taskLote = new LoteTask(LoteActivity.this, "POST");
+            taskLote.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(loteList)});
+            Lote l = Lote.last(Lote.class);
+            System.out.println(l);
+            l.setIntegrado(true);
+            l.update();
+            System.out.println(l);
+
+
         }
     }
 }

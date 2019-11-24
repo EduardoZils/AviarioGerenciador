@@ -2,6 +2,7 @@ package fag.edu.com.gerenciadordefichadeaviario.models;
 
 import com.google.gson.annotations.Expose;
 import com.orm.SugarRecord;
+import com.orm.dsl.Ignore;
 import com.orm.dsl.Unique;
 
 import java.text.SimpleDateFormat;
@@ -13,6 +14,7 @@ public class Lote extends SugarRecord {
     int cdLote;
     @Expose
     int cdAviario;
+
     Aviario aviario;
     @Expose
     Date dtChegada;

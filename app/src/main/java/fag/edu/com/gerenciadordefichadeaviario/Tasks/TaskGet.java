@@ -264,25 +264,25 @@ public class TaskGet extends AsyncTask<String, Integer, Result> {
 
 //---------------------------------------------------------------------------------------------------------
         } else if (title.equalsIgnoreCase("Rações")) {
-            //GET PESOS
-            try {
-                List<Pesos> pesosList = new ArrayList<>();
-                TaskGet task = new TaskGet(context, "Pesos");
-                for (Lote lotes : Lote.listAll(Lote.class)) {
-                    Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Pesos/byLote/" + lotes.getCdLote()}).get();
-                    Type typeUser = new TypeToken<List<Pesos>>() {
-                    }.getType();
-                    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-                    pesosList = gson.fromJson(result.getContent(), typeUser);
-                    for (Pesos l : pesosList) {
-                        l.setIntegrado(true);
-                        l.save();
-                    }
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        } else if (title.equalsIgnoreCase("Pesos")) {
+//            //GET PESOS
+//            try {
+//                List<Pesos> pesosList = new ArrayList<>();
+//                TaskGet task = new TaskGet(context, "Pesos");
+//                for (Lote lotes : Lote.listAll(Lote.class)) {
+//                    Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Pesos/byLote/" + lotes.getCdLote()}).get();
+//                    Type typeUser = new TypeToken<List<Pesos>>() {
+//                    }.getType();
+//                    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+//                    pesosList = gson.fromJson(result.getContent(), typeUser);
+//                    for (Pesos l : pesosList) {
+//                        l.setIntegrado(true);
+//                        l.save();
+//                    }
+//                }
+//            } catch (Exception ex) {
+//                ex.printStackTrace();
+//            }
+//        } else if (title.equalsIgnoreCase("Pesos")) {
 //
 //        } else if (title.equalsIgnoreCase("Rações")) {
             //GET ALIMENTAÇÃO

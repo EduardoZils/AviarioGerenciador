@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fag.edu.com.gerenciadordefichadeaviario.Util.Mensagem;
+import fag.edu.com.gerenciadordefichadeaviario.Util.PrintToPdf;
 import fag.edu.com.gerenciadordefichadeaviario.Util.TipoMensagem;
 import fag.edu.com.gerenciadordefichadeaviario.models.Alimentacao;
 import fag.edu.com.gerenciadordefichadeaviario.models.Hidrometro;
@@ -28,7 +30,8 @@ public class RelatorioDetalhadoActivity extends AppCompatActivity {
     private int tipoTela;
     private Lote lote;
 
-    TextView tv_dt_chegada_r, tv_dt_termino_r, tv_mortalidade_r, tv_mortalidade_r2, tv_peso_total, tv_media_peso, tv_consumo_racao_ave;
+    TextView tv_dt_chegada_r, tv_dt_termino_r, tv_mortalidade_r, tv_mortalidade_r2, tv_peso_total, tv_media_peso, tv_consumo_racao_ave,
+            tv_aves_restantes_r, tv_linhagem_r, tv_aves_inseridas_r, tv_dt_prevista_r, tv_lote_r, tv_aviario_r;
     ListView lv_mortalidade_r, lv_racao_r, lv_vacina_r, lv_hidrometro_r;
 
     @Override
@@ -44,6 +47,8 @@ public class RelatorioDetalhadoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Infelizmente está opção ainda não está valida", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                PrintToPdf.print(lv_mortalidade_r);
             }
         });
 
@@ -79,6 +84,13 @@ public class RelatorioDetalhadoActivity extends AppCompatActivity {
         lv_vacina_r = findViewById(R.id.lv_vacina_r);
         lv_hidrometro_r = findViewById(R.id.lv_hidrometro_r);
         lv_mortalidade_r = findViewById(R.id.lv_mortalidade_r);
+
+        tv_aves_restantes_r = findViewById(R.id.tv_aves_restantes_r);
+        tv_linhagem_r = findViewById(R.id.tv_linhagem_r);
+        tv_aves_inseridas_r = findViewById(R.id.tv_aves_inseridas_r);
+        tv_dt_prevista_r = findViewById(R.id.tv_dt_prevista_r);
+        tv_lote_r = findViewById(R.id.tv_lote_r);
+        tv_aviario_r = findViewById(R.id.tv_aviario_r);
     }
 
     private void carregaDados() {
@@ -86,20 +98,31 @@ public class RelatorioDetalhadoActivity extends AppCompatActivity {
         if (lote != null) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             tv_dt_chegada_r.setText(sdf.format(lote.getDtChegada()));
-            tv_dt_termino_r.setText(sdf.format(lote.getDtEntrega()));
+            tv_aviario_r.setText(String.valueOf(MainActivity.aviario_selecionado.getNrIdentificador()));
+            tv_lote_r.setText("#" + lote.getCdLote());
+            tv_dt_prevista_r.setText(sdf.format(lote.getDtEstimadaEntrega()));
+            if (!lote.isBlAtivo()) {
+                tv_dt_termino_r.setText(sdf.format(lote.getDtEntrega()));
+            }
+
+            tv_aves_inseridas_r.setText(lote.getQtAves() + "/" + MainActivity.aviario_selecionado.getNrCapAves());
+            tv_linhagem_r.setText(lote.getDsLinhagem());
+
 
             //MORTALIDADE -------------------------------------------------------------------------------------------------------------------------------------------------------
             int mortes = 0;
-            float porcento = 0;
+            int valorTotal;
             List<Mortalidade> mortalidadeList = new ArrayList<>();
-            for (Mortalidade m : Mortalidade.listAll(Mortalidade.class)) {
+            for (Mortalidade m : Mortalidade.listAll(Mortalidade.class, "dt_morte")) {
                 if (m.getCdLote() == lote.getCdLote()) {
                     mortes += m.getNrAvesAbatidas() + m.getNrAvesEliminadas();
                     mortalidadeList.add(m);
                 }
             }
-
-            porcento = (float) ((mortes * 100) / lote.getQtAves());
+            double porcento = 0.0;
+            valorTotal = lote.getQtAves();
+            porcento = ((mortes * 100) / valorTotal);
+            tv_aves_restantes_r.setText(String.valueOf(lote.getQtAves() - mortes));
             tv_mortalidade_r.setText(String.valueOf(mortes));
             tv_mortalidade_r2.setText(String.valueOf(porcento));
             lv_mortalidade_r.setAdapter(new ArrayAdapter<>(RelatorioDetalhadoActivity.this, R.layout.support_simple_spinner_dropdown_item, mortalidadeList));
@@ -155,4 +178,7 @@ public class RelatorioDetalhadoActivity extends AppCompatActivity {
             lv_hidrometro_r.setAdapter(new ArrayAdapter<>(RelatorioDetalhadoActivity.this, R.layout.support_simple_spinner_dropdown_item, hidrometroList));
         }
     }
+
+
+
 }

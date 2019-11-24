@@ -19,6 +19,7 @@ import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import fag.edu.com.gerenciadordefichadeaviario.AddAviario;
 import fag.edu.com.gerenciadordefichadeaviario.R;
 import fag.edu.com.gerenciadordefichadeaviario.Util.Conexao;
 import fag.edu.com.gerenciadordefichadeaviario.models.Aviario;
@@ -28,9 +29,11 @@ public class EnderecoTask extends AsyncTask<String, Integer, List<Endereco>> {
 
     private ProgressDialog progress;
     private Context context;
+    private String method;
 
-    public EnderecoTask(Context context) {
+    public EnderecoTask(Context context, String method) {
         this.context = context;
+        this.method = method;
     }
 
     @Override
@@ -53,8 +56,11 @@ public class EnderecoTask extends AsyncTask<String, Integer, List<Endereco>> {
         try {
             System.out.println("==================================================================== ENDERECO TASK ====================================================================");
             StringBuffer response = new StringBuffer();
-
-            connection = Conexao.realizaConexao("Enderecoes", "POST");
+            if (method.equals("PUT")) {
+                connection = Conexao.realizaConexao("Enderecoes/" + jsonData[1], method);
+            } else {
+                connection = Conexao.realizaConexao("Enderecoes", method);
+            }
 
             //Escrevo na Conexão que montamos
             OutputStream os = new BufferedOutputStream(connection.getOutputStream());
@@ -101,17 +107,20 @@ public class EnderecoTask extends AsyncTask<String, Integer, List<Endereco>> {
     protected void onPostExecute(List<Endereco> s) {
         super.onPostExecute(s);
         progress.cancel();
-
-        List<Aviario> aviariosList = new ArrayList<>();
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        for (Aviario a : Aviario.listAll(Aviario.class)) {
-            if (!a.isIntegrado()) {
-                aviariosList.add(a);
+        if (method.equals("POST")) {
+            List<Aviario> aviariosList = new ArrayList<>();
+            for (Aviario a : Aviario.listAll(Aviario.class)) {
+                if (!a.isIntegrado()) {
+                    aviariosList.add(a);
+                }
             }
+            AviarioTask taskAviario = new AviarioTask(context, "POST");
+            taskAviario.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(aviariosList)});
+        } else if (method.equals("PUT")) {
+            AviarioTask taskAviario = new AviarioTask(context, "PUT");
+            taskAviario.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(AddAviario.aviarioEdicao), String.valueOf(AddAviario.aviarioEdicao.getCdAviario())});
         }
-        AviarioTask taskAviario = new AviarioTask(context, "POST");
-        taskAviario.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(aviariosList)});
-
 
     }
 }

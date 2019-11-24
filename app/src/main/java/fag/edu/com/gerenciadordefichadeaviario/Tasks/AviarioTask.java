@@ -52,13 +52,19 @@ public class AviarioTask extends AsyncTask<String, Integer, List<Aviario>> {
         try {
             System.out.println("==================================================================== AVIARIOTASK ====================================================================");
             StringBuffer response = new StringBuffer();
-            connection = Conexao.realizaConexao("Aviarios", method);
+            if (method.equals("PUT")) {
+                connection = Conexao.realizaConexao("Aviarios/" + jsonData[1],  method);
+            } else {
+                connection = Conexao.realizaConexao("Aviarios", method);
+            }
 
             //Escrevo na Conexão que montamos
             OutputStream os = new BufferedOutputStream(connection.getOutputStream());
             //Escrevo na requisição do nosso JSON
+
             os.write(jsonData[0].getBytes());
             os.flush();
+
 
             System.out.println("=================Retorno da Req ==>   " + connection.getResponseCode());
 

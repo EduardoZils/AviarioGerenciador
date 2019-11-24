@@ -49,6 +49,7 @@ public class AddAviario extends AppCompatActivity {
     private List<Pais> paisList;
     private List<Estado> estadoList;
     private List<Municipio> municipioList;
+    public static Aviario aviarioEdicao = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,46 +122,60 @@ public class AddAviario extends AppCompatActivity {
                     if (!existe) {
                         Municipio.save(spMunicipio.getSelectedItem());
                     }
-
                     Endereco endereco = new Endereco();
-                    endereco.setCdEndereco(verificaCodigoEndereco());
+                    if (isEdicao) {
+                        for (Endereco endereco1 : Endereco.listAll(Endereco.class)){
+                            if(endereco1.getCdEndereco() == MainActivity.aviario_selecionado.getCdEndereco()){
+                                endereco = endereco1;
+                            }
+                        }
+                    } else {
+                        endereco = new Endereco();
+                        endereco.setCdEndereco(verificaCodigoEndereco());
+                        endereco.setDtCadastro(new Date());
+                        endereco.setIntegrado(false);
+
+                    }
                     endereco.setDsAdjetivo(et_referencia.getText().toString());
                     endereco.setDsCep(et_cep.getText().toString());
                     endereco.setMunicipio((Municipio) spMunicipio.getSelectedItem());
                     endereco.setCdMunicipio(((Municipio) spMunicipio.getSelectedItem()).getCdMunicipio());
                     endereco.setDsEstrada(et_estrada.getText().toString());
                     endereco.setDsLogradouro(et_logradouro.getText().toString());
-                    endereco.setDtCadastro(new Date());
                     endereco.setDtAtualizacao(new Date());
-                    endereco.setIntegrado(false);
-
-                    endereco.save();
-
+                    if (isEdicao) {
+                        endereco.update();
+                    } else {
+                        endereco.save();
+                    }
 
                     Aviario aviario = null;
                     if (isEdicao) {
                         aviario = MainActivity.aviario_selecionado;
                     } else {
                         aviario = new Aviario();
+                        aviario.setDtCadastro(new Date());
+                        aviario.setEndereco(endereco);
+                        aviario.setCdAviario(verificaCodigoAviario());
+                        aviario.setCdEndereco(endereco.getCdEndereco());
+                        aviario.setIntegrado(false);
                     }
 
-                    aviario.setCdAviario(verificaCodigoAviario());
+
                     aviario.setUsuario(MainActivity.usuarioLogado);
                     aviario.setNrIdentificador(Integer.valueOf(et_numero_aviario.getText().toString()));
                     aviario.setNrCapAves(Integer.valueOf(et_qt_aves.getText().toString()));
-                    aviario.setDtCadastro(new Date());
                     aviario.setDtAtualizacao(new Date());
-                    aviario.setEndereco(endereco);
                     aviario.setBlAtivo(true);
                     aviario.setCdEndereco(endereco.getCdEndereco());
                     aviario.setCdUsuario(MainActivity.usuarioLogado.getCdUsuario());
-                    aviario.setIntegrado(false);
                     if (isEdicao) {
                         aviario.update();
+                        atualizaDados(aviario, endereco);
                     } else {
                         aviario.save();
+                        integraDados();
                     }
-                    integraDados();
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -227,37 +242,39 @@ public class AddAviario extends AppCompatActivity {
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
 
-        if (isEdicao) {
-
-            List<Aviario> aviariosList = new ArrayList<>();
-            for (Aviario a : Aviario.listAll(Aviario.class)) {
-                if (!a.isIntegrado()) {
-                    aviariosList.add(a);
+        List<Endereco> enderecoList = new ArrayList<>();
+        if (Endereco.listAll(Endereco.class).size() > 0) {
+            for (Endereco e : Endereco.listAll(Endereco.class)) {
+                if (!e.isIntegrado()) {
+                    enderecoList.add(e);
                 }
             }
-            AviarioTask taskAviario = new AviarioTask(AddAviario.this, "PUT");
-            taskAviario.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(aviariosList)});
+            EnderecoTask taskEndereco = new EnderecoTask(AddAviario.this, "POST");
+            taskEndereco.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(enderecoList)});
 
-        } else {
-            List<Endereco> enderecoList = new ArrayList<>();
-            if (Endereco.listAll(Endereco.class).size() > 0) {
-                for (Endereco e : Endereco.listAll(Endereco.class)) {
-                    if (!e.isIntegrado()) {
-                        enderecoList.add(e);
-                    }
-                }
-                EnderecoTask taskEndereco = new EnderecoTask(AddAviario.this);
-                taskEndereco.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(enderecoList)});
-
-                Endereco endereco = Endereco.last(Endereco.class);
-                System.out.println(endereco);
-                endereco.setIntegrado(true);
-                endereco.update();
-                System.out.println(endereco);
+            Endereco endereco = Endereco.last(Endereco.class);
+            System.out.println(endereco);
+            endereco.setIntegrado(true);
+            endereco.update();
+            System.out.println(endereco);
 
 
-            }
         }
+
+    }
+
+    private void atualizaDados(Aviario aviario, Endereco endereco) {
+
+        aviario.setDtAtualizacao(new Date());
+        aviario.setBlAtivo(true);
+        aviario.update();
+
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+
+
+        aviarioEdicao = aviario;
+        EnderecoTask taskEndereco = new EnderecoTask(AddAviario.this, "PUT");
+        taskEndereco.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{gson.toJson(endereco), String.valueOf(endereco.getCdEndereco())});
 
     }
 

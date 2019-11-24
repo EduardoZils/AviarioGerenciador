@@ -71,6 +71,7 @@ public class PesosTask extends AsyncTask<String, Integer, List<Pesos>> {
                 System.out.println(connection.getResponseMessage());
             }
 
+            System.out.println("==================================================================== PESOS TASK ====================================================================");
             System.out.println("========================== RESULTADO ==========================");
             System.out.println(data.toString());
             System.out.println(response.toString());

@@ -101,7 +101,9 @@ public class VacinaActivity extends AppCompatActivity implements DatePickerDialo
                     if(et_forma_de_uso_vacina.getText().length() > 0 && et_nome_vacina.getText().length() > 0 && et_prescricao_vacina.getText().length() > 0 && et_dosagem_vacina.getText().length() > 0){
                         Vacina v = new Vacina();
                         v.setCdVacina(Vacina.listAll(Vacina.class).size() + 1);
+                        v.setCdLote(lote.getCdLote());
                         v.setBlAtivo(true);
+                        v.setIntegrado(false);
                         v.setDsFormaUso(et_forma_de_uso_vacina.getText().toString());
                         v.setDsNome(et_nome_vacina.getText().toString());
                         v.setDsPrescricao(et_prescricao_vacina.getText().toString());

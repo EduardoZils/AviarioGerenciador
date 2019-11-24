@@ -71,6 +71,7 @@ public class UsuarioTask extends AsyncTask<String, Integer, Usuario> {
                 System.out.println(connection.getResponseMessage());
             }
 
+            System.out.println("==================================================================== USUARIO TASK ====================================================================");
             System.out.println("========================== RESULTADO ==========================");
             System.out.println(data.toString());
             System.out.println(response.toString());

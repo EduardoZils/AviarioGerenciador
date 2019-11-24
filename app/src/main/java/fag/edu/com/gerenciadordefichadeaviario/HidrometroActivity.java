@@ -99,6 +99,7 @@ public class HidrometroActivity extends AppCompatActivity implements DatePickerD
                         Hidrometro h = new Hidrometro();
                         h.setCdHidrometro(Hidrometro.listAll(Hidrometro.class).size() + 1);
                         h.setLote(lote);
+                        h.setCdLote(lote.getCdLote());
                         h.setDtAtualizacao(new Date());
                         h.setDtCadastro(new Date());
                         h.setDtColeta(dt_selecionada);

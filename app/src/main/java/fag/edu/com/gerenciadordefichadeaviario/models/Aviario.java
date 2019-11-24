@@ -145,6 +145,6 @@ public class Aviario extends SugarRecord {
 
     @Override
     public String toString() {
-        return cdAviario + " - #" + nrIdentificador;
+        return  "->"+ nrIdentificador;
     }
 }
