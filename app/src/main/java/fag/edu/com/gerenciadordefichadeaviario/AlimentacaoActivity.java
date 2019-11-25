@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -163,8 +164,14 @@ public class AlimentacaoActivity extends AppCompatActivity implements DatePicker
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        dt_selecionada = new Date(year - 1900, month, dayOfMonth);
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        try {
+            dt_selecionada = sdf.parse(dayOfMonth + "/" + (month + 1) + "/" + year);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         sdf.format(dt_selecionada);
         System.out.println(sdf.format(dt_selecionada));
         tv_dt_recebimento.setText(sdf.format(dt_selecionada));

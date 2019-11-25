@@ -15,6 +15,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -129,8 +130,12 @@ public class LoteActivity extends AppCompatActivity implements DatePickerDialog.
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         if (definicao == 1) {
-            dt_selecionada = new Date(year - 1900, month, dayOfMonth);
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            try {
+                dt_selecionada = sdf.parse(dayOfMonth + "/" + (month + 1) + "/" + year);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             sdf.format(dt_selecionada);
             System.out.println(sdf.format(dt_selecionada));
             tv_dt_estimada_entrega.setText(dayOfMonth + "/" + (month + 1) + "/" + year);

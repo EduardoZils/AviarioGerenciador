@@ -18,6 +18,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -124,9 +125,14 @@ public class RegistrarActivity extends AppCompatActivity implements DatePickerDi
     }
 
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        //Mensagem.ExibirMensagem(RegistrarActivity.this, "Data selecionada (" + dayOfMonth + "/" + (month + 1) + "/" + year + ")", TipoMensagem.ALERTA);
 
-        dt_selecionada = new Date(year - 1900, month, dayOfMonth);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        try {
+            dt_selecionada = sdf.parse(dayOfMonth + "/" + (month + 1) + "/" + year);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         tv_dtnascimento.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
     }
 
