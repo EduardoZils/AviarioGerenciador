@@ -65,6 +65,7 @@ public class RacaoActivity extends AppCompatActivity {
                         racao.setDtCadastro(new Date());
                         racao.setDtAtualizacao(new Date());
                         racao.save();
+                        Mensagem.ExibirMensagem(RacaoActivity.this, "Ração cadastrada com sucesso!", TipoMensagem.SUCESSO);
                         integraDados();
                     } catch (Exception ex) {
                         ex.printStackTrace();

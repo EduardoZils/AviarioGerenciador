@@ -68,6 +68,8 @@ public class PesosActivity extends AppCompatActivity {
                         pesos.setVlPesagem(Double.parseDouble(et_peso_total.getText().toString()));
                         pesos.setIntegrado(false);
                         PesagemActivity.pesosList.add(pesos);
+                        Mensagem.ExibirMensagem(PesosActivity.this, "Peso salvo com sucesso!", TipoMensagem.SUCESSO);
+
                     } else {
                         Mensagem.ExibirMensagem(PesosActivity.this, "Verifique se todos os campos estão devidamente preenchidos", TipoMensagem.ERRO);
                     }
