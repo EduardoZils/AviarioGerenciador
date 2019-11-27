@@ -45,7 +45,7 @@ public class RelatorioDetalhadoActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Infelizmente está opção ainda não está valida", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Infelizmente esta opção ainda não está disponível", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
                 PrintToPdf.print(lv_mortalidade_r);
@@ -60,8 +60,6 @@ public class RelatorioDetalhadoActivity extends AppCompatActivity {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
-        Mensagem.ExibirMensagem(RelatorioDetalhadoActivity.this, "código do LOTE: " + tipoTela, TipoMensagem.SUCESSO);
 
         for (Lote l : Lote.listAll(Lote.class)) {
             if (l.getCdLote() == tipoTela) {
@@ -111,7 +109,7 @@ public class RelatorioDetalhadoActivity extends AppCompatActivity {
 
             //MORTALIDADE -------------------------------------------------------------------------------------------------------------------------------------------------------
             int mortes = 0;
-            int valorTotal;
+            float valorTotal;
             List<Mortalidade> mortalidadeList = new ArrayList<>();
             for (Mortalidade m : Mortalidade.listAll(Mortalidade.class, "dt_morte")) {
                 if (m.getCdLote() == lote.getCdLote()) {
@@ -119,8 +117,8 @@ public class RelatorioDetalhadoActivity extends AppCompatActivity {
                     mortalidadeList.add(m);
                 }
             }
-            double porcento = 0.0;
-            valorTotal = lote.getQtAves();
+            float porcento = 0;
+            valorTotal = (float) lote.getQtAves();
             porcento = ((mortes * 100) / valorTotal);
             tv_aves_restantes_r.setText(String.valueOf(lote.getQtAves() - mortes));
             tv_mortalidade_r.setText(String.valueOf(mortes));
@@ -131,6 +129,7 @@ public class RelatorioDetalhadoActivity extends AppCompatActivity {
 
             List<String> alimentacaoList = new ArrayList<>();
             float qt_racao = 0;
+            int tamanho = Alimentacao.listAll(Alimentacao.class).size();
             for (Alimentacao a : Alimentacao.listAll(Alimentacao.class)) {
                 if (a.getCdLote() == lote.getCdLote()) {
                     alimentacaoList.add(a.toStringRelatorio());
@@ -178,7 +177,6 @@ public class RelatorioDetalhadoActivity extends AppCompatActivity {
             lv_hidrometro_r.setAdapter(new ArrayAdapter<>(RelatorioDetalhadoActivity.this, R.layout.support_simple_spinner_dropdown_item, hidrometroList));
         }
     }
-
 
 
 }

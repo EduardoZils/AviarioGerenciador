@@ -295,25 +295,39 @@ public class TaskGet extends AsyncTask<String, Integer, Result> {
                     }.getType();
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
                     alimentacaoList = gson.fromJson(result.getContent(), typeUser);
+                    Lote lote_controle = lotes;
                     for (Alimentacao l : alimentacaoList) {
-                        l.setLote(Lote.findById(Lote.class, lotes.getCdAviario()));
+                        l.setLote(lote_controle);
                         l.setIntegrado(true);
-                        l.save();
-                    }
-                    boolean excluir = false;
-                    for (Racao r : Racao.listAll(Racao.class)) {
-                        excluir = true;
-                        for (Alimentacao l : alimentacaoList) {
+                        for (Racao r : Racao.listAll(Racao.class)) {
                             if (r.getCdRacao() == l.getCdRacao()) {
                                 l.setRacao(r);
-                                l.update();
-                                excluir = false;
+                                break;
                             }
                         }
-                        if(excluir){
-                            r.delete();
-                        }
+                        l.save();
                     }
+                }
+
+
+
+//                boolean excluir = false;
+//                for (Racao r : Racao.listAll(Racao.class)) {
+//                    excluir = true;
+//                    for (Alimentacao l : alimentacaoList) {
+//                        if (r.getCdRacao() == l.getCdRacao()) {
+//                            l.setRacao(r);
+//                            l.update();
+//                            excluir = false;
+//                            break;
+//                        }
+//                    }
+////                    if (excluir) {
+////                        r.delete();
+////                    }
+//                }
+
+
 //                    for (Alimentacao a : Alimentacao.listAll(Alimentacao.class)) {
 //                        for (Racao r : Racao.listAll(Racao.class)) {
 //                            if (r.getCdRacao() == a.getCdRacao()) {
@@ -321,7 +335,7 @@ public class TaskGet extends AsyncTask<String, Integer, Result> {
 //                            }
 //                        }
 //                    }
-                }
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

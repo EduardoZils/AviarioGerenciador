@@ -25,7 +25,7 @@ import fag.edu.com.gerenciadordefichadeaviario.models.Vacina;
 public class VacinaActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private Lote lote;
     private int day, mounth, year;
-    private Date dt_selecionada;
+    private Date dt_selecionada = null;
     private Calendar calendar = Calendar.getInstance();
     private DatePickerDialog datePickerDialog;
 
@@ -98,30 +98,34 @@ public class VacinaActivity extends AppCompatActivity implements DatePickerDialo
             @Override
             public void onClick(View view) {
                 try {
+                    if (dt_selecionada != null) {
 
-                    if(et_forma_de_uso_vacina.getText().length() > 0 && et_nome_vacina.getText().length() > 0 && et_prescricao_vacina.getText().length() > 0 && et_dosagem_vacina.getText().length() > 0){
-                        Vacina v = new Vacina();
-                        v.setCdVacina(Vacina.listAll(Vacina.class).size() + 1);
-                        v.setCdLote(lote.getCdLote());
-                        v.setBlAtivo(true);
-                        v.setIntegrado(false);
-                        v.setDsFormaUso(et_forma_de_uso_vacina.getText().toString());
-                        v.setDsNome(et_nome_vacina.getText().toString());
-                        v.setDsPrescricao(et_prescricao_vacina.getText().toString());
-                        v.setQtUsada(Double.parseDouble(et_dosagem_vacina.getText().toString()));
-                        v.setLote(lote);
-                        v.setDtCadastro(new Date());
-                        v.setDtAtualizacao(new Date());
-                        v.setDtUso(dt_selecionada);
-                        v.save();
-                    }else{
-                        Mensagem.ExibirMensagem(VacinaActivity.this, "Verifique se todos os campos estão devidamente preenchidos!", TipoMensagem.ERRO);
+                        if (et_forma_de_uso_vacina.getText().length() > 0 && et_nome_vacina.getText().length() > 0 && et_prescricao_vacina.getText().length() > 0 && et_dosagem_vacina.getText().length() > 0) {
+                            Vacina v = new Vacina();
+                            v.setCdVacina(Vacina.listAll(Vacina.class).size() + 1);
+                            v.setCdLote(lote.getCdLote());
+                            v.setBlAtivo(true);
+                            v.setIntegrado(false);
+                            v.setDsFormaUso(et_forma_de_uso_vacina.getText().toString());
+                            v.setDsNome(et_nome_vacina.getText().toString());
+                            v.setDsPrescricao(et_prescricao_vacina.getText().toString());
+                            v.setQtUsada(Double.parseDouble(et_dosagem_vacina.getText().toString()));
+                            v.setLote(lote);
+                            v.setDtCadastro(new Date());
+                            v.setDtAtualizacao(new Date());
+                            v.setDtUso(dt_selecionada);
+                            v.save();
+                        } else {
+                            Mensagem.ExibirMensagem(VacinaActivity.this, "Verifique se todos os campos estão devidamente preenchidos!", TipoMensagem.ERRO);
+                        }
+                    } else {
+                        Mensagem.ExibirMensagem(VacinaActivity.this, "Alguma data não foi informada!", TipoMensagem.ERRO);
                     }
-
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
+
             }
         });
 

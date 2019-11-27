@@ -27,7 +27,7 @@ public class HidrometroActivity extends AppCompatActivity implements DatePickerD
     private TextView tv_aviario_principal_hidrometro, tv_dt_leitura_agua;
     private EditText tv_leitura_atual;
     private Button bt_salvar_hidrometro;
-    private Date dt_selecionada;
+    private Date dt_selecionada = null;
     private Calendar calendar = Calendar.getInstance();
     private DatePickerDialog datePickerDialog;
     private Lote lote;
@@ -75,46 +75,50 @@ public class HidrometroActivity extends AppCompatActivity implements DatePickerD
         bt_salvar_hidrometro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean podeGravar = false;
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                Date hoje = new Date();
-                if (Hidrometro.listAll(Hidrometro.class).isEmpty()) {
-                    podeGravar = true;
-                } else {
-                    for (Hidrometro h : Hidrometro.listAll(Hidrometro.class)) {
+                if (dt_selecionada != null) {
+                    boolean podeGravar = false;
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    Date hoje = new Date();
+                    if (Hidrometro.listAll(Hidrometro.class).isEmpty()) {
                         podeGravar = true;
-                        if (sdf.format(hoje).equalsIgnoreCase(sdf.format(h.getDtColeta()))) {
-                            Mensagem.ExibirMensagem(HidrometroActivity.this, "Você já inseriu uma leitura hoje", TipoMensagem.ERRO);
-                            podeGravar = false;
-                            break;
-                        }
-                        if (sdf.format(hoje).compareTo(sdf.format(h.getDtColeta())) > 0) {
-                            Mensagem.ExibirMensagem(HidrometroActivity.this, "Você não pode efetuar lançamentos futuros", TipoMensagem.ERRO);
-                            podeGravar = false;
-                            break;
-                        }
-                    }
-                }
-                if (podeGravar) {
-                    if (tv_leitura_atual.getText().length() > 0) {
-                        Hidrometro h = new Hidrometro();
-                        h.setCdHidrometro(Hidrometro.listAll(Hidrometro.class).size() + 1);
-                        h.setLote(lote);
-                        h.setCdLote(lote.getCdLote());
-                        h.setDtAtualizacao(new Date());
-                        h.setDtCadastro(new Date());
-                        h.setDtColeta(dt_selecionada);
-                        h.setQtGasto(Double.parseDouble(tv_leitura_atual.getText().toString()));
-                        h.setBlAtivo(true);
-                        h.setIntegrado(false);
-
-
-                        h.save();
-
-                        Mensagem.ExibirMensagem(HidrometroActivity.this, "Leitura salva com sucesso!", TipoMensagem.SUCESSO);
                     } else {
-                        Mensagem.ExibirMensagem(HidrometroActivity.this, "Verifique se todos os campos estão devidamente preenchidos!", TipoMensagem.ERRO);
+                        for (Hidrometro h : Hidrometro.listAll(Hidrometro.class)) {
+                            podeGravar = true;
+                            if (sdf.format(hoje).equalsIgnoreCase(sdf.format(h.getDtColeta()))) {
+                                Mensagem.ExibirMensagem(HidrometroActivity.this, "Você já inseriu uma leitura hoje", TipoMensagem.ERRO);
+                                podeGravar = false;
+                                break;
+                            }
+                            if (sdf.format(hoje).compareTo(sdf.format(h.getDtColeta())) > 0) {
+                                Mensagem.ExibirMensagem(HidrometroActivity.this, "Você não pode efetuar lançamentos futuros", TipoMensagem.ERRO);
+                                podeGravar = false;
+                                break;
+                            }
+                        }
                     }
+                    if (podeGravar) {
+                        if (tv_leitura_atual.getText().length() > 0) {
+                            Hidrometro h = new Hidrometro();
+                            h.setCdHidrometro(Hidrometro.listAll(Hidrometro.class).size() + 1);
+                            h.setLote(lote);
+                            h.setCdLote(lote.getCdLote());
+                            h.setDtAtualizacao(new Date());
+                            h.setDtCadastro(new Date());
+                            h.setDtColeta(dt_selecionada);
+                            h.setQtGasto(Double.parseDouble(tv_leitura_atual.getText().toString()));
+                            h.setBlAtivo(true);
+                            h.setIntegrado(false);
+
+
+                            h.save();
+
+                            Mensagem.ExibirMensagem(HidrometroActivity.this, "Leitura salva com sucesso!", TipoMensagem.SUCESSO);
+                        } else {
+                            Mensagem.ExibirMensagem(HidrometroActivity.this, "Verifique se todos os campos estão devidamente preenchidos!", TipoMensagem.ERRO);
+                        }
+                    }
+                } else {
+                    Mensagem.ExibirMensagem(HidrometroActivity.this, "Alguma data não foi informada!", TipoMensagem.ERRO);
                 }
             }
         });

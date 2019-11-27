@@ -36,7 +36,7 @@ public class RegistrarActivity extends AppCompatActivity implements DatePickerDi
     TextView tv_dtnascimento;
     Button bt_registrar;
     private int day, mounth, year;
-    private Date dt_selecionada;
+    private Date dt_selecionada = null;
     private Calendar calendar = Calendar.getInstance();
     private DatePickerDialog datePickerDialog;//Dialog pra Date
 
@@ -69,46 +69,49 @@ public class RegistrarActivity extends AppCompatActivity implements DatePickerDi
             @Override
             public void onClick(View v) {
 
-                Usuario u = new Usuario();
-                boolean registra = true;
-
-                u.setCdUsuario(verificaCodigoUsuario());
-                if (u.getCdUsuario() == -1) {
-                    Mensagem.ExibirMensagem(RegistrarActivity.this, "Este e-mail já está cadastrado no sistema!", TipoMensagem.ERRO);
-                    et_email.setBackgroundColor(Color.rgb(247, 118, 118));
-                    registra = false;
-                }
-
-                u.setDsNome(et_nome.getText().toString());
-                u.setDsEmail(et_email.getText().toString());
-                u.setDsCpf(et_cpf.getText().toString());
-                u.setDsRg(et_rg.getText().toString());
-                u.setDtNascimento(dt_selecionada);
-                u.setDtAtualizacao(new Date());
-                u.setBlAtivo(true);
-                u.setDtCadastro(new Date());
-
-                if (et_senha.getText().toString().equalsIgnoreCase(et_senhaC.getText().toString())) {
-                    u.setDsSenha(et_senha.getText().toString());
-                } else {
-                    Mensagem.ExibirMensagem(RegistrarActivity.this, "As senhas não coincidem", TipoMensagem.ERRO);
-                    et_senha.setBackgroundColor(Color.rgb(247, 118, 118));
-                    et_senhaC.setBackgroundColor(Color.rgb(247, 118, 118));
-                    registra = false;
-                }
-                if (registra) {
-                    try {
-                        UsuarioTask task = new UsuarioTask(RegistrarActivity.this, "POST");
-                        Usuario usuario = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{new Gson().toJson(u)}).get();
-                        System.out.println("VERIFICA Result ------------------->" + usuario);
-                        Mensagem.ExibirMensagem(RegistrarActivity.this, "Usuário cadastrado com sucesso!", TipoMensagem.SUCESSO);
-                        u.save();
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
+                if (dt_selecionada != null) {
+                    Usuario u = new Usuario();
+                    boolean registra = true;
+                    u.setCdUsuario(verificaCodigoUsuario());
+                    if (u.getCdUsuario() == -1) {
+                        Mensagem.ExibirMensagem(RegistrarActivity.this, "Este e-mail já está cadastrado no sistema!", TipoMensagem.ERRO);
+                        et_email.setBackgroundColor(Color.rgb(247, 118, 118));
+                        registra = false;
                     }
-                    finish();
-                }
 
+                    u.setDsNome(et_nome.getText().toString());
+                    u.setDsEmail(et_email.getText().toString());
+                    u.setDsCpf(et_cpf.getText().toString());
+                    u.setDsRg(et_rg.getText().toString());
+                    u.setDtNascimento(dt_selecionada);
+                    u.setDtAtualizacao(new Date());
+                    u.setBlAtivo(true);
+                    u.setDtCadastro(new Date());
+
+                    if (et_senha.getText().toString().equalsIgnoreCase(et_senhaC.getText().toString())) {
+                        u.setDsSenha(et_senha.getText().toString());
+                    } else {
+                        Mensagem.ExibirMensagem(RegistrarActivity.this, "As senhas não coincidem", TipoMensagem.ERRO);
+                        et_senha.setBackgroundColor(Color.rgb(247, 118, 118));
+                        et_senhaC.setBackgroundColor(Color.rgb(247, 118, 118));
+                        registra = false;
+                    }
+                    if (registra) {
+                        try {
+                            UsuarioTask task = new UsuarioTask(RegistrarActivity.this, "POST");
+                            Usuario usuario = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{new Gson().toJson(u)}).get();
+                            System.out.println("VERIFICA Result ------------------->" + usuario);
+                            Mensagem.ExibirMensagem(RegistrarActivity.this, "Usuário cadastrado com sucesso!", TipoMensagem.SUCESSO);
+                            u.save();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                        finish();
+
+                    }
+                } else {
+                    Mensagem.ExibirMensagem(RegistrarActivity.this, "Alguma data não foi informada!", TipoMensagem.ERRO);
+                }
             }
         });
     }

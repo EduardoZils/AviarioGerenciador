@@ -32,8 +32,10 @@ public class MortalidadeActivity extends AppCompatActivity implements DatePicker
     ImageButton bt_mais_mortas, bt_menos_mortas, bt_mais_eliminadas, bt_menos_eliminadas;
     Button bt_salvar_mortalidade;
 
+    public static boolean foiEditadaHoje = false;
 
-    private Date dt_selecionada;
+
+    private Date dt_selecionada = null;
     private Calendar calendar = Calendar.getInstance();
     private DatePickerDialog datePickerDialog;
     private Lote lote;
@@ -204,60 +206,66 @@ public class MortalidadeActivity extends AppCompatActivity implements DatePicker
             @Override
             public void onClick(View view) {
                 boolean podeGravar;
-                if (Mortalidade.listAll(Mortalidade.class).isEmpty()) {
-                    podeGravar = true;
-                } else {
-                    Date hoje = new Date();
-
-                    // Compara se a data de hoje é maior que a data selecionada utilizando SDF para não ter problema com horas/minutos/segundos/milesimos {
-                    if (sdf.format(hoje).compareTo(sdf.format(dt_selecionada)) < 0) {
-                        Mensagem.ExibirMensagem(MortalidadeActivity.this, "Você não pode inserir valores em datas fururas", TipoMensagem.ERRO);
-                        podeGravar = false;
-                    } else {
+                if (dt_selecionada != null) {
+                    if (Mortalidade.listAll(Mortalidade.class).isEmpty()) {
                         podeGravar = true;
-                    }
-                }
-                if (podeGravar) {
-                    try {
+                    } else {
+                        Date hoje = new Date();
 
-                        if (isEdicao) {
-                            int codigo = aviario_mortalidade.getCdMortalidade();
-                            Date data = aviario_mortalidade.getDtMorte();
-                            aviario_mortalidade.delete();
-
-                            Mortalidade m = new Mortalidade();
-                            m.setCdMortalidade(codigo);
-                            m.setCdLote(lote.getCdLote());
-                            m.setLote(lote);
-                            m.setBlAtivo(true);
-                            m.setDtAtualizacao(new Date());
-                            m.setDtCadastro(new Date());
-                            m.setDtMorte(data);
-                            m.setNrAvesAbatidas(Integer.valueOf(et_aves_mortas.getText().toString()));
-                            m.setNrAvesEliminadas(Integer.valueOf(et_aves_eliminadas.getText().toString()));
-                            m.setIntegrado(false);
-                            m.save();
-                            Mensagem.ExibirMensagem(MortalidadeActivity.this, "Mortes atualizadas com sucesso!", TipoMensagem.SUCESSO);
+                        // Compara se a data de hoje é maior que a data selecionada utilizando SDF para não ter problema com horas/minutos/segundos/milesimos {
+                        if (sdf.format(hoje).compareTo(sdf.format(dt_selecionada)) < 0) {
+                            Mensagem.ExibirMensagem(MortalidadeActivity.this, "Você não pode inserir valores em datas fururas", TipoMensagem.ERRO);
+                            podeGravar = false;
                         } else {
-                            Mortalidade m = new Mortalidade();
-                            m.setCdMortalidade(Mortalidade.listAll(Mortalidade.class).size() + 1);
-                            m.setCdLote(lote.getCdLote());
-                            m.setLote(lote);
-                            m.setBlAtivo(true);
-                            m.setDtMorte(dt_selecionada);
-                            m.setDtAtualizacao(new Date());
-                            m.setDtCadastro(new Date());
-                            m.setNrAvesAbatidas(Integer.valueOf(et_aves_mortas.getText().toString()));
-                            m.setNrAvesEliminadas(Integer.valueOf(et_aves_eliminadas.getText().toString()));
-                            m.setIntegrado(false);
-                            m.save();
-                            Mensagem.ExibirMensagem(MortalidadeActivity.this, "Mortes salvas com sucesso!", TipoMensagem.SUCESSO);
+                            podeGravar = true;
                         }
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    } finally {
-                        finish();
                     }
+                    if (podeGravar) {
+                        try {
+
+                            if (isEdicao) {
+                                int codigo = aviario_mortalidade.getCdMortalidade();
+                                Date data = aviario_mortalidade.getDtMorte();
+                                aviario_mortalidade.delete();
+
+                                Mortalidade m = new Mortalidade();
+                                m.setCdMortalidade(codigo);
+                                m.setCdLote(lote.getCdLote());
+                                m.setLote(lote);
+                                m.setBlAtivo(true);
+                                m.setDtAtualizacao(new Date());
+                                m.setDtCadastro(new Date());
+                                m.setDtMorte(data);
+                                m.setNrAvesAbatidas(Integer.valueOf(et_aves_mortas.getText().toString()));
+                                m.setNrAvesEliminadas(Integer.valueOf(et_aves_eliminadas.getText().toString()));
+                                m.setIntegrado(false);
+                                m.save();
+                                foiEditadaHoje = true;
+                                Mensagem.ExibirMensagem(MortalidadeActivity.this, "Mortes atualizadas com sucesso!", TipoMensagem.SUCESSO);
+                            } else {
+                                Mortalidade m = new Mortalidade();
+                                m.setCdMortalidade(Mortalidade.listAll(Mortalidade.class).size() + 1);
+                                m.setCdLote(lote.getCdLote());
+                                m.setLote(lote);
+                                m.setBlAtivo(true);
+                                m.setDtMorte(dt_selecionada);
+                                m.setDtAtualizacao(new Date());
+                                m.setDtCadastro(new Date());
+                                m.setNrAvesAbatidas(Integer.valueOf(et_aves_mortas.getText().toString()));
+                                m.setNrAvesEliminadas(Integer.valueOf(et_aves_eliminadas.getText().toString()));
+                                m.setIntegrado(false);
+                                m.save();
+                                foiEditadaHoje = false;
+                                Mensagem.ExibirMensagem(MortalidadeActivity.this, "Mortes salvas com sucesso!", TipoMensagem.SUCESSO);
+                            }
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        } finally {
+                            finish();
+                        }
+                    }
+                } else {
+                    Mensagem.ExibirMensagem(MortalidadeActivity.this, "Alguma data não foi informada!", TipoMensagem.ERRO);
                 }
             }
         });

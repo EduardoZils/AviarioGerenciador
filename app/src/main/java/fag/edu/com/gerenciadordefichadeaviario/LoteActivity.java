@@ -36,7 +36,7 @@ public class LoteActivity extends AppCompatActivity implements DatePickerDialog.
     TextView tv_dt_estimada_entrega, tv_dt_chegada, tv_aviario_lote;
     Button bt_gerar_lote;
     private int day, mounth, year;
-    private Date dt_selecionada;
+    private Date dt_selecionada = null;
     private Date dt_selecionadaChegada;
     private int definicao;
     private Calendar calendar = Calendar.getInstance();
@@ -77,29 +77,33 @@ public class LoteActivity extends AppCompatActivity implements DatePickerDialog.
             @Override
             public void onClick(View view) {
                 try {
-                    Aviario aviario = MainActivity.aviario_selecionado;
-                    if (Integer.parseInt(et_qt_aves.getText().toString()) > aviario.getNrCapAves()) {
-                        Mensagem.ExibirMensagem(LoteActivity.this, "O aviário não suporta esta quantidade de aves, seu valor maximo é " + aviario.getNrCapAves(), TipoMensagem.ERRO);
-                    } else if (dt_selecionada.after(dt_selecionadaChegada)) {
+                    if (dt_selecionada != null && dt_selecionadaChegada != null) {
+                        Aviario aviario = MainActivity.aviario_selecionado;
+                        if (Integer.parseInt(et_qt_aves.getText().toString()) > aviario.getNrCapAves()) {
+                            Mensagem.ExibirMensagem(LoteActivity.this, "O aviário não suporta esta quantidade de aves, seu valor maximo é " + aviario.getNrCapAves(), TipoMensagem.ERRO);
+                        } else if (dt_selecionada.after(dt_selecionadaChegada)) {
 
-                        Lote lote = new Lote();
-                        lote.setCdLote(verificaCodigoLote());
-                        lote.setCdAviario(aviario.getCdAviario());
-                        lote.setDsLinhagem(et_linhagem.getText().toString());
-                        lote.setAviario(MainActivity.aviario_selecionado);
-                        lote.setDtAtualizacao(new Date());
-                        lote.setDtCadastro(new Date());
-                        lote.setDtChegada(dt_selecionadaChegada);
-                        lote.setDtEntrega(dt_selecionada);
-                        lote.setDtEstimadaEntrega(dt_selecionada);
-                        lote.setQtAves(Integer.parseInt(et_qt_aves.getText().toString()));
-                        lote.setBlAtivo(true);
-                        lote.setIntegrado(false);
+                            Lote lote = new Lote();
+                            lote.setCdLote(verificaCodigoLote());
+                            lote.setCdAviario(aviario.getCdAviario());
+                            lote.setDsLinhagem(et_linhagem.getText().toString());
+                            lote.setAviario(MainActivity.aviario_selecionado);
+                            lote.setDtAtualizacao(new Date());
+                            lote.setDtCadastro(new Date());
+                            lote.setDtChegada(dt_selecionadaChegada);
+                            lote.setDtEntrega(dt_selecionada);
+                            lote.setDtEstimadaEntrega(dt_selecionada);
+                            lote.setQtAves(Integer.parseInt(et_qt_aves.getText().toString()));
+                            lote.setBlAtivo(true);
+                            lote.setIntegrado(false);
 
 
-                        lote.save();
+                            lote.save();
 
-                        integraDados();
+                            integraDados();
+                        } else {
+                            Mensagem.ExibirMensagem(LoteActivity.this, "Alguma data não foi informada!", TipoMensagem.ERRO);
+                        }
                     } else {
                         Mensagem.ExibirMensagem(LoteActivity.this, "Datas inválidas, verifique se estão corretas!", TipoMensagem.ERRO);
                     }

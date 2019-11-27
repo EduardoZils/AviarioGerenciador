@@ -120,7 +120,7 @@ public class Hidrometro extends SugarRecord {
     public String toString() {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return qtGastoDia + "L   " +
+        return qtGastoDia + "m³   " +
                 sdf.format(dtColeta)
                 ;
     }

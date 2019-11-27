@@ -19,7 +19,7 @@ public class Alimentacao extends SugarRecord  {
     Lote lote;
     @Expose
     int cdRacao;
-    @NotNull
+
     Racao racao;
     @Expose
     Date dtRecebimento;
